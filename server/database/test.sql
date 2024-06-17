@@ -2,6 +2,8 @@ DROP SCHEMA IF EXISTS test CASCADE;
 
 CREATE SCHEMA IF NOT EXISTS test;
 
+SET search_path TO production;
+
 CREATE TABLE categories (
 	category_id SERIAL primary key,
 	category_name varchar(50) 
@@ -18,8 +20,8 @@ CREATE TABLE user_categories (
 CREATE TABLE zodiac (
 	zodiac_id SERIAL primary key,
 	zodiac_name VARCHAR (50),
-	start_date DATE,
-	end_date DATE,
+	start_dates DATE,
+	end_dates DATE,
 	zodiac_description TEXT
 );
 
@@ -82,22 +84,14 @@ CREATE TABLE numerology (
 	lucky_number_day INTEGER,
 	lucky_number_year INTEGER,
 	user_id INTEGER,
+	concord_group_id INTEGER,
 	constraint fk_numerology_users
     		foreign key (user_id)
-            references users (user_id)	
-	);
-
-CREATE TABLE categories_numerology (
-	categories_numerology_id SERIAL primary key,
-	category_id INTEGER,
-	numerology_id INTEGER,	
-	constraint fk_categories_numerology_categories
-    		foreign key (category_id)
-            references categories (category_id),
-	constraint fk_categories_numerology_id
-    		foreign key (numerology_id)
-            references numerology (numerology_id)
-);	
+            references users (user_id),
+	constraint fk_numerology_concord_group
+    		foreign key (concord_group_id)
+            references concord_group (concord_group_id)
+	);	
 
 -- Create function to set known good state
 CREATE OR REPLACE FUNCTION set_known_good_state()
@@ -128,10 +122,11 @@ INSERT INTO zodiac (zodiac_name, start_date, end_date, zodiac_description) VALUE
 INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, zodiac_id) VALUES
     ('user', 'password', 'test@test.com', 'First', 'Middle', 'Last', '1990-03-23', 1),
     ('user2', 'password', 'test2@test.com', 'First2', 'Middle2', 'Last2', '1991-04-26', 2);
+	('user3', 'password', 'test3@test.com', 'First3', 'Middle3', 'Last3', '1991-04-26', 2);
 
 INSERT INTO concord_group (concord_group_number, concord_group_description) VALUES
-    (1, 'Group 1 Description', 1),
-    (2, 'Group 2 Description', 2),
+    (1, 'Group 1 Description'),
+    (2, 'Group 2 Description'),
 	(3, 'Group 2 Description');
 
 INSERT INTO concord_days (day_type, day_number, concord_group_id) VALUES

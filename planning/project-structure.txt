@@ -23,6 +23,7 @@ LuckyYou
                 [] ConcordGroupHealth
                 [] ConcordGroupMoney
                 [] ConcordGroupSpiritual
+                [] ConcordGroupLifePurpose
 
             Numerology
                 [] LifePathNumber
@@ -35,6 +36,7 @@ LuckyYou
                 [] NumerologyHealth
                 [] NumerologyMoney
                 [] NumerologySpiritual
+                [] NumerologyLifePurpose
             Zodiac
                 [] ZodiacList
                 [] ZodiacItem
@@ -42,7 +44,8 @@ LuckyYou
                 [] ZodiacLove
                 [] ZodiacHealth
                 [] ZodiacMoney
-                [] ZodiacSpiritual  
+                [] ZodiacSpiritual
+                [] ZodiacLifePurpose  
         pages
             Home
                 [] Home
