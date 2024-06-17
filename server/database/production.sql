@@ -129,7 +129,9 @@ INSERT INTO zodiac (zodiac_name, start_date, end_date, zodiac_description) VALUE
 
 INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, zodiac_id) VALUES
     ('user', 'password', 'test@test.com', 'First', 'Middle', 'Last', '1990-03-23', 1),
-    ('user2', 'password', 'test2@test.com', 'First2', 'Middle2', 'Last2', '1991-04-26', 2);
+    ('user2', 'password', 'test2@test.com', 'First2', 'Middle2', 'Last2', '1991-04-26', 2)
+	('user3', 'password', 'test3@test.com', 'First3', 'Middle3', 'Last3', '1991-04-26', 2);
+
 
 INSERT INTO concord_group (concord_group_number, concord_group_description) VALUES
     (1, 'Group 1 Description', 1),

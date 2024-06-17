@@ -18,6 +18,12 @@ LuckyYou
             ConcordGroup
                 [] ConcordGroupList
                 [] ConcordGroupItem
+                /?
+                [] ConcordGroupLove
+                [] ConcordGroupHealth
+                [] ConcordGroupMoney
+                [] ConcordGroupSpiritual
+
             Numerology
                 [] LifePathNumber
                 [] BirthdayNumber
@@ -134,14 +140,14 @@ LuckyYou
                 [] CategoryNumerologyService - 1 hr
 
             Models (3 hr)
-                [] Category.java - 20 min
+                [] Category.java/enum - 20 min 
                 [] UserCategory.java - 20 min
-                [] Zodiac.java - 20 min
+                [] Zodiac/enum - 20 min
                 [] User.java - 20 min
-                [] ConcordGroup.java - 20 min
+                [] ConcordGroup/enum - 20 min
                 [] ConcordDays.java - 20 min
                 [] UserConcordGroup.java - 20 min
-                [] Numerology.java - 20 min
+                [] Numerology/enum - 20 min
                 [] CategoryNumerology.java - 20 min
         
             [] App.java - 10 min
