@@ -110,7 +110,7 @@ INSERT INTO categories (category_name) VALUES
     ('Health'),
     ('Money'),
     ('Career'),
-    ('Life Purpose');
+    ('Spirituality');
 
 INSERT INTO zodiac (zodiac_name, start_dates, end_dates, zodiac_description) VALUES
     ('Aries', '2023-03-21', '2023-04-19', 'The first sign of the zodiac'),

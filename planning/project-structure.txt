@@ -71,7 +71,7 @@ LuckyYou
         database (8 hr)
             [x] production.sql
             [x] test.sql
-            [] queries.sql
+            [x] queries.sql
         http
             [] Category.http - 20 min
             [] UserCategory.http - 20 min
@@ -145,16 +145,16 @@ LuckyYou
             Models (3 hr)
                 [] Category.java/enum - 20 min 
                 [] UserCategory.java - 20 min
-                [] Zodiac/enum - 20 min
-                [] User.java - 20 min
+                [x] Zodiac - 20 min
+                [x] User.java - 20 min
                 [] ConcordGroup/enum - 20 min
                 [] ConcordDays.java - 20 min
                 [] UserConcordGroup.java - 20 min
-                [] Numerology/enum - 20 min
+                [x] Numerology/enum - 20 min
                 [] CategoryNumerology.java - 20 min
         
-            [] App.java - 10 min
-            [] SecretSigninKey.java - 10 min
+            [x] App.java - 10 min
+            [x] SecretSigninKey.java - 10 min
     
     Resources
         [] application.properties- 10 min
