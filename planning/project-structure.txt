@@ -3,44 +3,173 @@ LuckyYou
         [] project-structure - 1hr
         [] uses-cases - 1.5 hr
     client
-        []
+        Styles
+            [] CSS ?
+        Assets
+            [] img/logo
+        components
+            Common
+                [] Errors
+                [] header
+                [] footer
+                [] NavBar
+                [] Navlink
+                [] SignUpForm
+            ConcordGroup
+                [] ConcordGroupList
+                [] ConcordGroupItem
+            Numerology
+                [] LifePathNumber
+                [] BirthdayNumber
+                [] ExpressionNumber
+                [] PersonalityNumber
+                [] SoulUrgeNumber
+
+                [] NumerologyLove
+                [] NumerologyHealth
+                [] NumerologyMoney
+                [] NumerologySpiritual
+            Zodiac
+                [] ZodiacList
+                [] ZodiacItem
+
+                [] ZodiacLove
+                [] ZodiacHealth
+                [] ZodiacMoney
+                [] ZodiacSpiritual  
+        pages
+            Home
+                [] Home
+                [] About
+                [] Contact ?
+            User
+                [] Login/SignUp
+                [] EditUser
+                [] MyLuckyYouPage - for viewing lucky information
+
+            Zodiac
+                [] Zodiac
+
+            Numerology
+                [] Numerology
+
+            Categories
+                [] Categories    
+        [] App
+        [] Main    
+
     server
-    database
-        [] production.sql
-        [] test.sql
-        [] queries.sql
-    http
-        []
-main
-    data
-        [x] UserJdbcTemplateRepository.java- 1.5hr
-        [x] UserMapper.java- 30 min
-        [x] UserRepository.java (interface) 1.5 hr
+        database (8 hr)
+            [x] production.sql
+            [x] test.sql
+            [] queries.sql
+        http
+            [] Category.http - 20 min
+            [] UserCategory.http - 20 min
+            [] Zodiac.http - 20 min
+            [] User.http - 20 min
+            [] ConcordGroup.http - 20 min
+            [] ConcordDays.http - 20 min
+            [] UserConcordGroup.http - 20 min
+            [] Numerology.http - 20 min
+            [] CategoryNumerology.http - 20 min
+    Src (4 days)
+        main
+            controllers (9 hr 1/3)
+                [] ErrorResponse - 10 min
+                [] GlobalExceptionHandler - 10 min
 
-        [x] LocationJdbcTemplateRepository.java- 1.5hr
-        [x] LocationMapper.java- 30 min
-        [x] LocationRepository.java (interface) - 1.5hr
+                [] CategoryController - 1 hr
+                [] UserCategoryController - 1 hr
+                [] ZodiacController - 1 hr
+                [] UserController - 1 hr
+                [] ConcordGroupController - 1 hr
+                [] ConcordDaysController - 1 hr
+                [] UserConcordGroupController - 1 hr
+                [] NumerologyController - 1 hr
+                [] CategoryNumerologyController - 1 hr
 
-        [] ReservationJdbcTemplateRepository.java - 1.5hr
-        [] ReservationMapper.java- 30 min
-        [] ReservationRepository.java (interface) - 1.5hr
+            data (8 hr)
+                [] DataAccessException - 10 min
 
-    domain
-        [x] StateService.java ?
-        [x] UserService.java- 2hr
-        [x] LocationService.java - 2hr
-        [] ReservationService.java - 2hr
-        [x] Result.java - 1hr
-    Models
-        [x] State.java (enum) ?
-        [x] User.java - 1.5hr
-        [x] Location.java - 1.5hr
-        [] Reservation.java - 1.5hr
-    ui
-        [x] ConsoleIO.java- 1hr
-        [] Controller.java- 2hr
+                [] CategoryJdbcTemplateRepository - 30 min
+                [] CategoryRepository -20 min
 
-        [x] MainMenuOption.java (enum) - 30 min
-        [] View.java- 2hr
-        [x] dwmh.learn.App.java - 15 min
-        [x] dwmh.learn.DataHelper.java- 15 min
+                [] UserCategoryJdbcTemplateRepository - 30 min
+                [] UserCategory.repository - 20 min
+
+                [] ZodiacJdbcTemplateRepository - 30 min
+                [] Zodiac.repository - 20 min
+
+                [] UserJdbcTemplateRepository - 30 min
+                [] User.repository - 20 min
+
+                [] ConcordGroupJdbcTemplateRepository - 30 min
+                [] ConcordGroup.repository - 20 min
+
+                [] ConcordDaysJdbcTemplateRepository - 30 min
+                [] ConcordDays.repository - 20 min
+
+                [] UserConcordGroupJdbcTemplateRepository - 30 min
+                [] UserConcordGroup.repository - 20 min
+
+                [] NumerologyJdbcTemplateRepository - 30 min
+                [] Numerology.repository - 20 min
+
+                [] CategoryNumerologyJdbcTemplateRepository - 30 min
+                [] CategoryNumerology.repository - 20 min
+
+            domain (9 hr 15 min)
+                [] Result - 10 min
+                [] ResultType - 5 min
+
+                [] CategoryService - 1 hr
+                [] UserCategoryService - 1 hr
+                [] ZodiacService - 1 hr
+                [] UserService - 1 hr
+                [] ConcordGroupService - 1 hr
+                [] ConcordDaysService - 1 hr
+                [] UserConcordGroupService - 1 hr
+                [] NumerologyService - 1 hr
+                [] CategoryNumerologyService - 1 hr
+
+            Models (3 hr)
+                [] Category.java - 20 min
+                [] UserCategory.java - 20 min
+                [] Zodiac.java - 20 min
+                [] User.java - 20 min
+                [] ConcordGroup.java - 20 min
+                [] ConcordDays.java - 20 min
+                [] UserConcordGroup.java - 20 min
+                [] Numerology.java - 20 min
+                [] CategoryNumerology.java - 20 min
+        
+            [] App.java - 10 min
+            [] SecretSigninKey.java - 10 min
+    
+    Resources
+        [] application.properties- 10 min
+        
+    test (2 days)
+        data/repo tests (9 hr)
+            [] Category - 1hr
+            [] UserCategory - 1hr
+            [] Zodiac - 1hr
+            [] User - 1hr
+            [] ConcordGroup - 1hr
+            [] ConcordDays - 1hr
+            [] UserConcordGroup - 1hr
+            [] Numerology - 1hr
+            [] CategoryNumerology - 1hr
+
+        
+        domain/service tests (9 hr)
+            [] Category - 1 hr
+            [] UserCategory - 1 hr
+            [] Zodiac - 1 hr
+            [] User - 1 hr
+            [] ConcordGroup - 1 hr
+            [] ConcordDays - 1 hr
+            [] UserConcordGroup - 1 hr
+            [] Numerology - 1 hr
+            [] CategoryNumerology - 1 hr
