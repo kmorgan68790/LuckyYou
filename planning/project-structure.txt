@@ -1,33 +1,46 @@
+LuckyYou    
+    planning
+        [] project-structure - 1hr
+        [] uses-cases - 1.5 hr
+    client
+        []
+    server
+    database
+        [] production.sql
+        [] test.sql
+        [] queries.sql
+    http
+        []
 main
     data
-       [x] UserJdbcTemplateRepository.java- 1.5hr
-       [x] UserMapper.java- 30 min
-       [x] UserRepository.java (interface) 1.5 hr
+        [x] UserJdbcTemplateRepository.java- 1.5hr
+        [x] UserMapper.java- 30 min
+        [x] UserRepository.java (interface) 1.5 hr
 
-       [x] LocationJdbcTemplateRepository.java- 1.5hr
-       [x] LocationMapper.java- 30 min
-       [x] LocationRepository.java (interface) - 1.5hr
+        [x] LocationJdbcTemplateRepository.java- 1.5hr
+        [x] LocationMapper.java- 30 min
+        [x] LocationRepository.java (interface) - 1.5hr
 
-       [] ReservationJdbcTemplateRepository.java - 1.5hr
-       [] ReservationMapper.java- 30 min
-       [] ReservationRepository.java (interface) - 1.5hr
+        [] ReservationJdbcTemplateRepository.java - 1.5hr
+        [] ReservationMapper.java- 30 min
+        [] ReservationRepository.java (interface) - 1.5hr
 
     domain
-       [x] StateService.java ?
-       [x] UserService.java- 2hr
-       [x] LocationService.java - 2hr
-       [] ReservationService.java - 2hr
-       [x] Result.java - 1hr
+        [x] StateService.java ?
+        [x] UserService.java- 2hr
+        [x] LocationService.java - 2hr
+        [] ReservationService.java - 2hr
+        [x] Result.java - 1hr
     Models
-       [x] State.java (enum) ?
-       [x] User.java - 1.5hr
-       [x] Location.java - 1.5hr
-       [] Reservation.java - 1.5hr
+        [x] State.java (enum) ?
+        [x] User.java - 1.5hr
+        [x] Location.java - 1.5hr
+        [] Reservation.java - 1.5hr
     ui
-       [x] ConsoleIO.java- 1hr
-       [] Controller.java- 2hr
+        [x] ConsoleIO.java- 1hr
+        [] Controller.java- 2hr
 
-       [x] MainMenuOption.java (enum) - 30 min
-       [] View.java- 2hr
-       [x] dwmh.learn.App.java - 15 min
-       [x] dwmh.learn.DataHelper.java- 15 min
+        [x] MainMenuOption.java (enum) - 30 min
+        [] View.java- 2hr
+        [x] dwmh.learn.App.java - 15 min
+        [x] dwmh.learn.DataHelper.java- 15 min
