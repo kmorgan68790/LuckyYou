@@ -13,6 +13,8 @@ public class ConcordGroup {
         this.concordGroupDescription = concordGroupDescription;
     }
 
+    public ConcordGroup() {}
+
     public int getConcordGroupId() {
         return concordGroupId;
     }

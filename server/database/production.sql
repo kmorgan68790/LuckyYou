@@ -12,9 +12,25 @@ CREATE TABLE categories (
 CREATE TABLE user_categories (
 	user_category_id SERIAL primary key,
 	category_id INTEGER,
-	constraint fk_user_categories_category
+	user_id INTEGER,
+	numerology_id INTEGER,
+	zodiac_id INTEGER,
+	concord_group_id INTEGER,
+	constraint fk_user_categories_user
+    		foreign key (user_id)
+            references users (user_id)
+    constraint fk_user_categories_categories
     		foreign key (category_id)
             references categories (category_id)
+    constraint fk_user_categories_numerology_id
+        		foreign key (numerology_id)
+                references numerology (numerology_id)
+    constraint fk_user_categories_zodiac
+        		foreign key (zodiac_id)
+                references zodiac (zodiac_id)
+    constraint fk_user_categories_concord_group
+            		foreign key (concord_group_id)
+                    references concord_group (concord_group_id)
 );
 
 CREATE TABLE zodiac (
@@ -93,17 +109,17 @@ CREATE TABLE numerology (
             references concord_group (concord_group_id)
 	);
 
-CREATE TABLE categories_numerology (
-	categories_numerology_id SERIAL primary key,
-	category_id INTEGER,
-	numerology_id INTEGER,	
-	constraint fk_categories_numerology_categories
-    		foreign key (category_id)
-            references categories (category_id),
-	constraint fk_categories_numerology_id
-    		foreign key (numerology_id)
-            references numerology (numerology_id)
-);	
+--CREATE TABLE categories_numerology (
+--	categories_numerology_id SERIAL primary key,
+--	category_id INTEGER,
+--	numerology_id INTEGER,
+--	constraint fk_categories_numerology_categories
+--    		foreign key (category_id)
+--            references categories (category_id),
+--	constraint fk_categories_numerology_id
+--    		foreign key (numerology_id)
+--            references numerology (numerology_id)
+--);
 
 INSERT INTO categories (category_name) VALUES
     ('Love'),
@@ -160,6 +176,6 @@ INSERT INTO numerology (life_path_number, life_path_description, birthday_number
     (9, 'Path to greatness', 23, 'Birthday number 23', 9, 'Expression number 3', 9, 'Personality number 9', 6, 'Soul urge number 6', 3, 5, 1, 1, 1),
     (5, 'Master path', 26, 'Birthday number 26', 9, 'Expression number 9', 3, 'Personality number 3', 6, 'Soul urge number 6', 4, 8, 2, 2, 2);
 
-INSERT INTO categories_numerology (category_id, numerology_id) VALUES
-    (1, 1),
-    (2, 2);
+--INSERT INTO user_categories (category_id, numerology_id) VALUES
+--    (1, 1),
+--    (2, 2);
