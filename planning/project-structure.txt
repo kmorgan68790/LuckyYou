@@ -71,7 +71,7 @@ LuckyYou
         database (8 hr)
             [x] production.sql
             [x] test.sql
-            [] queries.sql
+            [x] queries.sql
         http
             [] Category.http - 20 min
             [] UserCategory.http - 20 min
@@ -99,34 +99,34 @@ LuckyYou
                 [] CategoryNumerologyController - 1 hr
 
             data (8 hr)
-                [] DataAccessException - 10 min
+                [x] DataAccessException - 10 min
 
                 [] CategoryJdbcTemplateRepository - 30 min
                 [] CategoryRepository -20 min
 
+                [x] UserJdbcTemplateRepository - 30 min
+                [x] UserRepository - 20 min
+
                 [] UserCategoryJdbcTemplateRepository - 30 min
-                [] UserCategory.repository - 20 min
+                [] UserCategoryRepository - 20 min
 
                 [] ZodiacJdbcTemplateRepository - 30 min
-                [] Zodiac.repository - 20 min
+                [] ZodiacRepository - 20 min
 
-                [] UserJdbcTemplateRepository - 30 min
-                [] User.repository - 20 min
+                [x] ConcordGroupJdbcTemplateRepository - 30 min
+                [x] ConcordGroupRepository - 20 min
 
-                [] ConcordGroupJdbcTemplateRepository - 30 min
-                [] ConcordGroup.repository - 20 min
-
-                [] ConcordDaysJdbcTemplateRepository - 30 min
-                [] ConcordDays.repository - 20 min
+                [x] ConcordDaysJdbcTemplateRepository - 30 min
+                [x] ConcordDaysRepository - 20 min
 
                 [] UserConcordGroupJdbcTemplateRepository - 30 min
-                [] UserConcordGroup.repository - 20 min
+                [] UserConcordGroupRepository - 20 min
 
                 [] NumerologyJdbcTemplateRepository - 30 min
-                [] Numerology.repository - 20 min
+                [] NumerologyRepository - 20 min
 
                 [] CategoryNumerologyJdbcTemplateRepository - 30 min
-                [] CategoryNumerology.repository - 20 min
+                [] CategoryNumerologyRepository - 20 min
 
             domain (9 hr 15 min)
                 [] Result - 10 min
@@ -143,18 +143,18 @@ LuckyYou
                 [] CategoryNumerologyService - 1 hr
 
             Models (3 hr)
-                [] Category.java/enum - 20 min 
-                [] UserCategory.java - 20 min
-                [] Zodiac/enum - 20 min
-                [] User.java - 20 min
-                [] ConcordGroup/enum - 20 min
-                [] ConcordDays.java - 20 min
-                [] UserConcordGroup.java - 20 min
-                [] Numerology/enum - 20 min
-                [] CategoryNumerology.java - 20 min
+                [x] Category.java/enum - 20 min 
+                [x] UserCategory.java - 20 min
+                [x] Zodiac - 20 min
+                [x] User.java - 20 min
+                [x] ConcordGroup/enum - 20 min
+                [x] ConcordDays.java - 20 min
+                [x] UserConcordGroup.java - 20 min
+                [x] Numerology/enum - 20 min
+                [x] CategoryNumerology.java - 20 min
         
-            [] App.java - 10 min
-            [] SecretSigninKey.java - 10 min
+            [x] App.java - 10 min
+            [x] SecretSigninKey.java - 10 min
     
     Resources
         [] application.properties- 10 min

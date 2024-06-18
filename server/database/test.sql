@@ -2,7 +2,7 @@ DROP SCHEMA IF EXISTS test CASCADE;
 
 CREATE SCHEMA IF NOT EXISTS test;
 
-SET search_path TO production;
+SET search_path TO test;
 
 CREATE TABLE categories (
 	category_id SERIAL primary key,
@@ -113,7 +113,7 @@ INSERT INTO categories (category_name) VALUES
     ('Health'),
     ('Money'),
     ('Career'),
-    ('Life Purpose');
+    ('Spirituality');
 
 INSERT INTO zodiac (zodiac_name, start_date, end_date, zodiac_description) VALUES
     ('Aries', '2023-03-21', '2023-04-19', 'The first sign of the zodiac'),
@@ -121,7 +121,7 @@ INSERT INTO zodiac (zodiac_name, start_date, end_date, zodiac_description) VALUE
 
 INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, zodiac_id) VALUES
     ('user', 'password', 'test@test.com', 'First', 'Middle', 'Last', '1990-03-23', 1),
-    ('user2', 'password', 'test2@test.com', 'First2', 'Middle2', 'Last2', '1991-04-26', 2);
+    ('user2', 'password', 'test2@test.com', 'First2', 'Middle2', 'Last2', '1991-04-26', 2),
 	('user3', 'password', 'test3@test.com', 'First3', 'Middle3', 'Last3', '1991-04-26', 2);
 
 INSERT INTO concord_group (concord_group_number, concord_group_description) VALUES
