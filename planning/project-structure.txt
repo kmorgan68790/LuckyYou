@@ -113,14 +113,11 @@ LuckyYou
                 [] ZodiacJdbcTemplateRepository - 30 min
                 [] ZodiacRepository - 20 min
 
-                [] UserJdbcTemplateRepository - 30 min
-                [] UserRepository - 20 min
-
                 [x] ConcordGroupJdbcTemplateRepository - 30 min
                 [x] ConcordGroupRepository - 20 min
 
-                [] ConcordDaysJdbcTemplateRepository - 30 min
-                [] ConcordDaysRepository - 20 min
+                [x] ConcordDaysJdbcTemplateRepository - 30 min
+                [x] ConcordDaysRepository - 20 min
 
                 [] UserConcordGroupJdbcTemplateRepository - 30 min
                 [] UserConcordGroupRepository - 20 min

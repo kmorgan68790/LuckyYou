@@ -15,6 +15,8 @@ public class ConcordDays {
         this.concordGroupId = concordGroupId;
     }
 
+    public ConcordDays() {}
+
     public int getConcordDaysId() {
         return concordDaysId;
     }

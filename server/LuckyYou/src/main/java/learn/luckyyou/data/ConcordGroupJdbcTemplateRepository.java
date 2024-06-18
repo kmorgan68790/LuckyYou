@@ -34,19 +34,21 @@ public class ConcordGroupJdbcTemplateRepository implements ConcordGroupRepositor
 
     @Override
     public ConcordGroup add(ConcordGroup concordGroup) {
-        KeyHolder keyHolder = new GeneratedKeyHolder();
         String sql = "INSERT INTO concord_group (concord_group_number, concord_group_description) VALUES (?, ?);";
 
-        jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+            KeyHolder keyHolder = new GeneratedKeyHolder();
+            int rowsAffected = jdbcTemplate.update(connection -> {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, concordGroup.getConcordGroupId());
                 ps.setInt(2, concordGroup.getConcordGroupNumber());
                 ps.setString(3, concordGroup.getConcordGroupDescription());
                 return ps;
-            }
+
         }, keyHolder);
+
+        if (rowsAffected <= 0) {
+            return null;
+        }
 
         concordGroup.setConcordGroupId(keyHolder.getKey().intValue());
         return concordGroup;
@@ -69,7 +71,7 @@ public class ConcordGroupJdbcTemplateRepository implements ConcordGroupRepositor
     @Override
     public ConcordGroup findById(int concordGroupId) {
         String sql = "SELECT * FROM concord_group WHERE concord_group_id = ?;";
-        return jdbcTemplate.query(sql, new Object[]{concordGroupId}, new ConcordGroupRowMapper()).stream()
+        return jdbcTemplate.query(sql, new ConcordGroupRowMapper(), concordGroupId).stream()
                 .findFirst().orElse(null);
     }
 
