@@ -19,6 +19,8 @@ public class UserCategory {
         this.concordGroupId = concordGroupId;
     }
 
+    public UserCategory() {}
+
     public int getUserCategoryId() {
         return userCategoryId;
     }

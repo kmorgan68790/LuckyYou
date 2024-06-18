@@ -19,6 +19,8 @@ public class Zodiac {
         this.zodiacEnd = zodiacEnd;
     }
 
+    public Zodiac() {}
+
     public int getZodiacId() {
         return zodiacId;
     }

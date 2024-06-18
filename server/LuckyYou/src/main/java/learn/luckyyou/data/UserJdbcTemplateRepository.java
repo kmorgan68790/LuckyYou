@@ -35,6 +35,7 @@ public class UserJdbcTemplateRepository implements UserRepository{
             users.setDob(rs.getDate("dob").toLocalDate());
             // Handle zodiac_id mapping if needed
             users.setZodiacId(rs.getInt("zodiac_id"));
+            users.setConcordGroupId(rs.getInt("concord_group_id"));
             return users;
         }
     }
@@ -56,7 +57,7 @@ public class UserJdbcTemplateRepository implements UserRepository{
     public Users add(Users user) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         String sql = "INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, " +
-                "zodiac_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+                "zodiac_id, concord_group_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -70,6 +71,7 @@ public class UserJdbcTemplateRepository implements UserRepository{
                 ps.setString(6, user.getLastName());
                 ps.setDate(7, java.sql.Date.valueOf(user.getDob()));
                 ps.setInt(8, user.getZodiacId());
+                ps.setInt(8, user.getConcordGroupId());
                 return ps;
             }
         }, keyHolder);

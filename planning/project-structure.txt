@@ -101,17 +101,14 @@ LuckyYou
             data (8 hr)
                 [x] DataAccessException - 10 min
 
-                [] CategoryJdbcTemplateRepository - 30 min
-                [] CategoryRepository -20 min
-
                 [x] UserJdbcTemplateRepository - 30 min
                 [x] UserRepository - 20 min
 
-                [] UserCategoryJdbcTemplateRepository - 30 min
-                [] UserCategoryRepository - 20 min
+                [x] UserCategoryJdbcTemplateRepository - 30 min
+                [x] UserCategoryRepository - 20 min
 
-                [] ZodiacJdbcTemplateRepository - 30 min
-                [] ZodiacRepository - 20 min
+                [x] ZodiacJdbcTemplateRepository - 30 min
+                [x] ZodiacRepository - 20 min
 
                 [x] ConcordGroupJdbcTemplateRepository - 30 min
                 [x] ConcordGroupRepository - 20 min
@@ -119,14 +116,11 @@ LuckyYou
                 [x] ConcordDaysJdbcTemplateRepository - 30 min
                 [x] ConcordDaysRepository - 20 min
 
-                [] UserConcordGroupJdbcTemplateRepository - 30 min
-                [] UserConcordGroupRepository - 20 min
+                [x] ConcordBirthdayJdbcTemplateRepository - 30 min
+                [x] ConcordBirthdayRepository -20 min
 
                 [] NumerologyJdbcTemplateRepository - 30 min
                 [] NumerologyRepository - 20 min
-
-                [] CategoryNumerologyJdbcTemplateRepository - 30 min
-                [] CategoryNumerologyRepository - 20 min
 
             domain (9 hr)
                 [x] Result - 10 min
@@ -152,6 +146,7 @@ LuckyYou
                 [x] UserConcordGroup.java - 20 min
                 [x] Numerology/enum - 20 min
                 [x] CategoryNumerology.java - 20 min
+                [x] ConcordBirthday.java - 20 min
         
             [x] App.java - 10 min
             [x] SecretSigninKey.java - 10 min
