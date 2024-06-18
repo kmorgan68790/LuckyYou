@@ -67,12 +67,12 @@ LuckyYou
         [] App
         [] Main    
 
-    server
+    server (7-days total)
         database (8 hr)
             [x] production.sql
             [x] test.sql
             [x] queries.sql
-        http
+        http (3 hr)
             [] Category.http - 20 min
             [] UserCategory.http - 20 min
             [] Zodiac.http - 20 min
@@ -85,8 +85,8 @@ LuckyYou
     Src (4 days)
         main
             controllers (9 hr 1/3)
-                [] ErrorResponse - 10 min
-                [] GlobalExceptionHandler - 10 min
+                [x] ErrorResponse - 10 min
+                [x] GlobalExceptionHandler - 10 min
 
                 [] CategoryController - 1 hr
                 [] UserCategoryController - 1 hr
@@ -128,9 +128,9 @@ LuckyYou
                 [] CategoryNumerologyJdbcTemplateRepository - 30 min
                 [] CategoryNumerologyRepository - 20 min
 
-            domain (9 hr 15 min)
-                [] Result - 10 min
-                [] ResultType - 5 min
+            domain (9 hr)
+                [x] Result - 10 min
+                [x] ResultType - 5 min
 
                 [] CategoryService - 1 hr
                 [] UserCategoryService - 1 hr

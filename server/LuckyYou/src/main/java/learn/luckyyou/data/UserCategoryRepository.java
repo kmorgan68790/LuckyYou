@@ -1,4 +1,4 @@
 package learn.luckyyou.data;
 
-public class UserCategoryRepository {
+public interface UserCategoryRepository {
 }
