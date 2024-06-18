@@ -29,12 +29,16 @@ CREATE TABLE users (
 	dob DATE not null,
 	zodiac_id INTEGER,
 	concord_group_id INTEGER,
+    numerology_id INTEGER,
 	constraint fk_users_zodiac
     		foreign key (zodiac_id)
             references zodiac(zodiac_id),
     constraint fk_users_concord_group
         	foreign key (concord_group_id)
-            references concord_group (concord_group_id)
+            references concord_group (concord_group_id),
+    constraint fk_users_numerology_id
+        		foreign key (numerology_id)
+                references numerology (numerology_id),
 );
 
 CREATE TABLE concord_birthday (
@@ -56,29 +60,27 @@ CREATE TABLE concord_days (
 		references concord_group (concord_group_id)
 );
 
+CREATE TABLE numerology_description (
+	numerology_description_id SERIAL primary key,
+	numerology_type INTEGER,
+	numerology_description TEXT
+	numerology_number INTEGER
+);
+
 CREATE TABLE numerology (
 	numerology_id SERIAL primary key,
 	life_path_number INTEGER,
-	life_path_description TEXT,
 	birthday_number INTEGER,
-	birthday_description TEXT,
 	expression_number INTEGER,
-	expression_description TEXT,
 	personality_number INTEGER,
-	personality_description TEXT,
 	soul_urge_number INTEGER,
-	soul_urge_description TEXT,
 	lucky_number_month INTEGER,
 	lucky_number_day INTEGER,
-	lucky_number_year INTEGER,
-	user_id INTEGER,
-	concord_group_id INTEGER,
-	constraint fk_numerology_users
-    		foreign key (user_id)
-            references users (user_id),
-	constraint fk_numerology_concord_group
-    		foreign key (concord_group_id)
-            references concord_group (concord_group_id)
+	lucky_number_year INTEGER
+	numerology_description_id INTEGER,
+	constraint fk_numerology_numerology_description
+    		foreign key (numerology_description_id)
+            references numerology_description (numerology_description_id)
 	);
 
 	CREATE TABLE categories (
@@ -124,14 +126,143 @@ INSERT INTO zodiac (zodiac_name, start_dates, end_dates, zodiac_description) VAL
     ('Aquarius', '2024-01-20', '2024-02-18', 'Description for Aquarius'),
     ('Pisces', '2024-02-19', '2024-03-20', 'Description for Pisces');
 
-INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, zodiac_id, concord_group_id) VALUES
-    ('user', 'password', 'test@test.com', 'First', 'Middle', 'Last', '1990-03-23', 1),
-    ('user2', 'password', 'test2@test.com', 'First2', 'Middle2', 'Last2', '1991-04-26', 2),
-
 INSERT INTO concord_group (concord_group_number, concord_group_description) VALUES
     (1, 'Group 1 Description'),
     (2, 'Group 2 Description'),
 	(3, 'Group 2 Description');
+
+INSERT INTO numerology_description (numerology_type, numerology_description, numerology_number) VALUES
+    ('Life Path', 'Life Path Description', 1),
+    ('Life Path', 'Life Path Description', 2),
+    ('Life Path', 'Life Path Description', 3),
+    ('Life Path', 'Life Path Description', 4),
+    ('Life Path', 'Life Path Description', 5),
+    ('Life Path', 'Life Path Description', 6),
+    ('Life Path', 'Life Path Description', 7),
+    ('Life Path', 'Life Path Description', 8),
+    ('Life Path', 'Life Path Description', 9),
+    ('Life Path', 'Life Path Description', 11),
+    ('Life Path', 'Life Path Description', 22),
+    ('Life Path', 'Life Path Description', 33),
+
+    ('Birthday', 'Birthday Description', 1),
+    ('Birthday', 'Birthday Description', 2),
+    ('Birthday', 'Birthday Description', 3),
+    ('Birthday', 'Birthday Description', 4),
+    ('Birthday', 'Birthday Description', 5),
+    ('Birthday', 'Birthday Description', 6),
+    ('Birthday', 'Birthday Description', 7),
+    ('Birthday', 'Birthday Description', 8),
+    ('Birthday', 'Birthday Description', 9),
+    ('Birthday', 'Birthday Description', 10),
+    ('Birthday', 'Birthday Description', 11),
+    ('Birthday', 'Birthday Description', 12),
+    ('Birthday', 'Birthday Description', 13),
+    ('Birthday', 'Birthday Description', 14),
+    ('Birthday', 'Birthday Description', 15),
+    ('Birthday', 'Birthday Description', 16),
+    ('Birthday', 'Birthday Description', 17),
+    ('Birthday', 'Birthday Description', 18),
+    ('Birthday', 'Birthday Description', 19),
+    ('Birthday', 'Birthday Description', 20),
+    ('Birthday', 'Birthday Description', 21),
+    ('Birthday', 'Birthday Description', 22),
+    ('Birthday', 'Birthday Description', 23),
+    ('Birthday', 'Birthday Description', 24),
+    ('Birthday', 'Birthday Description', 25),
+    ('Birthday', 'Birthday Description', 26),
+    ('Birthday', 'Birthday Description', 27),
+    ('Birthday', 'Birthday Description', 28),
+    ('Birthday', 'Birthday Description', 29),
+    ('Birthday', 'Birthday Description', 30),
+    ('Birthday', 'Birthday Description', 31),
+
+    ('Expression', 'Expression Description', 1),
+    ('Expression', 'Expression Description', 2),
+    ('Expression', 'Expression Description', 3),
+    ('Expression', 'Expression Description', 4),
+    ('Expression', 'Expression Description', 5),
+    ('Expression', 'Expression Description', 6),
+    ('Expression', 'Expression Description', 7),
+    ('Expression', 'Expression Description', 8),
+    ('Expression', 'Expression Description', 9),
+    ('Expression', 'Expression Description', 11),
+    ('Expression', 'Expression Description', 22),
+    ('Expression', 'Expression Description', 33),
+
+    ('Personality', 'Personality Description', 1),
+    ('Personality', 'Personality Description', 2),
+    ('Personality', 'Personality Description', 3),
+    ('Personality', 'Personality Description', 4),
+    ('Personality', 'Personality Description', 5),
+    ('Personality', 'Personality Description', 6),
+    ('Personality', 'Personality Description', 7),
+    ('Personality', 'Personality Description', 8),
+    ('Personality', 'Personality Description', 9),
+    ('Personality', 'Personality Description', 11),
+    ('Personality', 'Personality Description', 22),
+    ('Personality', 'Personality Description', 33),
+
+    ('Soul Urge', 'Soul Urge Description', 1),
+    ('Soul Urge', 'Soul Urge Description', 2),
+    ('Soul Urge', 'Soul Urge Description', 3),
+    ('Soul Urge', 'Soul Urge Description', 4),
+    ('Soul Urge', 'Soul Urge Description', 5),
+    ('Soul Urge', 'Soul Urge Description', 6),
+    ('Soul Urge', 'Soul Urge Description', 7),
+    ('Soul Urge', 'Soul Urge Description', 8),
+    ('Soul Urge', 'Soul Urge Description', 9),
+    ('Soul Urge', 'Soul Urge Description', 11),
+    ('Soul Urge', 'Soul Urge Description', 22),
+    ('Soul Urge', 'Soul Urge Description', 33),
+
+    ('Lucky Month', 'Lucky Month Description', 1),
+    ('Lucky Month', 'Lucky Month Description', 2),
+    ('Lucky Month', 'Lucky Month Description', 3),
+    ('Lucky Month', 'Lucky Month Description', 4),
+    ('Lucky Month', 'Lucky Month Description', 5),
+    ('Lucky Month', 'Lucky Month Description', 6),
+    ('Lucky Month', 'Lucky Month Description', 7),
+    ('Lucky Month', 'Lucky Month Description', 8),
+    ('Lucky Month', 'Lucky Month Description', 9),
+    ('Lucky Month', 'Lucky Month Description', 11),
+    ('Lucky Month', 'Lucky Month Description', 22),
+    ('Lucky Month', 'Lucky Month Description', 33),
+
+    ('Lucky Day', 'Lucky Day Description', 1),
+    ('Lucky Day', 'Lucky Day Description', 2),
+    ('Lucky Day', 'Lucky Day Description', 3),
+    ('Lucky Day', 'Lucky Day Description', 4),
+    ('Lucky Day', 'Lucky Day Description', 5),
+    ('Lucky Day', 'Lucky Day Description', 6),
+    ('Lucky Day', 'Lucky Day Description', 7),
+    ('Lucky Day', 'Lucky Day Description', 8),
+    ('Lucky Day', 'Lucky Day Description', 9),
+    ('Lucky Day', 'Lucky Day Description', 11),
+    ('Lucky Day', 'Lucky Day Description', 22),
+    ('Lucky Day', 'Lucky Day Description', 33),
+
+    ('Lucky Year', 'Lucky Year Description', 1),
+    ('Lucky Year', 'Lucky Year Description', 2),
+    ('Lucky Year', 'Lucky Year Description', 3),
+    ('Lucky Year', 'Lucky Year Description', 4),
+    ('Lucky Year', 'Lucky Year Description', 5),
+    ('Lucky Year', 'Lucky Year Description', 6),
+    ('Lucky Year', 'Lucky Year Description', 7),
+    ('Lucky Year', 'Lucky Year Description', 8),
+    ('Lucky Year', 'Lucky Year Description', 9),
+    ('Lucky Year', 'Lucky Year Description', 11),
+    ('Lucky Year', 'Lucky Year Description', 22),
+    ('Lucky Year', 'Lucky Year Description', 33);
+
+INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, zodiac_id, concord_group_id) VALUES
+    ('user', 'password', 'test@test.com', 'First', 'Middle', 'Last', '1992-08-11',5, 2),
+    ('user2', 'password', 'test2@test.com', 'First2', 'Middle2', 'Last2', '1991-03-23', 1, 1);
+
+INSERT INTO numerology (life_path_number, birthday_number, expression_number, personality_number, soul_urge_number,
+lucky_number_month, lucky_number_day, lucky_number_year, user_id) VALUES
+    (22,  23,  9,  9,  6,  3, 5, 1, 1),
+    (22,  23,  9,  9,  6,  3, 5, 1, 2);
 
 INSERT INTO concord_birthday (concord_birthday_number, concord_group_id) VALUES
     (1,1),
@@ -535,15 +666,8 @@ INSERT INTO concord_days (day_type, concord_day_number, concord_group_id) VALUES
     ('spiritual', 3, 3),
     ('spiritual', 30, 3);
 
-
-INSERT INTO numerology (life_path_number, life_path_description, birthday_number, birthday_description, expression_number, 
-	expression_description, personality_number, personality_description, soul_urge_number, soul_urge_description, lucky_number_month, lucky_number_day, 
-	lucky_number_year, concord_group_id, user_id) VALUES
-    (9, 'Path to greatness', 23, 'Birthday number 23', 9, 'Expression number 3', 9, 'Personality number 9', 6, 'Soul urge number 6', 3, 5, 1, 1, 1),
-    (5, 'Master path', 26, 'Birthday number 26', 9, 'Expression number 9', 3, 'Personality number 3', 6, 'Soul urge number 6', 4, 8, 2, 2, 2);
-
 INSERT INTO categories (category_name) VALUES
-    ('Love'),
+('Love'),
     ('Health'),
     ('Money'),
     ('Career'),

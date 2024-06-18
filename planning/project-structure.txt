@@ -119,8 +119,8 @@ LuckyYou
                 [x] ConcordBirthdayJdbcTemplateRepository - 30 min
                 [x] ConcordBirthdayRepository -20 min
 
-                [] NumerologyJdbcTemplateRepository - 30 min
-                [] NumerologyRepository - 20 min
+                [x] NumerologyJdbcTemplateRepository - 30 min
+                [x] NumerologyRepository - 20 min
 
             domain (9 hr)
                 [x] Result - 10 min

@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Users {
     private int userId;
     private int zodiacId;
+    private int numerologyId;
     private int concordGroupId;
     private String firstName;
     private String middleName;
@@ -19,10 +20,11 @@ public class Users {
 
     public Users() {}
 
-    public Users(int userId, int zodiacId, int concordGroupId, String firstName, String middleName, String lastName,
-                 LocalDate dob, String userName, String password, String email) {
+    public Users(int userId, int zodiacId, int numerologyId, int concordGroupId, String firstName, String middleName,
+                 String lastName, LocalDate dob, String userName, String password, String email) {
         this.userId = userId;
         this.zodiacId = zodiacId;
+        this.numerologyId = numerologyId;
         this.concordGroupId = concordGroupId;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -32,6 +34,7 @@ public class Users {
         this.password = password;
         this.email = email;
     }
+
 
     public int getUserId() {
         return userId;
@@ -113,20 +116,28 @@ public class Users {
         this.concordGroupId = concordGroupId;
     }
 
+    public int getNumerologyId() {
+        return numerologyId;
+    }
+
+    public void setNumerologyId(int numerologyId) {
+        this.numerologyId = numerologyId;
+    }
 
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (!(object instanceof Users users)) return false;
-        return userId == users.userId && zodiacId == users.zodiacId && concordGroupId == users.concordGroupId &&
-                Objects.equals(firstName, users.firstName) && Objects.equals(middleName, users.middleName) &&
-                Objects.equals(lastName, users.lastName) && Objects.equals(dob, users.dob) &&
-                Objects.equals(userName, users.userName) && Objects.equals(password, users.password) &&
+        return userId == users.userId && zodiacId == users.zodiacId && numerologyId == users.numerologyId && concordGroupId
+                == users.concordGroupId && Objects.equals(firstName, users.firstName) && Objects.equals(middleName,
+                users.middleName) && Objects.equals(lastName, users.lastName) && Objects.equals(dob, users.dob)
+                && Objects.equals(userName, users.userName) && Objects.equals(password, users.password) &&
                 Objects.equals(email, users.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, zodiacId, concordGroupId, firstName, middleName, lastName, dob, userName, password, email);
+        return Objects.hash(userId, zodiacId, numerologyId, concordGroupId, firstName, middleName, lastName, dob, userName,
+                password, email);
     }
 }

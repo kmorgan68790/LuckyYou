@@ -1,6 +1,7 @@
 package learn.luckyyou.data;
 
 import learn.luckyyou.models.UserCategory;
+import learn.luckyyou.models.Users;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -71,6 +72,7 @@ public class UserCategoryJdbcTemplateRepository implements UserCategoryRepositor
         String sql = "SELECT * FROM user_categories WHERE category_id = ?;";
         return jdbcTemplate.queryForObject(sql, new UserCategoryRowMapper(), concordGroupId);
     }
+
 
 //    @Override
 //    public UserCategory add(UserCategory userCategory) {

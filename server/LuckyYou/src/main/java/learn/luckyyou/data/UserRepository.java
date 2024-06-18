@@ -1,5 +1,6 @@
 package learn.luckyyou.data;
 
+import learn.luckyyou.models.UserCategory;
 import learn.luckyyou.models.Users;
 
 import java.util.List;
@@ -14,4 +15,10 @@ public interface UserRepository {
     boolean update(Users users);
 
     boolean deleteById(int userId);
+
+    Users findByNumerologyId(int numerologyId);
+
+    Users findByZodiacId(int zodiacId);
+
+    Users findByConcordGroupId(int concordGroupId);
 }
