@@ -16,7 +16,14 @@ CREATE TABLE concord_group (
 	concord_group_id SERIAL primary key,
 	concord_group_number INTEGER,
 	concord_group_description TEXT
-    );
+);
+
+CREATE TABLE numerology_description (
+	numerology_description_id SERIAL primary key,
+	numerology_type VARCHAR (50),
+	numerology_description TEXT,
+	numerology_number INTEGER
+);
 
 CREATE TABLE users (
 	user_id SERIAL primary key,
@@ -29,16 +36,25 @@ CREATE TABLE users (
 	dob DATE not null,
 	zodiac_id INTEGER,
 	concord_group_id INTEGER,
-    numerology_id INTEGER,
 	constraint fk_users_zodiac
-    		foreign key (zodiac_id)
-            references zodiac(zodiac_id),
+    	foreign key (zodiac_id)
+        references zodiac(zodiac_id),
     constraint fk_users_concord_group
-        	foreign key (concord_group_id)
-            references concord_group (concord_group_id),
-    constraint fk_users_numerology_id
-        		foreign key (numerology_id)
-                references numerology (numerology_id),
+        foreign key (concord_group_id)
+        references concord_group (concord_group_id)
+);
+
+CREATE TABLE user_numerology_mapping (
+    user_numerology_mapping_id SERIAL primary key,
+    user_id INTEGER,
+    numerology_type VARCHAR(50),
+    numerology_description_id INTEGER,
+    constraint fk_user_numerology_mapping_user
+        foreign key (user_id)
+        references users (user_id),
+    constraint fk_user_numerology_mapping_description
+        foreign key (numerology_description_id)
+        references numerology_description (numerology_description_id)
 );
 
 CREATE TABLE concord_birthday (
@@ -56,61 +72,9 @@ CREATE TABLE concord_days (
 	concord_day_number INTEGER,
 	concord_group_id INTEGER,
 	constraint fk_concord_days_concord_group
-	foreign key (concord_group_id)
+	    foreign key (concord_group_id)
 		references concord_group (concord_group_id)
 );
-
-CREATE TABLE numerology_description (
-	numerology_description_id SERIAL primary key,
-	numerology_type INTEGER,
-	numerology_description TEXT
-	numerology_number INTEGER
-);
-
-CREATE TABLE numerology (
-	numerology_id SERIAL primary key,
-	life_path_number INTEGER,
-	birthday_number INTEGER,
-	expression_number INTEGER,
-	personality_number INTEGER,
-	soul_urge_number INTEGER,
-	lucky_number_month INTEGER,
-	lucky_number_day INTEGER,
-	lucky_number_year INTEGER
-	numerology_description_id INTEGER,
-	constraint fk_numerology_numerology_description
-    		foreign key (numerology_description_id)
-            references numerology_description (numerology_description_id)
-	);
-
-	CREATE TABLE categories (
-    	category_id SERIAL primary key,
-    	category_name varchar(50)
-    );
-
-    CREATE TABLE user_categories (
-    	user_category_id SERIAL primary key,
-    	category_id INTEGER,
-    	user_id INTEGER,
-    	numerology_id INTEGER,
-    	zodiac_id INTEGER,
-    	concord_group_id INTEGER,
-    	constraint fk_user_categories_user
-        		foreign key (user_id)
-                references users (user_id)
-        constraint fk_user_categories_categories
-        		foreign key (category_id)
-                references categories (category_id)
-        constraint fk_user_categories_numerology_id
-            		foreign key (numerology_id)
-                    references numerology (numerology_id)
-        constraint fk_user_categories_zodiac
-            		foreign key (zodiac_id)
-                    references zodiac (zodiac_id)
-        constraint fk_user_categories_concord_group
-                		foreign key (concord_group_id)
-                        references concord_group (concord_group_id)
-    );
 
 INSERT INTO zodiac (zodiac_name, start_dates, end_dates, zodiac_description) VALUES
     ('Aries', '2024-03-21', '2024-04-19', 'Description for Aries'),
@@ -216,31 +180,18 @@ INSERT INTO numerology_description (numerology_type, numerology_description, num
     ('Soul Urge', 'Soul Urge Description', 22),
     ('Soul Urge', 'Soul Urge Description', 33),
 
-    ('Lucky Month', 'Lucky Month Description', 1),
-    ('Lucky Month', 'Lucky Month Description', 2),
-    ('Lucky Month', 'Lucky Month Description', 3),
-    ('Lucky Month', 'Lucky Month Description', 4),
-    ('Lucky Month', 'Lucky Month Description', 5),
-    ('Lucky Month', 'Lucky Month Description', 6),
-    ('Lucky Month', 'Lucky Month Description', 7),
-    ('Lucky Month', 'Lucky Month Description', 8),
-    ('Lucky Month', 'Lucky Month Description', 9),
-    ('Lucky Month', 'Lucky Month Description', 11),
-    ('Lucky Month', 'Lucky Month Description', 22),
-    ('Lucky Month', 'Lucky Month Description', 33),
-
-    ('Lucky Day', 'Lucky Day Description', 1),
-    ('Lucky Day', 'Lucky Day Description', 2),
-    ('Lucky Day', 'Lucky Day Description', 3),
-    ('Lucky Day', 'Lucky Day Description', 4),
-    ('Lucky Day', 'Lucky Day Description', 5),
-    ('Lucky Day', 'Lucky Day Description', 6),
-    ('Lucky Day', 'Lucky Day Description', 7),
-    ('Lucky Day', 'Lucky Day Description', 8),
-    ('Lucky Day', 'Lucky Day Description', 9),
-    ('Lucky Day', 'Lucky Day Description', 11),
-    ('Lucky Day', 'Lucky Day Description', 22),
-    ('Lucky Day', 'Lucky Day Description', 33),
+    ('Lucky Number', 'Lucky Number Description', 1),
+    ('Lucky Number', 'Lucky Number Description', 2),
+    ('Lucky Number', 'Lucky Number Description', 3),
+    ('Lucky Number', 'Lucky Number Description', 4),
+    ('Lucky Number', 'Lucky Number Description', 5),
+    ('Lucky Number', 'Lucky Number Description', 6),
+    ('Lucky Number', 'Lucky Number Description', 7),
+    ('Lucky Number', 'Lucky Number Description', 8),
+    ('Lucky Number', 'Lucky Number Description', 9),
+    ('Lucky Number', 'Lucky Number Description', 11),
+    ('Lucky Number', 'Lucky Number Description', 22),
+    ('Lucky Number', 'Lucky Number Description', 33),
 
     ('Lucky Year', 'Lucky Year Description', 1),
     ('Lucky Year', 'Lucky Year Description', 2),
@@ -257,12 +208,38 @@ INSERT INTO numerology_description (numerology_type, numerology_description, num
 
 INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, zodiac_id, concord_group_id) VALUES
     ('user', 'password', 'test@test.com', 'First', 'Middle', 'Last', '1992-08-11',5, 2),
-    ('user2', 'password', 'test2@test.com', 'First2', 'Middle2', 'Last2', '1991-03-23', 1, 1);
+    ('user2', 'password', 'test2@test.com', 'Second', '', 'Last', '1991-03-23', 1, 1);
 
-INSERT INTO numerology (life_path_number, birthday_number, expression_number, personality_number, soul_urge_number,
-lucky_number_month, lucky_number_day, lucky_number_year, user_id) VALUES
-    (22,  23,  9,  9,  6,  3, 5, 1, 1),
-    (22,  23,  9,  9,  6,  3, 5, 1, 2);
+INSERT INTO user_numerology_mapping (user_id, numerology_type, numerology_description_id) VALUES
+--    22
+    (1, 'Life Path', 11),
+--    11
+    (1, 'Birthday', 23),
+--    9
+    (1, 'Expression', 52),
+--    3
+    (1, 'Personality', 58),
+--    6
+    (1, 'Soul Urge', 73),
+--  22 or 4
+    (1, 'Lucky Number', 90),
+--  9 same as destiny/exp. number
+    (1, 'Lucky Year', 100),
+
+--    1
+    (2, 'Life Path', 1),
+--    23
+    (2, 'Birthday', 35),
+--    4
+    (2, 'Expression', 47),
+--    1
+    (2, 'Personality', 56),
+--    3
+    (2, 'Soul Urge', 70),
+--   2
+    (2, 'Lucky Number', 81),
+--  4 same as destiny/exp. number
+    (2, 'Lucky Year', 95);
 
 INSERT INTO concord_birthday (concord_birthday_number, concord_group_id) VALUES
     (1,1),
@@ -316,12 +293,12 @@ INSERT INTO concord_days (day_type, concord_day_number, concord_group_id) VALUES
     ('mental', 19, 1),
     ('mental', 23, 1),
     ('mental', 25, 1),
-    ('physical',5, 1, 1),
-    ('physical', 5, 5, 1),
-    ('physical', 5, 28, 1),
-    ('spiritual', 5, 7, 1),
-    ('spiritual', 5, 10, 1),
-    ('spiritual', 5, 14, 1),
+    ('physical', 1, 1),
+    ('physical', 5, 1),
+    ('physical', 28, 1),
+    ('spiritual', 7, 1),
+    ('spiritual', 10, 1),
+    ('spiritual', 14, 1),
 -- day 7
     ('mental', 23, 1),
     ('mental', 25, 1),
@@ -404,7 +381,7 @@ INSERT INTO concord_days (day_type, concord_day_number, concord_group_id) VALUES
     ('mental', 5, 1),
     ('mental', 7, 1),
     ('mental', 10, 1),
-    ('physical' 14, 1),
+    ('physical', 14, 1),
     ('physical', 16, 1),
     ('physical', 19, 1),
     ('physical', 23, 1),
@@ -665,14 +642,3 @@ INSERT INTO concord_days (day_type, concord_day_number, concord_group_id) VALUES
     ('physical', 27, 3),
     ('spiritual', 3, 3),
     ('spiritual', 30, 3);
-
-INSERT INTO categories (category_name) VALUES
-('Love'),
-    ('Health'),
-    ('Money'),
-    ('Career'),
-    ('Spirituality');
-
-INSERT INTO user_categories (category_id, user_id, numerology_id, zodiac_id, concord_group_id) VALUES
-    (1, 1, ),
-    ();

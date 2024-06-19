@@ -1,6 +1,5 @@
 package learn.luckyyou.data;
 
-import learn.luckyyou.models.UserCategory;
 import learn.luckyyou.models.Users;
 
 import java.util.List;
