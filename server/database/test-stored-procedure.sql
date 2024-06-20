@@ -14,6 +14,9 @@ BEGIN
 	DELETE FROM test.concord_group;
     DELETE FROM test.zodiac;
 
+	PERFORM setval('test.users_user_id_seq', 1, false);
+    PERFORM setval('test.zodiac_zodiac_id_seq', 1, false);
+
 INSERT INTO test.zodiac (zodiac_name, start_dates, end_dates, zodiac_description) VALUES
     ('Aries', '2024-03-21', '2024-04-19', 'Description for Aries'),
     ('Taurus', '2024-04-20', '2024-05-20', 'Description for Taurus'),
