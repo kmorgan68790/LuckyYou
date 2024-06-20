@@ -1,7 +1,7 @@
 package learn.luckyyou.data;
 
 import learn.luckyyou.models.Users;
-import org.apache.tomcat.jni.User;
+//import org.apache.tomcat.jni.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -35,6 +35,7 @@ public class UserJdbcTemplateRepository implements UserRepository{
             users.setDob(rs.getDate("dob").toLocalDate());
             // Handle zodiac_id mapping if needed
             users.setZodiacId(rs.getInt("zodiac_id"));
+            users.setConcordGroupId(rs.getInt("concord_group_id"));
             return users;
         }
     }
@@ -54,14 +55,17 @@ public class UserJdbcTemplateRepository implements UserRepository{
 
     @Override
     public Users add(Users user) {
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        String sql = "INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, " +
-                "zodiac_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+//        KeyHolder keyHolder = new GeneratedKeyHolder();
+        final String sql = "INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, " +
+                "zodiac_id, concord_group_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-        jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//        jdbcTemplate.update(new PreparedStatementCreator() {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+
+//            @Override
+//            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement ps = connection.prepareStatement(sql, new String[] {"user_id"});
                 ps.setString(1, user.getUserName());
                 ps.setString(2, user.getPassword());
                 ps.setString(3, user.getEmail());
@@ -70,12 +74,23 @@ public class UserJdbcTemplateRepository implements UserRepository{
                 ps.setString(6, user.getLastName());
                 ps.setDate(7, java.sql.Date.valueOf(user.getDob()));
                 ps.setInt(8, user.getZodiacId());
+                ps.setInt(9, user.getConcordGroupId());
                 return ps;
-            }
+//            }
         }, keyHolder);
 
-        // Set the generated key on the user object
-        user.setUserId(keyHolder.getKey().intValue());
+        if (rowsAffected <= 0) {
+            return null;
+        }
+
+        // Extract the generated user_id from the KeyHolder
+        Number generatedId = keyHolder.getKey();
+        if (generatedId != null) {
+            user.setUserId(generatedId.intValue());
+        }
+
+//        // Set the generated key on the user object
+//        user.setUserId(keyHolder.getKey().intValue());
         return user;
     }
 
@@ -91,5 +106,19 @@ public class UserJdbcTemplateRepository implements UserRepository{
     public boolean deleteById(int userId) {
         String sql = "DELETE FROM users WHERE user_id = ?;";
         return jdbcTemplate.update(sql, userId) > 0;
+    }
+
+    @Override
+    public Users findByZodiacId(int zodiacId) {
+        String sql = "SELECT * FROM users WHERE zodiac_id = ?;";
+        return jdbcTemplate.query(sql, new UserRowMapper(), zodiacId).stream()
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public Users findByConcordGroupId(int concordGroupId) {
+        String sql = "SELECT * FROM users WHERE concord_group_id = ?;";
+        return jdbcTemplate.query(sql, new UserRowMapper(), concordGroupId).stream()
+                .findFirst().orElse(null);
     }
 }

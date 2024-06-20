@@ -14,4 +14,8 @@ public interface UserRepository {
     boolean update(Users users);
 
     boolean deleteById(int userId);
+
+    Users findByZodiacId(int zodiacId);
+
+    Users findByConcordGroupId(int concordGroupId);
 }

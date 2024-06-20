@@ -1,6 +1,6 @@
-SET search_path TO production;
+SET search_path TO test;
 
-SELECT * FROM zodiac;
+SELECT * FROM test.zodiac;
 
 SELECT * FROM concord_group;
 
