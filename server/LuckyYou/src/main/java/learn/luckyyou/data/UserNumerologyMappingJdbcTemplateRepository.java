@@ -23,8 +23,8 @@ public class UserNumerologyMappingJdbcTemplateRepository implements UserNumerolo
         @Override
         public UserNumerologyMapping mapRow(ResultSet rs, int rowNum) throws SQLException {
             UserNumerologyMapping UserNumerologyMapping = new UserNumerologyMapping();
-            UserNumerologyMapping.setUserNumerologyMappingId(rs.getInt("user_numerology_mapping_id "));
-            UserNumerologyMapping.setUserId(rs.getInt("user_id "));
+            UserNumerologyMapping.setUserNumerologyMappingId(rs.getInt("user_numerology_mapping_id"));
+            UserNumerologyMapping.setUserId(rs.getInt("user_id"));
             UserNumerologyMapping.setNumerologyType(rs.getString("numerology_type"));
             UserNumerologyMapping.setNumerologyDescriptionId(rs.getInt("numerology_description_id"));
             return UserNumerologyMapping;
@@ -33,20 +33,20 @@ public class UserNumerologyMappingJdbcTemplateRepository implements UserNumerolo
 
     @Override
     public List<UserNumerologyMapping> findAll() {
-        String sql = "SELECT * FROM user_numerology_mapping ;";
+        String sql = "SELECT * FROM user_numerology_mapping;";
         return jdbcTemplate.query(sql, new UserNumerologyMappingRowMapper());
     }
 
     @Override
     public UserNumerologyMapping findById(int userNumerologyMappingId) {
-        String sql = "SELECT * FROM numerology WHERE user_numerology_mapping_id = ?;";
+        String sql = "SELECT * FROM user_numerology_mapping WHERE user_numerology_mapping_id = ?;";
         return jdbcTemplate.query(sql, new UserNumerologyMappingRowMapper(), userNumerologyMappingId).stream()
                 .findFirst().orElse(null);
     }
 
     @Override
     public List<UserNumerologyMapping> findByUserId(int userId) {
-        String sql = "SELECT * FROM numerology WHERE user_id = ?;";
+        String sql = "SELECT * FROM user_numerology_mapping WHERE user_id = ?;";
         return jdbcTemplate.query(sql, new UserNumerologyMappingRowMapper(), userId);
     }
 
