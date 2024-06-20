@@ -1,6 +1,7 @@
+package learn.luckyyou;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class App {
@@ -8,4 +9,3 @@ public class App {
         SpringApplication.run(App.class, args);
     }
 }
-

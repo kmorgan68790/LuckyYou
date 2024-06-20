@@ -15,8 +15,6 @@ public interface UserRepository {
 
     boolean deleteById(int userId);
 
-    Users findByNumerologyId(int numerologyId);
-
     Users findByZodiacId(int zodiacId);
 
     Users findByConcordGroupId(int concordGroupId);

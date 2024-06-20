@@ -2,7 +2,6 @@ package learn.luckyyou.data;
 
 import learn.luckyyou.models.ConcordDays;
 
-import java.lang.classfile.Interfaces;
 import java.util.List;
 
 public interface ConcordDaysRepository {

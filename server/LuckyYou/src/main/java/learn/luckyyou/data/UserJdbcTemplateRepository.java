@@ -1,7 +1,7 @@
 package learn.luckyyou.data;
 
 import learn.luckyyou.models.Users;
-import org.apache.tomcat.jni.User;
+//import org.apache.tomcat.jni.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -55,13 +55,16 @@ public class UserJdbcTemplateRepository implements UserRepository{
 
     @Override
     public Users add(Users user) {
-        KeyHolder keyHolder = new GeneratedKeyHolder();
+//        KeyHolder keyHolder = new GeneratedKeyHolder();
         String sql = "INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, " +
-                "zodiac_id, concord_group_id, numerology_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);";
+                "zodiac_id, concord_group_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-        jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+//        jdbcTemplate.update(new PreparedStatementCreator() {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+
+//            @Override
+//            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, user.getUserName());
                 ps.setString(2, user.getPassword());
@@ -72,9 +75,8 @@ public class UserJdbcTemplateRepository implements UserRepository{
                 ps.setDate(7, java.sql.Date.valueOf(user.getDob()));
                 ps.setInt(8, user.getZodiacId());
                 ps.setInt(8, user.getConcordGroupId());
-                ps.setInt(8, user.getNumerologyId());
                 return ps;
-            }
+//            }
         }, keyHolder);
 
         // Set the generated key on the user object
@@ -94,13 +96,6 @@ public class UserJdbcTemplateRepository implements UserRepository{
     public boolean deleteById(int userId) {
         String sql = "DELETE FROM users WHERE user_id = ?;";
         return jdbcTemplate.update(sql, userId) > 0;
-    }
-
-    @Override
-    public Users findByNumerologyId(int numerologyId) {
-        String sql = "SELECT * FROM users WHERE numerology_id = ?;";
-        return jdbcTemplate.query(sql, new UserRowMapper(), numerologyId).stream()
-                .findFirst().orElse(null);
     }
 
     @Override
