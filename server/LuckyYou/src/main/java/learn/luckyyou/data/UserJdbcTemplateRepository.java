@@ -56,7 +56,7 @@ public class UserJdbcTemplateRepository implements UserRepository{
     @Override
     public Users add(Users user) {
 //        KeyHolder keyHolder = new GeneratedKeyHolder();
-        String sql = "INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, " +
+        final String sql = "INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, " +
                 "zodiac_id, concord_group_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 //        jdbcTemplate.update(new PreparedStatementCreator() {
@@ -65,7 +65,7 @@ public class UserJdbcTemplateRepository implements UserRepository{
 
 //            @Override
 //            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement ps = connection.prepareStatement(sql, new String[] {"user_id"});
                 ps.setString(1, user.getUserName());
                 ps.setString(2, user.getPassword());
                 ps.setString(3, user.getEmail());
@@ -74,13 +74,23 @@ public class UserJdbcTemplateRepository implements UserRepository{
                 ps.setString(6, user.getLastName());
                 ps.setDate(7, java.sql.Date.valueOf(user.getDob()));
                 ps.setInt(8, user.getZodiacId());
-                ps.setInt(8, user.getConcordGroupId());
+                ps.setInt(9, user.getConcordGroupId());
                 return ps;
 //            }
         }, keyHolder);
 
-        // Set the generated key on the user object
-        user.setUserId(keyHolder.getKey().intValue());
+        if (rowsAffected <= 0) {
+            return null;
+        }
+
+        // Extract the generated user_id from the KeyHolder
+        Number generatedId = keyHolder.getKey();
+        if (generatedId != null) {
+            user.setUserId(generatedId.intValue());
+        }
+
+//        // Set the generated key on the user object
+//        user.setUserId(keyHolder.getKey().intValue());
         return user;
     }
 

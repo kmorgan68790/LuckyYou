@@ -23,13 +23,16 @@ class UserJdbcTemplateRepositoryTest {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    KnownGoodState knownGoodState;
+
     static boolean hasSetup = false;
 
     @BeforeEach
     void setup() {
         if (!hasSetup) {
             hasSetup = true;
-            jdbcTemplate.execute("CALL test.set_known_good_state()");
+            knownGoodState.set();
         }
     }
 
@@ -44,45 +47,48 @@ class UserJdbcTemplateRepositoryTest {
     @Test
     void findById() {
         Users user = repository.findById(1);
+
         assertEquals(1, user.getUserId());
         assertEquals("First", user.getFirstName());
     }
 
     @Test
     void add() {
-        // all fields
         Users newUser = makeUser();
+        newUser.setUserName("user4");
+        newUser.setEmail("test4@test.com");
         Users actual = repository.add(newUser);
 
         assertNotNull(actual);
-        assertEquals(3, actual.getUserId());
+        assertNotNull(actual.getUserId());
+        assertEquals(newUser.getUserName(), actual.getUserName());
+        assertEquals(newUser.getPassword(), actual.getPassword());
+        assertEquals(newUser.getEmail(), actual.getEmail());
+        assertEquals(newUser.getFirstName(), actual.getFirstName());
+        assertEquals(newUser.getMiddleName(), actual.getMiddleName());
+        assertEquals(newUser.getLastName(), actual.getLastName());
+        assertEquals(newUser.getDob(), actual.getDob());
+        assertEquals(newUser.getZodiacId(), actual.getZodiacId());
+        assertEquals(newUser.getConcordGroupId(), actual.getConcordGroupId());
     }
 
     @Test
     void update() {
         Users newUser = makeUser();
-        newUser.setUserId(2);
+        newUser.setFirstName("xx");
+
         assertTrue(repository.update(newUser));
+
         newUser.setUserId(13);
         assertFalse(repository.update(newUser));
     }
 
     @Test
-    void deleteById() {
-        assertTrue(repository.deleteById(2));
-        assertFalse(repository.deleteById(13));
-    }
-
-    @Test
     void findByZodiacId() {
-//        Users user = makeUser();
-//        Users actual = repository.findByZodiacId(user.getZodiacId());
-//
-//        assertEquals(5, actual);
         Users user = makeUser();
+
         // Insert the user into the database before running the findByZodiacId test
         repository.add(user);
-
         Users actual = repository.findByZodiacId(user.getZodiacId());
 
         // Verify the actual user is not null and has the expected zodiacId
@@ -93,14 +99,20 @@ class UserJdbcTemplateRepositoryTest {
     @Test
     void findByConcordGroupId() {
         Users user = makeUser();
+
         // Insert the user into the database before running the findByZodiacId test
         repository.add(user);
-
         Users actual = repository.findByConcordGroupId(user.getConcordGroupId());
 
         // Verify the actual user is not null and has the expected zodiacId
         assertNotNull(actual);
         assertEquals(user.getConcordGroupId(), actual.getConcordGroupId());
+    }
+
+    @Test
+    void deleteById() {
+        assertTrue(repository.deleteById(3));
+        assertFalse(repository.deleteById(13));
     }
 
     private Users makeUser() {
