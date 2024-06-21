@@ -1,10 +1,7 @@
 package learn.luckyyou.domain;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import learn.luckyyou.data.ConcordBirthdayRepository;
-import learn.luckyyou.data.ConcordGroupRepository;
-import learn.luckyyou.data.UserRepository;
-import learn.luckyyou.data.ZodiacRepository;
+import learn.luckyyou.data.*;
 import learn.luckyyou.models.ConcordBirthday;
 import learn.luckyyou.models.Users;
 import learn.luckyyou.models.Zodiac;
@@ -20,15 +17,19 @@ public class UsersService {
     private final ZodiacRepository zodiacRepository;
     private final ConcordGroupRepository concordGroupRepository;
     private final ConcordBirthdayRepository concordBirthdayRepository;
+    private final UserNumerologyMappingRepository userNumerologyMappingRepository;
+    private final UserNumerologyMappingService userNumerologyMappingService;
 
     private  int BCRYPT_ROUNDS = 12;
 
     public UsersService(UserRepository repository, ZodiacRepository zodiacRepository,
-                        ConcordGroupRepository concordGroupRepository, ConcordBirthdayRepository concordBirthdayRepository) {
+                        ConcordGroupRepository concordGroupRepository, ConcordBirthdayRepository concordBirthdayRepository, UserNumerologyMappingRepository userNumerologyMappingRepository, UserNumerologyMappingService userNumerologyMappingService) {
         this.repository = repository;
         this.zodiacRepository = zodiacRepository;
         this.concordGroupRepository = concordGroupRepository;
         this.concordBirthdayRepository = concordBirthdayRepository;
+        this.userNumerologyMappingRepository = userNumerologyMappingRepository;
+        this.userNumerologyMappingService = userNumerologyMappingService;
     }
 
     public List<Users> findAll() {
@@ -70,6 +71,10 @@ public class UsersService {
 
                 user.setPassword(hashedPassword);
                 Users createdUser = repository.add(user);
+
+                // Calculate and save numerology mappings
+                userNumerologyMappingService.calculateAndSaveNumerologyMappings(user);
+
                 result.setPayload(createdUser);
             }
 

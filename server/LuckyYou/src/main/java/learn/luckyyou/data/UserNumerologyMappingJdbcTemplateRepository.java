@@ -22,12 +22,12 @@ public class UserNumerologyMappingJdbcTemplateRepository implements UserNumerolo
     private static final class UserNumerologyMappingRowMapper implements RowMapper<UserNumerologyMapping> {
         @Override
         public UserNumerologyMapping mapRow(ResultSet rs, int rowNum) throws SQLException {
-            UserNumerologyMapping UserNumerologyMapping = new UserNumerologyMapping();
-            UserNumerologyMapping.setUserNumerologyMappingId(rs.getInt("user_numerology_mapping_id"));
-            UserNumerologyMapping.setUserId(rs.getInt("user_id"));
-            UserNumerologyMapping.setNumerologyType(rs.getString("numerology_type"));
-            UserNumerologyMapping.setNumerologyDescriptionId(rs.getInt("numerology_description_id"));
-            return UserNumerologyMapping;
+            UserNumerologyMapping userNumerologyMapping = new UserNumerologyMapping();
+            userNumerologyMapping.setUserNumerologyMappingId(rs.getInt("user_numerology_mapping_id"));
+            userNumerologyMapping.setUserId(rs.getInt("user_id"));
+            userNumerologyMapping.setNumerologyType(rs.getString("numerology_type"));
+            userNumerologyMapping.setNumerologyDescriptionId(rs.getInt("numerology_description_id"));
+            return userNumerologyMapping;
         }
     }
 
@@ -63,10 +63,23 @@ public class UserNumerologyMappingJdbcTemplateRepository implements UserNumerolo
     }
 
     @Override
-    public List<UserNumerologyMapping> findByUserIdAndNumerologyType(int userId, String numerologyType) {
-        String sql = "SELECT * FROM user_numerology_mapping WHERE user_id = ? AND numerology_type = ?;";
-        return jdbcTemplate.query(sql, new UserNumerologyMappingRowMapper(), userId, numerologyType);
+    public UserNumerologyMapping findByUserIdAndNumerologyType(int userId, String numerologyType) {
+        final String sql = "SELECT * FROM user_numerology_mapping WHERE user_id = ? AND numerology_type = ?;";
+        return jdbcTemplate.queryForObject(sql, new UserNumerologyMappingRowMapper(), userId, numerologyType);
     }
+    @Override
+    public boolean saveNumerologyMapping(UserNumerologyMapping mapping) {
+        final String sql = "INSERT INTO user_numerology_mapping (user_id, numerology_type, numerology_description_id) " +
+                "VALUES (?, ?, ?)";
+        int rowsAffected = jdbcTemplate.update(sql, mapping.getUserId(), mapping.getNumerologyType(),
+                mapping.getNumerologyDescriptionId());
+        return rowsAffected > 0;
+    }
+//    @Override
+//    public UserNumerologyMapping findByUserIdAndType(int userId, String numerologyType) {
+//        final String sql = "SELECT * FROM user_numerology_mapping WHERE user_id = ? AND numerology_type = ?";
+//        return jdbcTemplate.queryForObject(sql, new UserNumerologyMappingRowMapper(), userId, numerologyType);
+//    }
 
 }
 

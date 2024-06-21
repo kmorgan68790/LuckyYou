@@ -236,7 +236,7 @@ INSERT INTO user_numerology_mapping (user_id, numerology_type, numerology_descri
     (2, 'Personality', 56),
 --    3
     (2, 'Soul Urge', 70),
---   2
+--   1
     (2, 'Lucky Number', 81),
 --  4 same as destiny/exp. number
     (2, 'Lucky Year', 95);

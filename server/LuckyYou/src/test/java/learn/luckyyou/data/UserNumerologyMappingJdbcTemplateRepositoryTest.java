@@ -82,10 +82,21 @@ class UserNumerologyMappingJdbcTemplateRepositoryTest {
         UserNumerologyMapping expected = new UserNumerologyMapping(8,2,
                 "Life Path", 1);
 
-        List<UserNumerologyMapping> actual = repository.findByUserIdAndNumerologyType(2,
+        UserNumerologyMapping actual = repository.findByUserIdAndNumerologyType(2,
                 "Life Path");
 
-        assertEquals(expected.getNumerologyType(), actual.get(0).getNumerologyType());
-        assertEquals(expected.getUserId(), actual.get(0).getUserId());
+        assertEquals(expected.getNumerologyType(), actual.getNumerologyType());
+        assertEquals(expected.getUserId(), actual.getUserId());
     }
+
+//    @Test
+//    void UserNumerologyMapping findByUserIdAndNumerologyType(int userId, String numerologyType) {
+//
+//    }
+//
+//    @Test
+//    void boolean saveNumerologyMapping(UserNumerologyMapping mapping) {
+//
+//    }
+
 }

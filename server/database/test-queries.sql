@@ -1,6 +1,6 @@
 SET search_path TO test;
 
-SELECT * FROM test.zodiac;
+SELECT * FROM zodiac;
 
 SELECT * FROM concord_group;
 

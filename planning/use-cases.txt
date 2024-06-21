@@ -45,8 +45,19 @@ domain
             shouldFindByConcordGroupId()
             shouldFindByDayTypeAndGroupId()
 
-    [] ZodiacServiceTest.java - 2hr
+    [x] ZodiacServiceTest.java - 2hr
         Methods
             shouldFindById()
             shouldFindZodiacStartAndEnd()
             shouldFindByDate()
+
+    [] UserNumerologyMappingServiceTest.java - 2hr
+        Methods
+            shouldDetermineIfMasterNumber()
+            shouldCalulcateLifePathBasedOnUsersFullDob()
+            shouldCalulcateBirthdayBasedOnUsersDayOfBirth()
+            shouldCalulcateExpressionBasedOnUsersFullName()
+            shouldCalulcatePersonalityBasedOnUsersFullNameConsonantsOnly()
+            shouldCalulcateSoulUrgeBasedOnUsersFullNameVowelsOnly()
+            shouldCalulcateLuckyNumberBasedOnFullDob()
+            shouldCalulcateLuckyYearBasedOnUsersExpressionNumber()

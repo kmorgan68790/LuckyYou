@@ -158,14 +158,16 @@ LuckyYou
             [x] ConcordGroup - 1 hr
             [x] ConcordDays - 1 hr
             [x] ConcordBirthday - 1 hr
-            [x] UserNumerologyMapping - 1 hr
+            [] UserNumerologyMapping - 1 hr
+            [x] NumerologyDescription - 1 hr
 
 
         
         domain/service tests (9 hr)
-            [] Zodiac - 1 hr
-            [] User - 1 hr
-            [] ConcordGroup - 1 hr
-            [] ConcordDays - 1 hr
-            [] ConcordBirthday - 1 hr
+            [x] Zodiac - 1 hr
+            [x] User - 1 hr
+            [x] ConcordGroup - 1 hr
+            [x] ConcordDays - 1 hr
+            [x] ConcordBirthday - 1 hr
             [] UserNumerologyMapping - 1 hr
+            [] NumerologyDescription - 1 hr

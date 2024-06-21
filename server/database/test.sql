@@ -4,7 +4,7 @@ CREATE SCHEMA IF NOT EXISTS test;
 
 SET search_path TO test;
 
-CREATE TABLE test.zodiac (
+CREATE TABLE zodiac (
 	zodiac_id SERIAL primary key,
 	zodiac_name VARCHAR (50),
 	start_dates DATE,
@@ -12,7 +12,7 @@ CREATE TABLE test.zodiac (
 	zodiac_description TEXT
 );
 
-CREATE TABLE test.concord_group (
+CREATE TABLE concord_group (
 	concord_group_id SERIAL primary key,
 	concord_group_number INTEGER,
 	concord_group_description TEXT
@@ -20,12 +20,12 @@ CREATE TABLE test.concord_group (
 
 CREATE TABLE numerology_description (
 	numerology_description_id SERIAL primary key,
-	numerology_type INTEGER,
+	numerology_type VARCHAR (50),
 	numerology_description TEXT,
 	numerology_number INTEGER
 );
 
-CREATE TABLE test.users (
+CREATE TABLE users (
 	user_id SERIAL primary key,
 	user_name VARCHAR (50) UNIQUE not null,
 	user_password VARCHAR(250) not null,
@@ -38,10 +38,10 @@ CREATE TABLE test.users (
 	concord_group_id INTEGER,
 	constraint fk_users_zodiac
     	foreign key (zodiac_id)
-        references test.zodiac(zodiac_id),
+        references zodiac(zodiac_id),
     constraint fk_users_concord_group
         foreign key (concord_group_id)
-        references test.concord_group (concord_group_id)
+        references concord_group (concord_group_id)
 );
 
 CREATE TABLE user_numerology_mapping (

@@ -1,5 +1,6 @@
 package learn.luckyyou.domain;
 
+import learn.luckyyou.data.UserRepository;
 import learn.luckyyou.data.ZodiacRepository;
 import learn.luckyyou.models.Zodiac;
 import org.springframework.stereotype.Service;
@@ -11,8 +12,11 @@ import java.util.List;
 public class ZodiacService {
     private final ZodiacRepository repository;
 
-    public ZodiacService(ZodiacRepository repository) {
+    private final UserRepository userRepository;
+
+    public ZodiacService(ZodiacRepository repository, UserRepository userRepository) {
         this.repository = repository;
+        this.userRepository = userRepository;
     }
 
     public List<Zodiac> findAll() {
