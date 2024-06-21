@@ -1,8 +1,6 @@
 package learn.luckyyou.data;
 
 import learn.luckyyou.models.ConcordBirthday;
-import learn.luckyyou.models.ConcordDays;
-import learn.luckyyou.models.Users;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +64,6 @@ class ConcordBirthdayJdbcTemplateRepositoryTest {
         ConcordBirthday actual = repository.findConcordBirthdayNumber(3);
 
         assertNotNull(actual);
-        assertEquals(concordBirthday.getConcordBirthdayNumber(), actual.getConcordBirthdayNumber());
+        assertEquals(concordBirthday.getConcordBirthdayNumber(), actual);
     }
 }
