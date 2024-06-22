@@ -1,0 +1,15 @@
+@base_url = http://localhost:8080/api/concord-birthday
+
+GET {{base_url}} HTTP/1.1
+
+### gets id for birthday number 3
+
+GET {{base_url}}/id/3 HTTP/1.1
+
+### gets all b-days for group 1
+
+GET {{base_url}}/group/1 HTTP/1.1
+
+### gets id for birthday number 23
+
+GET {{base_url}}/birthday/23 HTTP/1.1

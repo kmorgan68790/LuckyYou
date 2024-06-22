@@ -1,6 +1,7 @@
 package learn.luckyyou.data;
 
 import learn.luckyyou.models.Users;
+import org.apache.catalina.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,11 +88,9 @@ class UserJdbcTemplateRepositoryTest {
     void findByZodiacId() {
         Users user = makeUser();
 
-        // Insert the user into the database before running the findByZodiacId test
         repository.add(user);
         Users actual = repository.findByZodiacId(user.getZodiacId());
 
-        // Verify the actual user is not null and has the expected zodiacId
         assertNotNull(actual);
         assertEquals(user.getZodiacId(), actual.getZodiacId());
     }
@@ -100,13 +99,23 @@ class UserJdbcTemplateRepositoryTest {
     void findByConcordGroupId() {
         Users user = makeUser();
 
-        // Insert the user into the database before running the findByZodiacId test
         repository.add(user);
         Users actual = repository.findByConcordGroupId(user.getConcordGroupId());
 
-        // Verify the actual user is not null and has the expected zodiacId
         assertNotNull(actual);
         assertEquals(user.getConcordGroupId(), actual.getConcordGroupId());
+    }
+
+    @Test
+    void shouldFindByUsername() {
+        Users user = makeUser();
+        String expected = "user3";
+
+        repository.add(user);
+        Users actual = repository.findByUsername(user.getUserName());
+
+        assertNotNull(actual);
+        assertEquals(expected, actual.getUserName());
     }
 
     @Test

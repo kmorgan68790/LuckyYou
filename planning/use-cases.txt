@@ -51,7 +51,7 @@ domain
             shouldFindZodiacStartAndEnd()
             shouldFindByDate()
 
-    [] UserNumerologyMappingServiceTest.java - 2hr
+    [x] UserNumerologyMappingServiceTest.java - 2hr
         Methods
             shouldDetermineIfMasterNumber()
             shouldCalulcateLifePathBasedOnUsersFullDob()

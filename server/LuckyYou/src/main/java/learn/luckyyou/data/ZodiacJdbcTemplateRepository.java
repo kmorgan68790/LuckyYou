@@ -32,7 +32,7 @@ public class ZodiacJdbcTemplateRepository implements ZodiacRepository{
 
     @Override
     public List<Zodiac> findAll() {
-        final String sql = "SELECT * FROM zodiac;";
+        final String sql = "SELECT * FROM zodiac";
         return jdbcTemplate.query(sql, new ZodiacRowMapper());
     }
 

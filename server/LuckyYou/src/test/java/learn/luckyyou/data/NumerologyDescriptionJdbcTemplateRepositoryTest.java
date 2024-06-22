@@ -71,9 +71,4 @@ class NumerologyDescriptionJdbcTemplateRepositoryTest {
         assertEquals("Birthday Description", result.getNumerologyDescription());
     }
 
-    private NumerologyDescription makeNumerologyEntry() {
-        NumerologyDescription numerologyDescription = new NumerologyDescription(35,
-                "Birthday", "Birthday Description",23);
-        return numerologyDescription;
-    }
 }

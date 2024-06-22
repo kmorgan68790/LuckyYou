@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Service
 public class UsersService {
@@ -38,7 +37,7 @@ public class UsersService {
 
     public Users findById(int userId) {
         return repository.findById(userId);
-    };
+    }
 
     public Result<Users> add(Users user) {
         List<Zodiac> zodiacs = zodiacRepository.findAll();
@@ -96,15 +95,8 @@ public class UsersService {
         }
     }
 
-//    private int calculateConcordGroupId(LocalDate birthday) {
-//        // Your logic to calculate Concord Group ID based on date of birth
-//
-//        // This is a placeholder example, replace with your own logic
-//        return 1; // Replace with actual calculation logic
-//    }
-
-    public Result<Users> update(Users user) {
-        Result<Users> result = validate(user);
+    public Result<Users> update(Users user)  {
+        Result<Users> result = validateNulls(user);
 
         if (user.getUserId() <= 0) {
             result.addErrorMessage("User `id` is required", ResultType.INVALID);
@@ -118,8 +110,7 @@ public class UsersService {
             }
         }
         return result;
-    };
-
+    }
 
     public Result<Users> deleteById(int userId) {
         Result<Users> result = new Result<>();
@@ -127,16 +118,21 @@ public class UsersService {
             result.addErrorMessage("User id %s was not found", ResultType.NOT_FOUND, userId);
         }
         return result;
-    };
+    }
+
+    public Users findByUsername(String username) {
+        return repository.findByUsername(username);
+    }
 
     public Users findByZodiacId(int zodiacId) {
         return repository.findById(zodiacId);
 
-    };
+    }
 
     public Users findByConcordGroupId(int concordGroupId) {
+
         return repository.findById(concordGroupId);
-    };
+    }
 
     private Result validate(Users user) {
         List<Users> existingUsers = repository.findAll();
@@ -165,6 +161,10 @@ public class UsersService {
         //        validate user dob/ mostly the year
         int pastYear = 1000;
         LocalDate currentYear = LocalDate.now();
+
+        if (user.getDob() == null || user.getDob().equals("") ) {
+            result.addErrorMessage("Date of Birth is required to calculate results", ResultType.INVALID);
+        }
 
         if (user.getDob().getDayOfMonth() < 0 || user.getDob().getDayOfMonth() > 31 || user.getDob().getYear() < pastYear
                 || user.getDob().getYear() > currentYear.getYear() || user.getDob().getMonth().getValue() < 0
@@ -195,13 +195,7 @@ public class UsersService {
     }
 
     private Result<Users> validateNulls(Users user) {
-        List<Users> users = repository.findAll();
-
         Result<Users> result = new Result<>();
-//
-//        if (!users.contains(user.getUserId())) {
-//            result.addErrorMessage("User", ResultType.INVALID);
-//        }
 
         if (user.getUserName() == null || user.getUserName().isBlank()) {
             result.addErrorMessage("Username cannot be blank", ResultType.INVALID);
@@ -217,10 +211,6 @@ public class UsersService {
 
         if (user.getLastName() == null || user.getLastName().isBlank()) {
             result.addErrorMessage("Last name is required to calculate results", ResultType.INVALID);
-        }
-
-        if (user.getDob() == null ) {
-            result.addErrorMessage("Date of Birth is required to calculate results", ResultType.INVALID);
         }
 
         return result;

@@ -60,11 +60,11 @@ public class UserNumerologyMappingService {
 
         // Maps numerology types to their calculated values
         Map<String, Integer> numerologyCalculations = new HashMap<>();
-        numerologyCalculations.put("Life Path Number", lifePathNumber);
-        numerologyCalculations.put("Birthday Number", birthdayNumber);
-        numerologyCalculations.put("Expression Number", expressionNumber);
-        numerologyCalculations.put("Personality Number", personalityNumber);
-        numerologyCalculations.put("Soul Urge Number", soulUrge);
+        numerologyCalculations.put("Life Path", lifePathNumber);
+        numerologyCalculations.put("Birthday", birthdayNumber);
+        numerologyCalculations.put("Expression", expressionNumber);
+        numerologyCalculations.put("Personality", personalityNumber);
+        numerologyCalculations.put("Soul Urge", soulUrge);
         numerologyCalculations.put("Lucky Number", luckyNumber);
         numerologyCalculations.put("Lucky Year", luckyYear);
 
@@ -109,10 +109,7 @@ public class UserNumerologyMappingService {
     // Calculate Birthday Number based on user's day of birth
     public int calculateBirthdayNumber(LocalDate dob) {
         int day = dob.getDayOfMonth();
-
-        int daySum = isMasterNumber(day) ? day : sumDigits(day);
-
-        return reduceToSingleDigit(daySum);
+        return day;
     }
 
     // Calculate Expression Number based on user's full name
@@ -164,7 +161,7 @@ public class UserNumerologyMappingService {
 
         int daySum = isMasterNumber(day) ? day : sumDigits(day);
         int monthSum = isMasterNumber(month) ? month : sumDigits(month);
-        int yearSum = sumDigits(year);
+        int yearSum = isMasterNumber(year) ? year : sumDigits(year) ;
 
         int luckyNumber = daySum + monthSum + yearSum;
 
@@ -210,8 +207,19 @@ public class UserNumerologyMappingService {
 //    map letters to numbers
     private int sumLetters(String text) {
         return text.chars()
-                .map(Character::getNumericValue)
+                .map(this::mapCharToNumber)
                 .sum();
+    }
+
+    private int mapCharToNumber(int ch) {
+        if (Character.isLetter(ch)) {
+            // Normalize to a 1-26 range: 'A'->1, 'B'->2, ..., 'Z'->26
+            int normalized = Character.toUpperCase(ch) - 'A' + 1;
+            // Map to 1-9 range
+            return (normalized - 1) % 9 + 1;
+        }
+        // For non-letters, you may want to decide how to handle them, here we return 0
+        return 0;
     }
 
 

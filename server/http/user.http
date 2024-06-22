@@ -1,0 +1,194 @@
+@base_url = http://localhost:8080/api/users
+
+GET {{base_url}} HTTP/1.1
+
+### username/email already taken
+
+POST {{base_url}}
+Content-Type: application/json
+
+{
+    "userName": "user",
+    "password": "password",
+    "email": "test@test.com",
+    "firstName": "John",
+    "middleName": "",
+    "lastName": "Doe",
+    "dob": "1992-08-11",
+    "zodiacId": "5",
+    "concordGroupId": "2"
+}
+
+### fails b/c of null dob
+
+POST {{base_url}}
+Content-Type: application/json
+
+{
+    "userName": "user",
+    "password": "password",
+    "email": "test@test.com",
+    "firstName": "John",
+    "middleName": "",
+    "lastName": "Doe",
+    "dob": "12"
+    
+}
+
+### fails b/c of incorrect year value
+
+POST {{base_url}}
+Content-Type: application/json
+
+{
+    "userName": "user",
+    "password": "password",
+    "email": "test@test.com",
+    "firstName": "John",
+    "middleName": "",
+    "lastName": "Doe",
+    "dob": "0000-01-01"
+    
+}
+
+### create without middle name
+
+POST {{base_url}}
+Content-Type: application/json
+
+{
+    "userName": "user3",
+    "password": "password",
+    "email": "test3@test.com",
+    "firstName": "John",
+    "middleName": "",
+    "lastName": "Doe",
+    "dob": "1995-09-17"
+    
+}
+
+### creates new user
+
+POST {{base_url}}
+Content-Type: application/json
+
+{
+    "userName": "user4",
+    "password": "password",
+    "email": "test4@test.com",
+    "firstName": "John",
+    "middleName": "A",
+    "lastName": "Doe",
+    "dob": "1995-09-17"
+    
+}
+
+### fails b/c name is null
+
+PUT {{base_url}}/5
+Content-Type: application/json
+
+{   
+    "userId": 5,
+    "userName": "user5",
+    "password": "password",
+    "email": "test5@test.com",
+    "firstName": "",
+    "middleName": "A",
+    "lastName": "Doe",
+    "dob": "1995-09-17"
+    
+}
+
+### fails b/c userName is not unique
+
+PUT {{base_url}}/5
+Content-Type: application/json
+
+{   
+    "userId": 5,
+    "userName": "user",
+    "password": "password",
+    "email": "test5@test.com",
+    "firstName": "Johnny",
+    "middleName": "A",
+    "lastName": "Doe",
+    "dob": "1995-09-17"
+    
+}
+
+### updates first name for existing user
+
+PUT {{base_url}}/5
+Content-Type: application/json
+
+{   
+    "userId": 5,
+    "userName": "user5",
+    "password": "password",
+    "email": "test5@test.com",
+    "firstName": "Johnny",
+    "middleName": "A",
+    "lastName": "Doe",
+    "dob": "1995-09-17"
+    
+}
+
+### cannot find username
+
+POST {{base_url}}/login
+Content-Type: application/json
+
+{
+    "username": "cake@fake.com",
+    "password": "password"
+}
+
+### cannot find password
+
+POST {{base_url}}/login
+Content-Type: application/json
+
+{
+    "userName": "user3",
+    "password": "pass"
+}
+
+
+### finds login info
+
+POST {{base_url}}/login
+Content-Type: application/json
+
+{
+    "userName": "user3",
+    "password": "password"
+}
+
+###
+
+POST {{base_url}}/login
+Content-Type: application/json
+
+{
+    "username": "fake@fake.com",
+    "password": "password"
+}
+
+###
+
+POST {{base_url}}/login
+Content-Type: application/json
+
+{
+    "username": "test@test.com",
+    "password": "fake-password"
+}
+
+### does not find user to delete
+
+DELETE {{base_url}}/13 HTTP/1.1
+
+### finds user to delete
+
+DELETE {{base_url}}/5 HTTP/1.1

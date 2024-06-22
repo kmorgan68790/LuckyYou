@@ -14,19 +14,6 @@ BEGIN
 	TRUNCATE TABLE concord_group RESTART IDENTITY CASCADE;
 	TRUNCATE TABLE zodiac RESTART IDENTITY CASCADE;
 
-	-- DELETE FROM test.concord_days;
- --    DELETE FROM test.concord_birthday;
- --    DELETE FROM test.user_numerology_mapping;
-	-- DELETE FROM test.users;
-	-- DELETE FROM test.users;
-	-- DELETE FROM test.concord_group;
- --    DELETE FROM test.zodiac;
-
-	-- PERFORM setval('test.users_user_id_seq', 1, false);
- --    PERFORM setval('test.zodiac_zodiac_id_seq', 1, false);
-    -- PERFORM setval('concord_group_concord_group_id_seq', 1, false);
-
-
 INSERT INTO zodiac (zodiac_name, start_dates, end_dates, zodiac_description) VALUES
     ('Aries', '2024-03-21', '2024-04-19', 'Description for Aries'),
     ('Taurus', '2024-04-20', '2024-05-20', 'Description for Taurus'),

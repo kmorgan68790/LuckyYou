@@ -1,13 +1,11 @@
 package learn.luckyyou.domain;
 
-import learn.luckyyou.data.ConcordBirthdayRepository;
-import learn.luckyyou.data.ConcordGroupRepository;
-import learn.luckyyou.data.UserRepository;
-import learn.luckyyou.data.ZodiacRepository;
-import learn.luckyyou.models.ConcordBirthday;
-import learn.luckyyou.models.Users;
-import learn.luckyyou.models.Zodiac;
+import learn.luckyyou.data.*;
+import learn.luckyyou.models.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -23,6 +21,14 @@ class UsersServiceTest {
     @Autowired
     UsersService service;
 
+    @Autowired
+    UserNumerologyMappingService userNumerologyMappingService;
+    @MockBean
+    UserNumerologyMappingRepository userNumerologyMappingRepository;
+
+    @MockBean
+    NumerologyDescriptionRepository numerologyDescriptionRepository;
+
     @MockBean
     UserRepository repository;
     @MockBean
@@ -31,6 +37,7 @@ class UsersServiceTest {
     ConcordGroupRepository concordGroupRepository;
     @MockBean
     ConcordBirthdayRepository concordBirthdayRepository;
+
 
     @Test
     void shouldNotAddNonUniqueUsername() {
@@ -317,6 +324,66 @@ class UsersServiceTest {
 
         assertEquals(concordBirthday.getConcordGroupId(), user.getConcordGroupId());
     }
+
+//    @Test
+//    void shouldCalculateAndSaveNumerologyMappings() {
+//        Users user = makeUser();
+//        user.setUserId(1);
+//        user.setDob(LocalDate.of(1991, 3, 23));
+//        user.setFirstName("John");
+//        user.setMiddleName("A");
+//        user.setLastName("Doe");
+//        user.setPassword("password");
+//
+//        when(repository.add(user)).thenReturn(user);
+//        service.add(user);
+//
+//        // Verify that calculateAndSaveNumerologyMappings was called
+//        List<UserNumerologyMapping> numerologyMappings = userNumerologyMappingRepository.findByUserId(user.getUserId());
+//
+//        // Check if numerology mappings are as expected
+//        assertNotNull(numerologyMappings);
+//        assertFalse(numerologyMappings.isEmpty());
+//    }
+
+//    @Test
+//    void shouldCalculateAndSaveNumerologyMappings() {
+//        Users user = makeUser();
+//        user.setUserId(1);
+//        user.setDob(LocalDate.of(1991, 3, 23));
+//        user.setFirstName("John");
+//        user.setMiddleName("A");
+//        user.setLastName("Doe");
+//        user.setPassword("password");
+//
+//        // Mock repository behavior
+//        when(repository.add(user)).thenReturn(user);
+//
+//        // Mock numerology description repository
+//        NumerologyDescription lifePathDescription = new NumerologyDescription(1, "Life Path", "Description for Life Path", 1);
+//        NumerologyDescription personalityDescription = new NumerologyDescription(2, "Personality", "Description for Personality", 1);
+//        when(numerologyDescriptionRepository.findAll()).thenReturn(List.of(lifePathDescription, personalityDescription));
+//
+//        // Mock save behavior
+////        when(userNumerologyMappingRepository.saveNumerologyMapping(any(UserNumerologyMapping.class));
+//
+//        // Call the method under test
+//        service.add(user);
+//
+//        // Verify that calculateAndSaveNumerologyMappings was called
+//        verify(userNumerologyMappingService, times(1)).calculateAndSaveNumerologyMappings(user);
+//
+//        // Fetch the saved numerology mappings for the user
+//        List<UserNumerologyMapping> numerologyMappings = userNumerologyMappingRepository.findByUserId(user.getUserId());
+//
+//        // Check if numerology mappings are as expected
+//        assertNotNull(numerologyMappings);
+//        assertFalse(numerologyMappings.isEmpty());
+//
+//        // Verify the saved mappings
+//        verify(userNumerologyMappingRepository, times(2)).saveNumerologyMapping(any(UserNumerologyMapping.class)); // adjust the times() based on the expected number of saves
+//    }
+
 
     private Users makeUser() {
         Users user = new Users(1,1,1,"First", "Middle","Last",

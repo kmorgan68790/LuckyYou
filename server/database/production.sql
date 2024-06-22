@@ -85,9 +85,9 @@ INSERT INTO zodiac (zodiac_name, start_dates, end_dates, zodiac_description) VAL
     ('Virgo', '2024-08-23', '2024-09-22', 'Description for Virgo'),
     ('Libra', '2024-09-23', '2024-10-22', 'Description for Libra'),
     ('Scorpio', '2024-10-23', '2024-11-21', 'Description for Scorpio'),
-    ('Sagittarius', '2024-11-22', '2024-12-21', 'Description for Sagittarius'),
-    ('Capricorn', '2024-12-22', '2024-01-19', 'Description for Capricorn'),
-    ('Aquarius', '2024-01-20', '2024-02-18', 'Description for Aquarius'),
+    ('Sagittarius', '2024-11-22', '2024-12-20', 'Description for Sagittarius'),
+    ('Capricorn', '2024-12-21', '2024-01-20', 'Description for Capricorn'),
+    ('Aquarius', '2024-01-21', '2024-02-18', 'Description for Aquarius'),
     ('Pisces', '2024-02-19', '2024-03-20', 'Description for Pisces');
 
 INSERT INTO concord_group (concord_group_number, concord_group_description) VALUES
@@ -207,38 +207,38 @@ INSERT INTO numerology_description (numerology_type, numerology_description, num
     ('Lucky Year', 'Lucky Year Description', 33);
 
 INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, zodiac_id, concord_group_id) VALUES
-    ('user', 'password', 'test@test.com', 'First', 'Middle', 'Last', '1992-08-11',5, 2),
-    ('user2', 'password', 'test2@test.com', 'Second', '', 'Last', '1991-03-23', 1, 1);
+    ('user', 'password', 'test@test.com', 'John', '', 'Doe', '1992-08-11',5, 2),
+    ('user2', 'password', 'test2@test.com', 'John', 'A', 'Doe', '1991-03-23', 1, 1);
 
 INSERT INTO user_numerology_mapping (user_id, numerology_type, numerology_description_id) VALUES
 --    22
     (1, 'Life Path', 11),
 --    11
     (1, 'Birthday', 23),
---    9
+--    8
     (1, 'Expression', 52),
---    3
+--    9
     (1, 'Personality', 58),
---    6
+--    8
     (1, 'Soul Urge', 73),
---  22 or 4
+--   4
     (1, 'Lucky Number', 90),
---  9 same as destiny/exp. number
+--  8 same as destiny/exp. number
     (1, 'Lucky Year', 100),
 
 --    1
     (2, 'Life Path', 1),
 --    23
     (2, 'Birthday', 35),
---    4
+--    9
     (2, 'Expression', 47),
---    1
+--    9
     (2, 'Personality', 56),
---    3
+--    7
     (2, 'Soul Urge', 70),
 --   1
     (2, 'Lucky Number', 81),
---  4 same as destiny/exp. number
+--  9 same as destiny/exp. number
     (2, 'Lucky Year', 95);
 
 INSERT INTO concord_birthday (concord_birthday_number, concord_group_id) VALUES
