@@ -1,23 +1,20 @@
-DROP PROCEDURE IF EXISTS test.set_known_good_state;
--- Create function to set known good state
+
 CREATE OR REPLACE PROCEDURE test.set_known_good_state()
-	-- SET search_path TO Procedures
+-- SET search_path TO test	
 LANGUAGE plpgsql
 AS $$
 BEGIN
 	-- Delete existing data from tables (if needed)
-	DELETE FROM test.concord_days;
-    DELETE FROM test.concord_birthday;
-    DELETE FROM test.user_numerology_mapping;
-	DELETE FROM test.users;
-	DELETE FROM test.numerology_description;
-	DELETE FROM test.concord_group;
-    DELETE FROM test.zodiac;
+	TRUNCATE TABLE concord_days RESTART IDENTITY CASCADE;
+    TRUNCATE TABLE concord_birthday RESTART IDENTITY CASCADE;
+    TRUNCATE TABLE concord_days RESTART IDENTITY CASCADE;
+	TRUNCATE TABLE user_numerology_mapping RESTART IDENTITY CASCADE;
+	TRUNCATE TABLE users RESTART IDENTITY CASCADE;
+	TRUNCATE TABLE numerology_description RESTART IDENTITY CASCADE;
+	TRUNCATE TABLE concord_group RESTART IDENTITY CASCADE;
+	TRUNCATE TABLE zodiac RESTART IDENTITY CASCADE;
 
-	PERFORM setval('test.users_user_id_seq', 1, false);
-    PERFORM setval('test.zodiac_zodiac_id_seq', 1, false);
-
-INSERT INTO test.zodiac (zodiac_name, start_dates, end_dates, zodiac_description) VALUES
+INSERT INTO zodiac (zodiac_name, start_dates, end_dates, zodiac_description) VALUES
     ('Aries', '2024-03-21', '2024-04-19', 'Description for Aries'),
     ('Taurus', '2024-04-20', '2024-05-20', 'Description for Taurus'),
     ('Gemini', '2024-05-21', '2024-06-20', 'Description for Gemini'),
@@ -31,12 +28,12 @@ INSERT INTO test.zodiac (zodiac_name, start_dates, end_dates, zodiac_description
     ('Aquarius', '2024-01-20', '2024-02-18', 'Description for Aquarius'),
     ('Pisces', '2024-02-19', '2024-03-20', 'Description for Pisces');
 
-INSERT INTO test.concord_group (concord_group_number, concord_group_description) VALUES
+INSERT INTO concord_group (concord_group_number, concord_group_description) VALUES
     (1, 'Group 1 Description'),
     (2, 'Group 2 Description'),
 	(3, 'Group 2 Description');
 
-INSERT INTO test.numerology_description (numerology_type, numerology_description, numerology_number) VALUES
+INSERT INTO numerology_description (numerology_type, numerology_description, numerology_number) VALUES
     ('Life Path', 'Life Path Description', 1),
     ('Life Path', 'Life Path Description', 2),
     ('Life Path', 'Life Path Description', 3),
@@ -147,97 +144,98 @@ INSERT INTO test.numerology_description (numerology_type, numerology_description
     ('Lucky Year', 'Lucky Year Description', 22),
     ('Lucky Year', 'Lucky Year Description', 33);
 
-INSERT INTO test.users (user_name, user_password, email, first_name, middle_name, last_name, dob) VALUES
-    ('user', 'password', 'test@test.com', 'First', 'Middle', 'Last', '1992-08-11'),
-    ('user2', 'password', 'test2@test.com', 'Second', '', 'Last', '1991-03-23');
+INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, zodiac_id, concord_group_id) VALUES
+    ('user', 'password', 'test@test.com', 'First', 'Middle', 'Last', '1992-08-11',5, 2),
+    ('user2', 'password', 'test2@test.com', 'Second', '', 'Last', '1991-03-23',1,1);
 
-INSERT INTO test.user_numerology_mapping (numerology_type) VALUES
+INSERT INTO user_numerology_mapping (user_id, numerology_type, numerology_description_id) VALUES
 --    22
-    ( 'Life Path'),
+    (1, 'Life Path', 11),
 --    11
-    ( 'Birthday'),
+    (1, 'Birthday', 23),
 --    9
-    ( 'Expression'),
+    (1, 'Expression', 52),
 --    3
-    ( 'Personality'),
+    (1, 'Personality', 58),
 --    6
-    ( 'Soul Urge'),
+    (1, 'Soul Urge', 73),
 --  22 or 4
-    ( 'Lucky Number'),
+    (1, 'Lucky Number', 90),
 --  9 same as destiny/exp. number
-    ( 'Lucky Year'),
+    (1, 'Lucky Year', 100),
 
 --    1
-    ( 'Life Path'),
+    (2, 'Life Path', 1),
 --    23
-    ( 'Birthday'),
+    (2, 'Birthday', 35),
 --    4
-    ( 'Expression'),
+    (2, 'Expression', 47),
 --    1
-    ( 'Personality'),
+    (2, 'Personality', 56),
 --    3
-    ( 'Soul Urge'),
+    (2, 'Soul Urge', 70),
 --   2
-    ( 'Lucky Number'),
+    (2, 'Lucky Number', 81),
 --  4 same as destiny/exp. number
-    ( 'Lucky Year');
+    (2, 'Lucky Year', 95);
 
-INSERT INTO test.concord_birthday (concord_birthday_number) VALUES
-    (1),
 
-    (11),
+INSERT INTO concord_birthday (concord_birthday_number, concord_group_id) VALUES
+   	(23,1),
 
-    (3),
-    (6);
+    (11,2),
 
-INSERT INTO test.concord_days (day_type, concord_day_number) VALUES
+    (3,3),
+    (6,3);
+
+INSERT INTO concord_days (day_type, concord_day_number, concord_group_id) VALUES
 -- day 23
-    ('mental', 1),
-    ('mental', 25),
-    ('mental', 28),
-    ('physical',5),
-    ('physical', 7),
-    ('physical', 10),
-    ('spiritual', 14),
-    ('spiritual', 16),
-    ('spiritual', 19),
-    ('spiritual', 23),
+    ('mental', 1, 1),
+    ('mental', 25, 1),
+    ('mental', 28, 1),
+    ('physical',5, 1),
+    ('physical', 7, 1),
+    ('physical', 10, 1),
+    ('spiritual', 14, 1),
+    ('spiritual', 16, 1),
+    ('spiritual', 19, 1),
+    ('spiritual', 23, 1),
 
 -- day 11
-    ('mental', 2),
-    ('mental',4),
-    ('mental',31),
-    ('physical', 8),
-    ('physical', 11),
-    ('physical', 13),
-    ('physical', 17),
-    ('spiritual', 20),
-    ('spiritual', 22),
-    ('spiritual', 26),
-    ('spiritual', 29),
+    ('mental', 2, 2),
+    ('mental',4, 2),
+    ('mental',31, 2),
+    ('physical', 8, 2),
+    ('physical', 11, 2),
+    ('physical', 13, 2),
+    ('physical', 17, 2),
+    ('spiritual', 20, 2),
+    ('spiritual', 22, 2),
+    ('spiritual', 26, 2),
+    ('spiritual', 29, 2),
 
 -- day 3
-    ('mental', 15),
-    ('mental',  18),
-    ('mental',  21),
-    ('mental',  14),
-    ('physical',  27),
-    ('physical',  30),
-    ('spiritual', 3),
-    ('spiritual', 6),
-    ('spiritual', 9),
-    ('spiritual', 12),
+    ('mental', 15, 3),
+    ('mental',  18, 3),
+    ('mental',  21, 3),
+    ('mental',  14, 3),
+    ('physical',  27, 3),
+    ('physical',  30, 3),
+    ('spiritual', 3, 3),
+    ('spiritual', 6, 3),
+    ('spiritual', 9, 3),
+    ('spiritual', 12, 3),
 -- day 6
-    ('mental', 21),
-    ('mental',  24),
-    ('mental',  27),
-    ('mental',  30),
-    ('physical',  3),
-    ('physical',  6),
-    ('spiritual', 9),
-    ('spiritual', 12),
-    ('spiritual', 15),
-    ('spiritual', 18);
+    ('mental', 21, 3),
+    ('mental',  24, 3),
+    ('mental',  27, 3),
+    ('mental',  30, 3),
+    ('physical',  3, 3),
+    ('physical',  6, 3),
+    ('spiritual', 9, 3),
+    ('spiritual', 12, 3),
+    ('spiritual', 15, 3),
+    ('spiritual', 18, 3);
 
 -- Commit the transaction
 -- COMMIT;

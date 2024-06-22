@@ -3,11 +3,11 @@ package learn.luckyyou.models;
 import java.util.Objects;
 
 public class ConcordBirthday {
-    private Integer concordBirthdayNumberId;
-    private Integer concordBirthdayNumber;
-    private Integer concordGroupId;
+    private int concordBirthdayNumberId;
+    private int concordBirthdayNumber;
+    private int concordGroupId;
 
-    public ConcordBirthday(Integer concordBirthdayNumberId, Integer concordBirthdayNumber, Integer concordGroupId) {
+    public ConcordBirthday(int concordBirthdayNumberId, int concordBirthdayNumber, int concordGroupId) {
         this.concordBirthdayNumberId = concordBirthdayNumberId;
         this.concordBirthdayNumber = concordBirthdayNumber;
         this.concordGroupId = concordGroupId;
@@ -16,27 +16,27 @@ public class ConcordBirthday {
     public ConcordBirthday() {
     }
 
-    public Integer getConcordBirthdayNumberId() {
+    public int getConcordBirthdayNumberId() {
         return concordBirthdayNumberId;
     }
 
-    public void setConcordBirthdayNumberId(Integer concordBirthdayNumberId) {
+    public void setConcordBirthdayNumberId(int concordBirthdayNumberId) {
         this.concordBirthdayNumberId = concordBirthdayNumberId;
     }
 
-    public Integer getConcordBirthdayNumber() {
+    public int getConcordBirthdayNumber() {
         return concordBirthdayNumber;
     }
 
-    public void setConcordBirthdayNumber(Integer concordBirthdayNumber) {
+    public void setConcordBirthdayNumber(int concordBirthdayNumber) {
         this.concordBirthdayNumber = concordBirthdayNumber;
     }
 
-    public Integer getConcordGroupId() {
+    public int getConcordGroupId() {
         return concordGroupId;
     }
 
-    public void setConcordGroupId(Integer concordGroupId) {
+    public void setConcordGroupId(int concordGroupId) {
         this.concordGroupId = concordGroupId;
     }
 

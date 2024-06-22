@@ -64,5 +64,7 @@ class ZodiacJdbcTemplateRepositoryTest {
         Zodiac zodiac = repository.findByDate(date);
 
         assertNotNull(zodiac);
+//        make sure it returns august
+        assertEquals("Leo", zodiac.getZodiacName());
     }
 }

@@ -13,5 +13,5 @@ public interface ZodiacRepository {
     List<Zodiac> findAll();
     Zodiac findById(int zodiacId);
     Zodiac findZodiacStartAndEnd(LocalDate zodiacDateStart, LocalDate zodiacDateEnd);
-    Zodiac findByDate(LocalDate date); // Find zodiac by a specific date
+    Zodiac findByDate(LocalDate date);
 }

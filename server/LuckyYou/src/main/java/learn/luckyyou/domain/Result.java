@@ -4,17 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Result <T>{
+public class  Result <T> {
     private final ArrayList<String> messages = new ArrayList<>();
-    private ResultType type = ResultType.SUCCESS;
+    private ResultType resultType = ResultType.SUCCESS;
     private T payload;
 
-    public ResultType getType() {
-        return type;
+    public List<String> getErrorMessages() {
+        return new ArrayList<>(messages);
+    }
+
+    public void addErrorMessage(String message, ResultType resultType) {
+        messages.add(message);
+        this.resultType = resultType;
+    }
+
+    public void addErrorMessage(String format, ResultType resultType, Object... args) {
+        messages.add(String.format(format, args));
+        this.resultType = resultType;
     }
 
     public boolean isSuccess() {
-        return type == ResultType.SUCCESS;
+        return resultType == ResultType.SUCCESS;
+    }
+
+    public ResultType getResultType() {
+        return this.resultType;
     }
 
     public T getPayload() {
@@ -25,24 +39,16 @@ public class Result <T>{
         this.payload = payload;
     }
 
-    public List<String> getMessages() {
-        return new ArrayList<>(messages);
-    }
-
-    public void addMessage(String message, ResultType type) {
-        messages.add(message);
-        this.type = type;
-    }
-
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
-        if (!(object instanceof Result<?> result)) return false;
-        return Objects.equals(messages, result.messages) && type == result.type && Objects.equals(payload, result.payload);
+        if (object == null || getClass() != object.getClass()) return false;
+        Result<?> result = (Result<?>) object;
+        return Objects.equals(messages, result.messages) && Objects.equals(payload, result.payload) && resultType == result.resultType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messages, type, payload);
+        return Objects.hash(messages, payload, resultType);
     }
 }

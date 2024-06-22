@@ -18,4 +18,6 @@ public interface UserRepository {
     Users findByZodiacId(int zodiacId);
 
     Users findByConcordGroupId(int concordGroupId);
+
+    Users findByUsername(String username);
 }

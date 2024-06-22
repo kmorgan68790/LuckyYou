@@ -15,10 +15,6 @@ public class Users {
     private String password;
     private String email;
 
-
-
-    public Users() {}
-
     public Users(int userId, int zodiacId, int concordGroupId, String firstName, String middleName,
                  String lastName, LocalDate dob, String userName, String password, String email) {
         this.userId = userId;
@@ -32,7 +28,7 @@ public class Users {
         this.password = password;
         this.email = email;
     }
-
+    public Users() {}
 
     public int getUserId() {
         return userId;

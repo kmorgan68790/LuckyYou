@@ -1,0 +1,11 @@
+@base_url = http://localhost:8080/api/numerology
+
+GET {{base_url}} HTTP/1.1
+
+###
+
+GET {{base_url}}/type/"Life Path" HTTP/1.1
+
+###
+
+GET {{base_url}}/number/3 HTTP/1.1

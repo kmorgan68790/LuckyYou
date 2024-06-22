@@ -44,6 +44,21 @@ public class UserJdbcTemplateRepository implements UserRepository{
     public List<Users> findAll() {
         String sql = "SELECT * FROM users;";
         return jdbcTemplate.query(sql, new UserRowMapper());
+//        String sql = "SELECT * FROM users";
+//        return jdbcTemplate.query(sql, (rs, rowNum) ->
+//                new Users(
+//                        rs.getInt("user_id"),
+//                        rs.getInt("zodiac_id"),
+//                        rs.getInt("concord_id"),
+//                        rs.getString("first_name"),
+//                        rs.getString("middle_name"),
+//                        rs.getString("last_name"),
+//                        rs.getDate("dob").toLocalDate(),
+//                        rs.getString("user_name"),
+//                        rs.getString("user_password"),
+//                        rs.getString("user_email")
+//                )
+//        );
     }
 
     @Override
@@ -104,7 +119,8 @@ public class UserJdbcTemplateRepository implements UserRepository{
 
     @Override
     public boolean deleteById(int userId) {
-        String sql = "DELETE FROM users WHERE user_id = ?;";
+        String sql = "DELETE FROM user_numerology_mapping WHERE user_id = ?;" ;
+//                "DELETE FROM users WHERE user_id = ?;";
         return jdbcTemplate.update(sql, userId) > 0;
     }
 
@@ -119,6 +135,13 @@ public class UserJdbcTemplateRepository implements UserRepository{
     public Users findByConcordGroupId(int concordGroupId) {
         String sql = "SELECT * FROM users WHERE concord_group_id = ?;";
         return jdbcTemplate.query(sql, new UserRowMapper(), concordGroupId).stream()
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public Users findByUsername(String username) {
+        String sql = "SELECT * FROM users WHERE user_name = ?;";
+        return jdbcTemplate.query(sql, new UserRowMapper(), username).stream()
                 .findFirst().orElse(null);
     }
 }

@@ -73,30 +73,27 @@ LuckyYou
             [x] test.sql
             [x] queries.sql
         http (3 hr)
-            [] Category.http - 20 min
-            [] UserCategory.http - 20 min
-            [] Zodiac.http - 20 min
-            [] User.http - 20 min
-            [] ConcordGroup.http - 20 min
-            [] ConcordDays.http - 20 min
-            [] UserConcordGroup.http - 20 min
-            [] Numerology.http - 20 min
-            [] CategoryNumerology.http - 20 min
+            [x] NumerologyDescription.http - 20 min
+            [x] UserNumerologyMapping.http - 20 min
+            [x] Zodiac.http - 20 min
+            [x] User.http - 20 min
+            [x] ConcordGroup.http - 20 min
+            [x] ConcordDays.http - 20 min
+            [x] ConcordBirthday.http - 20 min
+
     Src (4 days)
         main
             controllers (9 hr 1/3)
                 [x] ErrorResponse - 10 min
                 [x] GlobalExceptionHandler - 10 min
 
-                [] CategoryController - 1 hr
-                [] UserCategoryController - 1 hr
-                [] ZodiacController - 1 hr
-                [] UserController - 1 hr
-                [] ConcordGroupController - 1 hr
-                [] ConcordDaysController - 1 hr
-                [] UserConcordGroupController - 1 hr
-                [] NumerologyController - 1 hr
-                [] CategoryNumerologyController - 1 hr
+                [x] NumerologyDescriptionController - 1 hr
+                [x] UserNumerologyMappingController - 1 hr
+                [x] ZodiacController - 1 hr
+                [x] UserController - 1 hr
+                [x] ConcordGroupController - 1 hr
+                [x] ConcordDaysController - 1 hr
+                [x] ConcordBirthdayController - 1 hr
 
             data (8 hr)
                 [x] DataAccessException - 10 min
@@ -126,15 +123,13 @@ LuckyYou
                 [x] Result - 10 min
                 [x] ResultType - 5 min
 
-                [] CategoryService - 1 hr
-                [] UserCategoryService - 1 hr
-                [] ZodiacService - 1 hr
-                [] UserService - 1 hr
-                [] ConcordGroupService - 1 hr
-                [] ConcordDaysService - 1 hr
-                [] UserConcordGroupService - 1 hr
-                [] NumerologyService - 1 hr
-                [] CategoryNumerologyService - 1 hr
+                [x] NumerologyDescriptionService - 1 hr
+                [x] ZodiacService - 1 hr
+                [x] UserService - 1 hr
+                [x] ConcordGroupService - 1 hr
+                [x] ConcordDaysService - 1 hr
+                [x] UserConcordGroupService - 1 hr
+                [x] UserNumerologyMappingService - 1 hr
 
             Models (3 hr)
                 [x] Zodiac.java - 20 min
@@ -158,14 +153,16 @@ LuckyYou
             [x] ConcordGroup - 1 hr
             [x] ConcordDays - 1 hr
             [x] ConcordBirthday - 1 hr
-            [x] UserNumerologyMapping - 1 hr
+            [] UserNumerologyMapping - 1 hr
+            [x] NumerologyDescription - 1 hr
 
 
         
         domain/service tests (9 hr)
-            [] Zodiac - 1 hr
-            [] User - 1 hr
-            [] ConcordGroup - 1 hr
-            [] ConcordDays - 1 hr
-            [] ConcordBirthday - 1 hr
-            [] UserNumerologyMapping - 1 hr
+            [x] Zodiac - 1 hr
+            [x] User - 1 hr
+            [x] ConcordGroup - 1 hr
+            [x] ConcordDays - 1 hr
+            [x] ConcordBirthday - 1 hr
+            [x] UserNumerologyMapping - 1 hr
+            [x] NumerologyDescription - 1 hr

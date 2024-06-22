@@ -1,0 +1,63 @@
+domain
+    [x] UsersServiceTest.java- 2hr
+        Methods:
+            shouldNotFindNonexistingId()
+            shouldNotAddNonUniqueUsername()
+            shouldNotAddNonUniqueEmail()
+            shouldNotAddUserWithNullOrBlankPassword()
+            shouldNotAddUserWithNullFirstName()
+            shouldAddUserWithNullMiddleName()
+            shouldNotAddUserWithNullLastName()
+            shouldNotAddUserWithNullDob()
+
+            shouldNotFindNonexistingId()
+            shouldNotUpdateNonUniqueUsername()
+            shouldNotUpdateNonUniqueEmail()
+            shouldNotUpdateUserWithNullOrBlankPassword()
+            shouldNotUpdateUserWithNullFirstName()
+            shouldUpdateUserWithNullMiddleName()
+            shouldNotUpdateUserWithNullLastName()
+            shouldNotUpdateUserWithnNonNullDob()
+
+            shouldNotDeleteNonExistingUser()
+            shouldDeleteExistingUser()
+
+            shouldAssignZodiacSignWithUsersDobWithoutYear()
+
+            shouldAssignConcordGroupWithUsersBirthDay()
+
+    [x] ConcordGroupServiceTest.java - 2hr
+        Methods:
+            shouldFindConcordGroupId()
+            shouldFindIdForMatchingDescription()
+            shouldFindAllConcorGroupId()
+
+    [x] ConcordBirthdayServiceTest.java - 2hr
+        Methods
+            shouldNotFindById()
+            shouldFindByGroupId()
+            shouldNotFindConcordBirthdayNumber()
+            shouldNotFindConcordBirthdayNumber()
+
+    [x] ConcordBirthdayServiceTest.java - 2hr
+        Methods
+            shouldFindById()
+            shouldFindByConcordGroupId()
+            shouldFindByDayTypeAndGroupId()
+
+    [x] ZodiacServiceTest.java - 2hr
+        Methods
+            shouldFindById()
+            shouldFindZodiacStartAndEnd()
+            shouldFindByDate()
+
+    [x] UserNumerologyMappingServiceTest.java - 2hr
+        Methods
+            shouldDetermineIfMasterNumber()
+            shouldCalulcateLifePathBasedOnUsersFullDob()
+            shouldCalulcateBirthdayBasedOnUsersDayOfBirth()
+            shouldCalulcateExpressionBasedOnUsersFullName()
+            shouldCalulcatePersonalityBasedOnUsersFullNameConsonantsOnly()
+            shouldCalulcateSoulUrgeBasedOnUsersFullNameVowelsOnly()
+            shouldCalulcateLuckyNumberBasedOnFullDob()
+            shouldCalulcateLuckyYearBasedOnUsersExpressionNumber()
