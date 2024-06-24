@@ -261,13 +261,14 @@ class UsersServiceTest {
     void shouldNotUpdateUserWithInvalidDob() {
         Users user = makeUser();
         when(repository.add(user)).thenReturn(user);
+
         user.setDob(LocalDate.of(0000,3,23));
 
         Result<Users> expected = new Result<>();
         expected.addErrorMessage("Birthdate must be a valid month, day, and year", ResultType.INVALID);
         Result<Users> actual = service.update(user);
 
-        assertEquals(expected, actual);
+        assertEquals(expected.getErrorMessages(), actual.getErrorMessages());
     }
 
     @Test

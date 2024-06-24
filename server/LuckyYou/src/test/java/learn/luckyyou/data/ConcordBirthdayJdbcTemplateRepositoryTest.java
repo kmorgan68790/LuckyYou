@@ -64,6 +64,6 @@ class ConcordBirthdayJdbcTemplateRepositoryTest {
         ConcordBirthday actual = repository.findConcordBirthdayNumber(3);
 
         assertNotNull(actual);
-        assertEquals(concordBirthday.getConcordBirthdayNumber(), actual);
+        assertEquals(concordBirthday.getConcordBirthdayNumber(), actual.getConcordBirthdayNumber());
     }
 }
