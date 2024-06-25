@@ -4,6 +4,7 @@ import NumerologyList from '../components/NumerologyList';
 
 const Numerology = ({user}) => {
     const [numerologies, setNumerologies] = useState([])
+	const [numerologyNumbers, setnumerologyNumbers] = useState([])
 
 	useEffect(() => {
 		fetch("http://localhost:8080/api/numerology")
@@ -13,8 +14,16 @@ const Numerology = ({user}) => {
 		})
 	}, [])
 
+	useEffect(() => {
+		fetch("http://localhost:8080/api/mapping/user/${user.userId}")
+		.then(response => response.json())
+		.then(json => {
+			setnumerologyNumbers(json)
+		})
+	}, [])
+
     return (
-        <NumerologyList numerologies={numerologies} user={user}/>
+        <NumerologyList numerologies={numerologies} numerologyNumbers={numerologyNumbers} user={user}/>
     )
 };
 

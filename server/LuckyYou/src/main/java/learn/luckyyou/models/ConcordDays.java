@@ -5,12 +5,15 @@ import java.util.Objects;
 public class ConcordDays {
     private int concordDaysId;
     private String dayType;
+    private int concordBirthdayNumber;
+
     private int concordDayNumber;
     private int concordGroupId;
 
-    public ConcordDays(int concordDaysId, String dayType, int concordDayNumber, int concordGroupId) {
+    public ConcordDays(int concordDaysId, String dayType, int concordBirthdayNumber, int concordDayNumber, int concordGroupId) {
         this.concordDaysId = concordDaysId;
         this.dayType = dayType;
+        this.concordBirthdayNumber = concordBirthdayNumber;
         this.concordDayNumber = concordDayNumber;
         this.concordGroupId = concordGroupId;
     }
@@ -49,16 +52,23 @@ public class ConcordDays {
         this.concordGroupId = concordGroupId;
     }
 
+    public int getConcordBirthdayNumber() {
+        return concordBirthdayNumber;
+    }
+
+    public void setConcordBirthdayNumber(int concordBirthdayNumber) {
+        this.concordBirthdayNumber = concordBirthdayNumber;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (!(object instanceof ConcordDays that)) return false;
-        return concordDaysId == that.concordDaysId && concordDayNumber == that.concordDayNumber && concordGroupId == that.concordGroupId
-                && Objects.equals(dayType, that.dayType);
+        return concordDaysId == that.concordDaysId && concordBirthdayNumber == that.concordBirthdayNumber && concordDayNumber == that.concordDayNumber && concordGroupId == that.concordGroupId && Objects.equals(dayType, that.dayType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(concordDaysId, dayType, concordDayNumber, concordGroupId);
+        return Objects.hash(concordDaysId, dayType, concordBirthdayNumber, concordDayNumber, concordGroupId);
     }
 }

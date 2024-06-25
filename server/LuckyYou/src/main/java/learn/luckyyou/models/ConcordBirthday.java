@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class ConcordBirthday {
     private int concordBirthdayNumberId;
+
     private int concordBirthdayNumber;
     private int concordGroupId;
 

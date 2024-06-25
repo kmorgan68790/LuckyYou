@@ -4,21 +4,6 @@ import Errors from "../components/Errors";
 import { jwtDecode } from "jwt-decode";
 
 const LoginSignUp = ({setUser}) => {
-    // const INITIAL_USER= {
-    //     userId: 0,
-    //     userName: "",
-    //     password: "",
-    //     email: "",
-    //     firstName: "",
-    //     middleName: "",
-    //     lastName: "",
-    //     dob: 0,
-    //     zodiacId: 0,
-    //     concordGroupId: 0,
-    //   };
-
-    // const setUser = props.setUser
-    // const[user, setUser] = useState(INITIAL_USER);
     const [errors, setErrors] = useState([]);
     const [isLogin, setIsLogin] = useState(true);
     const [showSignupPrompt, setShowSignupPrompt] = useState(false);
@@ -59,16 +44,13 @@ const LoginSignUp = ({setUser}) => {
         .then(response => {
             if (response.ok) {
                 response.json().then(json => {
-                    // setUser(json); 
-                    // localStorage.setItem("user", JSON.stringify(json));
+
                     const userObject = jwtDecode(json.jwt)
                     userObject.jwt = json.jwt
                     setUser(userObject)
-                    localStorage.setItem("users", JSON.stringify(userObject))
-                    // navigate("/");
+                    localStorage.setItem("user", JSON.stringify(userObject))
+                    navigate("/luckyme");
                 });
-                // console.log("Success!");
-                // navigate("/")
             } else if (response.status >= 400 || response.status <= 499) {
                 response.json()
                 .then(json => setErrors(json))
@@ -97,16 +79,12 @@ const LoginSignUp = ({setUser}) => {
                     const userObject = {
                         jwt: json.jwt,
                         userName: decodedToken.user_name,
-                        userId: decodedToken.user_id,
-                        zodiacId: decodedToken.zodiac_id,
-                        concordGroupId: decodedToken.concord_group_id
+                        userId: decodedToken.userId,
+                        zodiacId: decodedToken.zodiacId,
+                        concordGroupId: decodedToken.concordGroupId
                     };
-                    // userObject.jwt = json.jwt
-                    // userObject.zodiacId = json.zodiacId; 
-                    // userObject.concordGroupId = json.concordGroupId;
-                    // userObject.userId = json.userId;
                     setUser(userObject)
-                    localStorage.setItem("users", JSON.stringify(userObject))
+                    localStorage.setItem("user", JSON.stringify(userObject))
                     navigate("/luckyme");
                 });
             } else if (response.status === 404 || response.status === 403) {
@@ -124,7 +102,6 @@ const LoginSignUp = ({setUser}) => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        // logIn();
         if (isLogin) {
           logIn();
         } else {   

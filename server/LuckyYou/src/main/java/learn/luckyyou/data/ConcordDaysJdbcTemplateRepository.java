@@ -25,6 +25,7 @@ public class ConcordDaysJdbcTemplateRepository implements ConcordDaysRepository 
             ConcordDays concordDay = new ConcordDays();
             concordDay.setConcordDaysId(rs.getInt("concord_days_id"));
             concordDay.setDayType(rs.getString("day_type"));
+            concordDay.setConcordBirthdayNumber(rs.getInt("concord_birthday_number"));
             concordDay.setConcordDayNumber(rs.getInt("concord_day_number"));
             concordDay.setConcordGroupId(rs.getInt("concord_group_id"));
             return concordDay;
@@ -36,6 +37,13 @@ public class ConcordDaysJdbcTemplateRepository implements ConcordDaysRepository 
         String sql = "SELECT * FROM concord_days WHERE concord_days_id = ?;";
         return jdbcTemplate.query(sql, new ConcordDayRowMapper(), concordDaysId).stream()
                 .findFirst().orElse(null);
+    }
+
+    @Override
+    public List<ConcordDays>  findConcordDaysByBirthdayAndGroupId(int concordBirthdayNumber, int concordGroupId) {
+        String sql = "SELECT * FROM concord_days WHERE concord_birthday_number = ? AND concord_group_id = ?;";
+        return jdbcTemplate.query(sql, new ConcordDayRowMapper(), concordBirthdayNumber, concordGroupId);
+
     }
 
     @Override

@@ -12,11 +12,10 @@ const NavBar = ({setUser, user}) => {
     </li>
 
     return (
+        <nav className='navbar navbar-expand justify-content-between'>
+        <h2>LuckyYou</h2>
+        <img src={clover} alt='Four leaf clover' height='45'/>
         <ul className='navbar-nav justify-content-space-between'>
-            {/* <li><h2>LuckyYou</h2></li>
-            <li>
-                <img src={clover} alt='Four leaf clover' height='45'/>
-            </li> */}
                 
             {/* always visible */}
             <NavLink name="Home" to="/"/>
@@ -37,6 +36,7 @@ const NavBar = ({setUser, user}) => {
             { user !== null && <NavLink name="Edit" to={`/edit/${user.userId}`} /> }
             { user !== null && logOutLink }
         </ul>
+        </nav>
     )
 }
 

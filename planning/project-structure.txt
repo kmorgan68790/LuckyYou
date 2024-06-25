@@ -28,7 +28,7 @@ LuckyYou
  
         pages
             Home
-                [] Home
+                [x] Home
                 [] About
                 [] Contact ?
             User

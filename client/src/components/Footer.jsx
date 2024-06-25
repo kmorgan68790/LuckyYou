@@ -11,7 +11,7 @@ const Footer = ({setUser, user}) => {
     </li>
 
     return (
-        <ul className='navbar-nav'>
+        <ul className='navbar-nav' >
             {/* <li><h2>LuckyYou</h2></li>
             <li>
                 <img src={clover} alt='Four leaf clover' height='45'/>

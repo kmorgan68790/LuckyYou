@@ -54,7 +54,7 @@ const Edit = ({ user, setUser }) => {
                 navigate("/luckyme");
             } else if (response.status === 403) {
                 setUser(null);
-                localStorage.removeItem("users");
+                localStorage.removeItem("user");
             } else if (response.status >= 400 && response.status < 499) {
                 response.json().then(json => setErrors(json));
             } else {

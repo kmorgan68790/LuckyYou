@@ -21,6 +21,8 @@ public class ConcordDaysService {
     public ConcordDays findById(int concordDaysId) {
         return concordDaysRepository.findById(concordDaysId);
     }
+    public List<ConcordDays> findConcordDaysByBirthdayAndGroupId(int concordBirthdayNumber, int concordGroupId) {
+        return concordDaysRepository.findConcordDaysByBirthdayAndGroupId(concordBirthdayNumber,concordGroupId);}
 
     public List<ConcordDays> findByConcordGroupId(int concordGroupId) {
         return concordDaysRepository.findByConcordGroupId(concordGroupId);
