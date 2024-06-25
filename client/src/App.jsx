@@ -23,7 +23,7 @@ function App() {
     <div className='container'>
 				<header className='mb-3'>
 					<nav className='navbar navbar-expand'>
-						<div className='d-flex ' >
+						<div className='d-flex' >
 						<h2>LuckyYou</h2>
 						<a className='navbar-brand' href='/'>
 						<img src={clover} alt='Four leaf clover' height='45'/>

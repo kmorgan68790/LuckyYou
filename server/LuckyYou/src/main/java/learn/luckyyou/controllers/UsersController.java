@@ -136,15 +136,10 @@ public class UsersController {
         }
 
         Integer userId;
-//        try {
             Jws<Claims> parsedJwt = Jwts.parserBuilder()
                     .setSigningKey(secretSigningKey.getKey())
                     .build().parseClaimsJws(headers.get("authorization"));
             userId = (Integer) parsedJwt.getBody().get("userId");
-//        } catch (SignatureException ex) {
-//            return null;
-//        }
-
         return userId;
     }
 }
