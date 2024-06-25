@@ -2,6 +2,15 @@
 
 GET {{base_url}} HTTP/1.1
 
+###
+
+GET {{base_url}}/personal
+Content-Type: application/json
+
+{
+    "userId": 1
+}
+
 ### username/email already taken
 
 POST {{base_url}}

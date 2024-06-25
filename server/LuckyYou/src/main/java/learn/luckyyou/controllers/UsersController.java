@@ -33,6 +33,9 @@ public class UsersController {
         return service.findAll();
     }
 
+    @GetMapping("/id/{userId}")
+    public Users findById(@PathVariable int userId) {return service.findById(userId);}
+
     @PostMapping
     public ResponseEntity<?> add(@RequestBody Users user)  {
         Result<Users> result = service.add(user);
@@ -115,9 +118,11 @@ public class UsersController {
     }
 
     private HashMap<String, String> getJwtFromUser(Users user) {
-        String jwt =  Jwts.builder()
+        String jwt = Jwts.builder()
                 .claim("user_name", user.getUserName())
                 .claim("user_id", user.getUserId())
+                .claim("zodiac_id", user.getZodiacId())
+                .claim("concord_group_id", user.getConcordGroupId())
                 .signWith(secretSigningKey.getKey())
                 .compact();
         HashMap<String, String> output = new HashMap<>();
@@ -131,15 +136,10 @@ public class UsersController {
         }
 
         Integer userId;
-//        try {
             Jws<Claims> parsedJwt = Jwts.parserBuilder()
                     .setSigningKey(secretSigningKey.getKey())
                     .build().parseClaimsJws(headers.get("authorization"));
             userId = (Integer) parsedJwt.getBody().get("userId");
-//        } catch (SignatureException ex) {
-//            return null;
-//        }
-
         return userId;
     }
 }

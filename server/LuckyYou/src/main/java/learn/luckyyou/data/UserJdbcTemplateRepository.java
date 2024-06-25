@@ -44,21 +44,6 @@ public class UserJdbcTemplateRepository implements UserRepository{
     public List<Users> findAll() {
         String sql = "SELECT * FROM users;";
         return jdbcTemplate.query(sql, new UserRowMapper());
-//        String sql = "SELECT * FROM users";
-//        return jdbcTemplate.query(sql, (rs, rowNum) ->
-//                new Users(
-//                        rs.getInt("user_id"),
-//                        rs.getInt("zodiac_id"),
-//                        rs.getInt("concord_id"),
-//                        rs.getString("first_name"),
-//                        rs.getString("middle_name"),
-//                        rs.getString("last_name"),
-//                        rs.getDate("dob").toLocalDate(),
-//                        rs.getString("user_name"),
-//                        rs.getString("user_password"),
-//                        rs.getString("user_email")
-//                )
-//        );
     }
 
     @Override

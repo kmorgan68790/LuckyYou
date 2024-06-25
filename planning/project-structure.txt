@@ -1,7 +1,7 @@
 LuckyYou    
     planning
         [] project-structure - 1hr
-        [] uses-cases - 1.5 hr
+        [x] uses-cases - 1.5 hr
     client
         Styles
             [] CSS ?
@@ -9,43 +9,23 @@ LuckyYou
             [] img/logo
         components
             Common
-                [] Errors
+                [x] Errors
                 [] header
                 [] footer
                 [] NavBar
                 [] Navlink
-                [] SignUpForm
             ConcordGroup
                 [] ConcordGroupList
                 [] ConcordGroupItem
-                /?
-                [] ConcordGroupLove
-                [] ConcordGroupHealth
-                [] ConcordGroupMoney
-                [] ConcordGroupSpiritual
-                [] ConcordGroupLifePurpose
 
             Numerology
-                [] LifePathNumber
-                [] BirthdayNumber
-                [] ExpressionNumber
-                [] PersonalityNumber
-                [] SoulUrgeNumber
+                [x] NumerologyItem
+                [] NumerologyList
 
-                [] NumerologyLove
-                [] NumerologyHealth
-                [] NumerologyMoney
-                [] NumerologySpiritual
-                [] NumerologyLifePurpose
             Zodiac
                 [] ZodiacList
-                [] ZodiacItem
-
-                [] ZodiacLove
-                [] ZodiacHealth
-                [] ZodiacMoney
-                [] ZodiacSpiritual
-                [] ZodiacLifePurpose  
+                [x] ZodiacItem
+ 
         pages
             Home
                 [] Home
@@ -62,10 +42,11 @@ LuckyYou
             Numerology
                 [] Numerology
 
-            Categories
-                [] Categories    
+            LuckyMe
+            [] LuckyMe
+
         [] App
-        [] Main    
+        [x] Main    
 
     server (7-days total)
         database (8 hr)

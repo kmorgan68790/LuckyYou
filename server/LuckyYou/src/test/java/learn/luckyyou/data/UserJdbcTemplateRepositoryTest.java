@@ -87,6 +87,8 @@ class UserJdbcTemplateRepositoryTest {
     @Test
     void findByZodiacId() {
         Users user = makeUser();
+        user.setUserName("user5");
+        user.setEmail("test5@test.com");
 
         repository.add(user);
         Users actual = repository.findByZodiacId(user.getZodiacId());
@@ -109,7 +111,10 @@ class UserJdbcTemplateRepositoryTest {
     @Test
     void shouldFindByUsername() {
         Users user = makeUser();
-        String expected = "user3";
+        user.setUserName("user6");
+        user.setEmail("test6@test.com");
+        String expected = "user6";
+
 
         repository.add(user);
         Users actual = repository.findByUsername(user.getUserName());
@@ -120,7 +125,7 @@ class UserJdbcTemplateRepositoryTest {
 
     @Test
     void deleteById() {
-        assertTrue(repository.deleteById(3));
+        assertTrue(repository.deleteById(2));
         assertFalse(repository.deleteById(13));
     }
 
