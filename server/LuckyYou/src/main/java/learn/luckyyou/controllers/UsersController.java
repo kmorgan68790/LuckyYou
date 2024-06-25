@@ -115,9 +115,11 @@ public class UsersController {
     }
 
     private HashMap<String, String> getJwtFromUser(Users user) {
-        String jwt =  Jwts.builder()
+        String jwt = Jwts.builder()
                 .claim("user_name", user.getUserName())
                 .claim("user_id", user.getUserId())
+                .claim("zodiac_id", user.getZodiacId())
+                .claim("concord_group_id", user.getConcordGroupId())
                 .signWith(secretSigningKey.getKey())
                 .compact();
         HashMap<String, String> output = new HashMap<>();
