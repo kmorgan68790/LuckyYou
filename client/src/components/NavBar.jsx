@@ -12,11 +12,11 @@ const NavBar = ({setUser, user}) => {
     </li>
 
     return (
-        <ul className='navbar-nav'>
-            <li><h2>LuckyYou</h2></li>
+        <ul className='navbar-nav justify-content-space-between'>
+            {/* <li><h2>LuckyYou</h2></li>
             <li>
                 <img src={clover} alt='Four leaf clover' height='45'/>
-            </li>
+            </li> */}
                 
             {/* always visible */}
             <NavLink name="Home" to="/"/>

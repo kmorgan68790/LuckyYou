@@ -33,6 +33,9 @@ public class UsersController {
         return service.findAll();
     }
 
+    @GetMapping("/id/{userId}")
+    public Users findById(@PathVariable int userId) {return service.findById(userId);}
+
     @PostMapping
     public ResponseEntity<?> add(@RequestBody Users user)  {
         Result<Users> result = service.add(user);

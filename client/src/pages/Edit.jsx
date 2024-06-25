@@ -4,7 +4,9 @@ import Errors from "../components/Errors";
 
 const Edit = ({ user, setUser }) => {
     const navigate = useNavigate();
+
     const [userData, setUserData] = useState({
+        userId: user ? user.userId : 0,
         userName: "",
         email: "",
         firstName: "",
@@ -16,8 +18,8 @@ const Edit = ({ user, setUser }) => {
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
-        if (user) {
-            fetch(`http://localhost:8080/api/users/${user.userId}`, {
+        if (user && user.userId > 0) {
+            fetch(`http://localhost:8080/api/users/id/${user.userId}`, {
                 headers: {
                     Authorization: `Bearer ${user.jwt}`
                 }

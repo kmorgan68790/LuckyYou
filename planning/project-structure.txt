@@ -9,26 +9,22 @@ LuckyYou
             [] img/logo
         components
             Common
-                [] Errors
+                [x] Errors
                 [] header
                 [] footer
                 [] NavBar
                 [] Navlink
-                [] SignUpForm
             ConcordGroup
                 [] ConcordGroupList
                 [] ConcordGroupItem
 
             Numerology
-                [] LifePathNumber
-                [] BirthdayNumber
-                [] ExpressionNumber
-                [] PersonalityNumber
-                [] SoulUrgeNumber
+                [x] NumerologyItem
+                [] NumerologyList
 
             Zodiac
                 [] ZodiacList
-                [] ZodiacItem
+                [x] ZodiacItem
  
         pages
             Home
@@ -46,10 +42,11 @@ LuckyYou
             Numerology
                 [] Numerology
 
-            Categories
-                [] Categories    
+            LuckyMe
+            [] LuckyMe
+
         [] App
-        [] Main    
+        [x] Main    
 
     server (7-days total)
         database (8 hr)
