@@ -169,6 +169,7 @@ class UsersServiceTest {
         newUser.setUserName("user2");
         newUser.setEmail("email2");
         when(repository.add(newUser)).thenReturn(newUser);
+        repository.add(newUser);
 
         Result<Users> expected = new Result<>();
         expected.addErrorMessage("Username is already taken", ResultType.INVALID);
@@ -325,66 +326,6 @@ class UsersServiceTest {
 
         assertEquals(concordBirthday.getConcordGroupId(), user.getConcordGroupId());
     }
-
-//    @Test
-//    void shouldCalculateAndSaveNumerologyMappings() {
-//        Users user = makeUser();
-//        user.setUserId(1);
-//        user.setDob(LocalDate.of(1991, 3, 23));
-//        user.setFirstName("John");
-//        user.setMiddleName("A");
-//        user.setLastName("Doe");
-//        user.setPassword("password");
-//
-//        when(repository.add(user)).thenReturn(user);
-//        service.add(user);
-//
-//        // Verify that calculateAndSaveNumerologyMappings was called
-//        List<UserNumerologyMapping> numerologyMappings = userNumerologyMappingRepository.findByUserId(user.getUserId());
-//
-//        // Check if numerology mappings are as expected
-//        assertNotNull(numerologyMappings);
-//        assertFalse(numerologyMappings.isEmpty());
-//    }
-
-//    @Test
-//    void shouldCalculateAndSaveNumerologyMappings() {
-//        Users user = makeUser();
-//        user.setUserId(1);
-//        user.setDob(LocalDate.of(1991, 3, 23));
-//        user.setFirstName("John");
-//        user.setMiddleName("A");
-//        user.setLastName("Doe");
-//        user.setPassword("password");
-//
-//        // Mock repository behavior
-//        when(repository.add(user)).thenReturn(user);
-//
-//        // Mock numerology description repository
-//        NumerologyDescription lifePathDescription = new NumerologyDescription(1, "Life Path", "Description for Life Path", 1);
-//        NumerologyDescription personalityDescription = new NumerologyDescription(2, "Personality", "Description for Personality", 1);
-//        when(numerologyDescriptionRepository.findAll()).thenReturn(List.of(lifePathDescription, personalityDescription));
-//
-//        // Mock save behavior
-////        when(userNumerologyMappingRepository.saveNumerologyMapping(any(UserNumerologyMapping.class));
-//
-//        // Call the method under test
-//        service.add(user);
-//
-//        // Verify that calculateAndSaveNumerologyMappings was called
-//        verify(userNumerologyMappingService, times(1)).calculateAndSaveNumerologyMappings(user);
-//
-//        // Fetch the saved numerology mappings for the user
-//        List<UserNumerologyMapping> numerologyMappings = userNumerologyMappingRepository.findByUserId(user.getUserId());
-//
-//        // Check if numerology mappings are as expected
-//        assertNotNull(numerologyMappings);
-//        assertFalse(numerologyMappings.isEmpty());
-//
-//        // Verify the saved mappings
-//        verify(userNumerologyMappingRepository, times(2)).saveNumerologyMapping(any(UserNumerologyMapping.class)); // adjust the times() based on the expected number of saves
-//    }
-
 
     private Users makeUser() {
         Users user = new Users(1,1,1,"First", "Middle","Last",

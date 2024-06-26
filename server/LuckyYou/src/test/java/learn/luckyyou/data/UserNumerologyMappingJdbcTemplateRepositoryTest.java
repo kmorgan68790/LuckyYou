@@ -89,14 +89,4 @@ class UserNumerologyMappingJdbcTemplateRepositoryTest {
         assertEquals(expected.getUserId(), actual.getUserId());
     }
 
-//    @Test
-//    void UserNumerologyMapping findByUserIdAndNumerologyType(int userId, String numerologyType) {
-//
-//    }
-//
-//    @Test
-//    void boolean saveNumerologyMapping(UserNumerologyMapping mapping) {
-//
-//    }
-
 }

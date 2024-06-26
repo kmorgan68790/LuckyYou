@@ -37,27 +37,27 @@ class ConcordDaysJdbcTemplateRepositoryTest {
         ConcordDays concordDay = repository.findById(1);
 
         assertEquals(1, concordDay.getConcordDaysId());
-        assertEquals("mental", concordDay.getDayType());
+        assertEquals("Mental", concordDay.getDayType());
     }
 
-//    @Test
-//    void findByConcordGroupId() {
-//        ConcordDays concordDay = new ConcordDays(2,"mental",25,1);
-//
-//        List<ConcordDays> actual = repository.findByConcordGroupId(1);
-//
-//        assertNotNull(actual);
-//        assertEquals(concordDay.getConcordGroupId(), actual.get(1).getConcordGroupId());
-//    }
+    @Test
+    void findByConcordGroupId() {
+        ConcordDays concordDay = new ConcordDays(2,"Mental",5,25,1);
 
-//    @Test
-//    void findByDayTypeAndGroupId() {
-//        ConcordDays concordDay = new ConcordDays(2,"mental",25,1);
-//
-//        List<ConcordDays> actual = repository.findByConcordGroupId(1);
-//
-//        assertNotNull(actual);
-//        assertEquals(concordDay.getConcordGroupId(), actual.get(1).getConcordGroupId());
-//        assertEquals(concordDay.getDayType(), actual.get(1).getDayType());
-//    }
+        List<ConcordDays> actual = repository.findByConcordGroupId(1);
+
+        assertNotNull(actual);
+        assertEquals(concordDay.getConcordGroupId(), actual.get(1).getConcordGroupId());
+    }
+
+    @Test
+    void findByDayTypeAndGroupId() {
+        ConcordDays concordDay = new ConcordDays(2,"Mental",5,25,1);
+
+        List<ConcordDays> actual = repository.findByConcordGroupId(1);
+
+        assertNotNull(actual);
+        assertEquals(concordDay.getConcordGroupId(), actual.get(1).getConcordGroupId());
+        assertEquals(concordDay.getDayType(), actual.get(1).getDayType());
+    }
 }

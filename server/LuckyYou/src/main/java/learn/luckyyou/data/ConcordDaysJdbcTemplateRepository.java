@@ -58,24 +58,4 @@ public class ConcordDaysJdbcTemplateRepository implements ConcordDaysRepository 
         return jdbcTemplate.query(sql, new ConcordDayRowMapper(), dayType, concordGroupId);
     }
 
-    //    @Override
-//    public ConcordDays add(ConcordDays concordDays) {
-//        String sql = "INSERT INTO concord_days (day_type, concord_day_number, concord_group_id) VALUES (?, ?, ?);";
-//        jdbcTemplate.update(sql,
-//                concordDays.getDayType(),
-//                concordDays.getConcordDayNumber(),
-//                concordDays.getConcordGroupId());
-//        return concordDays;
-//    }
-//
-//    @Override
-//    public boolean update(ConcordDays concordDays) {
-//        String sql = "UPDATE concord_days SET day_type = ?, concord_day_number = ?, concord_group_id = ? " +
-//                "WHERE concord_days_id = ?;";
-//        return jdbcTemplate.update(sql,
-//                concordDays.getDayType(),
-//                concordDays.getConcordDayNumber(),
-//                concordDays.getConcordGroupId(),
-//                concordDays.getConcordDaysId()) > 0;
-//    }
 }

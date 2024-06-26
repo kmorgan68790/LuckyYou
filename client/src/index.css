@@ -35,12 +35,12 @@ ul {
   }
 
   .luckyMeContainer {
-	padding-left: 2rem;
-	padding-right: 2rem;
-	/* text-align: justify; */
-	
+	margin-left: 5rem;
+	margin-right: 5rem;
   }
-
+.concord {
+	margin-left: 5rem;
+}
 
 
 

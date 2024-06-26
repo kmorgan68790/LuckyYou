@@ -15,8 +15,6 @@ const LoginSignUp = ({setUser}) => {
     const[middleName, setMiddleName] = useState("")
     const[lastName, setLastName] = useState("")
     const[dob, setDob] = useState("")
-    const[zodiacId, setZodiacId] = useState("")
-    const[concordId, setConcordId] = useState("")
     
     // hide/show password
     const [showPassword, setShowPassword] = useState(false);
@@ -78,10 +76,7 @@ const LoginSignUp = ({setUser}) => {
                     const decodedToken = jwtDecode(json.jwt);
                     const userObject = {
                         jwt: json.jwt,
-                        userName: decodedToken.user_name,
-                        userId: decodedToken.userId,
-                        zodiacId: decodedToken.zodiacId,
-                        concordGroupId: decodedToken.concordGroupId
+                        ...decodedToken
                     };
                     setUser(userObject)
                     localStorage.setItem("user", JSON.stringify(userObject))

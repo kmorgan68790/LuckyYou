@@ -4,9 +4,9 @@ LuckyYou
         [x] uses-cases - 1.5 hr
     client
         Styles
-            [] CSS ?
+            [x] CSS ?
         Assets
-            [] img/logo
+            [x] img/logo
         components
             components
                 [x] Errors
@@ -31,20 +31,20 @@ LuckyYou
                 [x] About
                 [x] Contact 
             User
-                [] Login/SignUp
-                [] EditUser
+                [x] Login/SignUp
+                [x] EditUser
                 [] MyLuckyYouPage - for viewing lucky information
 
             Zodiac
-                [] Zodiac
+                [x] Zodiac
 
             Numerology
-                [] Numerology
+                [x] Numerology
 
             LuckyMe
             [] LuckyMe
 
-        [] App
+        [x] App
         [x] Main    
 
     server (7-days total)

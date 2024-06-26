@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
 import NumerologyList from '../components/NumerologyList';
 
 const Numerology = ({user}) => {
@@ -23,7 +22,9 @@ const Numerology = ({user}) => {
 	}, [])
 
     return (
+		<div className='m-5'>
         <NumerologyList numerologies={numerologies} numerologyNumbers={numerologyNumbers} user={user}/>
+		</div>
     )
 };
 

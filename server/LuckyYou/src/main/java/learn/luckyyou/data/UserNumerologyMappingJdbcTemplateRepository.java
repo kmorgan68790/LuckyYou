@@ -75,11 +75,6 @@ public class UserNumerologyMappingJdbcTemplateRepository implements UserNumerolo
                 mapping.getNumerologyDescriptionId());
         return rowsAffected > 0;
     }
-//    @Override
-//    public UserNumerologyMapping findByUserIdAndType(int userId, String numerologyType) {
-//        final String sql = "SELECT * FROM user_numerology_mapping WHERE user_id = ? AND numerology_type = ?";
-//        return jdbcTemplate.queryForObject(sql, new UserNumerologyMappingRowMapper(), userId, numerologyType);
-//    }
 
 }
 

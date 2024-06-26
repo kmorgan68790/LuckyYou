@@ -10,7 +10,4 @@ public interface ConcordDaysRepository {
     List<ConcordDays> findConcordDaysByBirthdayAndGroupId(int concordBirthdayNumber, int concordGroupId);
     List<ConcordDays> findByConcordGroupId(int concordGroupId);
     List<ConcordDays> findByDayTypeAndGroupId(String dayType, int concordGroupId);
-
-//    ConcordDays add(ConcordDays concordDays);
-//    boolean update(ConcordDays concordDays);
 }

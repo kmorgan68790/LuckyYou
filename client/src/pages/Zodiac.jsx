@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
 import ZodiacList from '../components/ZodiacList';
-// import ZodiacItem from '../components/ZodiacItem';
 
 const Zodiac = ({user}) => {
     const [zodiacs, setZodiacs] = useState([])

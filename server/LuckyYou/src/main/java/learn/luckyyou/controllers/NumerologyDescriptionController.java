@@ -32,11 +32,6 @@ public class NumerologyDescriptionController {
         return service.findByNumerologyType(numerologyType);
     }
 
-//    @GetMapping("/description/{numerologyType}")
-//    public NumerologyDescription findByNumerologyDescription(@PathVariable String numerologyDescription) {
-//        return service.findByNumerologyDescription(numerologyDescription);
-//    }
-
     @GetMapping("/number/{numerologyNumber}")
     public NumerologyDescription findByNumerologyNumber(@PathVariable int numerologyNumber) {
         return service.findByNumerologyNumber(numerologyNumber);

@@ -91,6 +91,8 @@ public class UsersController {
                 .claim("userId", user.getUserId())
                 .claim("zodiacId", user.getZodiacId())
                 .claim("concordGroupId", user.getConcordGroupId())
+                .claim("dob", user.getDob().getDayOfMonth())
+                .claim("test","test")
                 .signWith(secretSigningKey.getKey())
                 .compact();
         HashMap<String, String> output = new HashMap<>();

@@ -1,5 +1,4 @@
 import NavLink from "./NavLink"
-// import clover from '.././assets/clover.png';
 import luckyYouLogo from '.././assets/luckyYouLogo.png';
 
 const NavBar = ({setUser, user}) => {
