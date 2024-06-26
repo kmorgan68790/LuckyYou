@@ -28,11 +28,6 @@ public class ZodiacController {
         return  service.findById(zodiacId);
     }
 
-//    @GetMapping("/id/{zodiacId}")
-//    public Zodiac findZodiacStartAndEnd(LocalDate zodiacDateStart, LocalDate zodiacDateEnd) {
-//      return service.findZodiacStartAndEnd(zodiacDateStart, zodiacDateEnd);
-//    }
-
     @GetMapping("/date/{date}")
     public Zodiac findByDate(LocalDate date) {
         return service.findByDate(date);

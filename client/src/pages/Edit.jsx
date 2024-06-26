@@ -67,7 +67,7 @@ const Edit = ({ user, setUser }) => {
     };
 
     return (
-        <>
+        <div className="mx-5">
             <h3>Edit Your Profile</h3>
             <Errors errors={errors} />
             <form onSubmit={handleSubmit}>
@@ -139,7 +139,7 @@ const Edit = ({ user, setUser }) => {
                 </div>
                 <button type="submit">Save Changes</button>
             </form>
-        </>
+        </div>
     );
 };
 

@@ -119,10 +119,10 @@ const LoginSignUp = ({setUser}) => {
 
     return (
         <div>
-            <h3>{isLogin ? 'Login' : 'Sign Up'}</h3>
+            <h3 className="mx-5">{isLogin ? 'Login' : 'Sign Up'}</h3>
             <Errors errors={errors} />
             <form onSubmit={handleSubmit}>
-                <fieldset>
+                <fieldset className="mx-5">
                     <div>
                         <label htmlFor="userName-input">Username</label>
                         <input id="userName-input" name="userName" type="text" value={userName}

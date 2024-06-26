@@ -28,17 +28,9 @@ public class ConcordDaysController {
         return service.findConcordDaysByBirthdayAndGroupId(concordBirthdayNumber, concordGroupId);
     }
 
-//    public List<ConcordDays> findConcordDaysByBirthdayAndGroupId(int concordBirthdayNumber, int concordGroupId) {
-//        return concordDaysRepository.findConcordDaysByBirthdayAndGroupId(concordBirthdayNumber,concordGroupId);}
-
     @GetMapping("/group/{concordGroupId}")
     public List<ConcordDays> findByConcordGroupId(@PathVariable int concordGroupId) {
         return service.findByConcordGroupId(concordGroupId);
     }
-
-//    @GetMapping("/group-day/{concordGroupId}")
-//    public List<ConcordDays> findByDayTypeAndGroupId(String dayType, int concordGroupId) {
-//        return service.findByDayTypeAndGroupId(dayType,concordGroupId);
-//    }
 
 }

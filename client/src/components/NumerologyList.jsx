@@ -4,6 +4,7 @@ import NumerologyItem from './NumerologyItem';
 
 const NumerologyList = ({ numerologies }) => {
     return (
+        <div className='mx-5'>
         <ul>
             {numerologies.map(numerology => (
                 <NumerologyItem
@@ -12,6 +13,7 @@ const NumerologyList = ({ numerologies }) => {
                 />
             ))}
         </ul>
+        </div>
     );
 };
 

@@ -8,29 +8,28 @@ LuckyYou
         Assets
             [] img/logo
         components
-            Common
+            components
                 [x] Errors
-                [] header
-                [] footer
-                [] NavBar
-                [] Navlink
+                [x] footer
+                [x] NavBar
+                [x] Navlink
             ConcordGroup
-                [] ConcordGroupList
-                [] ConcordGroupItem
+                [x] ConcordGroupList
+                [x] ConcordGroupItem
 
             Numerology
                 [x] NumerologyItem
-                [] NumerologyList
+                [x] NumerologyList
 
             Zodiac
-                [] ZodiacList
+                [x] ZodiacList
                 [x] ZodiacItem
  
         pages
             Home
                 [x] Home
-                [] About
-                [] Contact ?
+                [x] About
+                [x] Contact 
             User
                 [] Login/SignUp
                 [] EditUser

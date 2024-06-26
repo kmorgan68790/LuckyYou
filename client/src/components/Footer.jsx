@@ -11,7 +11,8 @@ const Footer = ({setUser, user}) => {
     </li>
 
     return (
-        <ul className='navbar-nav' >
+        <nav className='navbar navbar-expand justify-content-center'>
+        <ul className="navbar-nav" >
             {/* <li><h2>LuckyYou</h2></li>
             <li>
                 <img src={clover} alt='Four leaf clover' height='45'/>
@@ -23,6 +24,7 @@ const Footer = ({setUser, user}) => {
             <NavLink name="News Letter" to="/"/>
             <NavLink name="Privacy" to="/"/>
         </ul>
+        </nav>
     )
 }
 

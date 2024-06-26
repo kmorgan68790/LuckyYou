@@ -1,5 +1,6 @@
 import NavLink from "./NavLink"
-import clover from '.././assets/clover.png';
+// import clover from '.././assets/clover.png';
+import luckyYouLogo from '.././assets/luckyYouLogo.png';
 
 const NavBar = ({setUser, user}) => {
     const logOutLink = <li className='nav-item'>
@@ -12,9 +13,8 @@ const NavBar = ({setUser, user}) => {
     </li>
 
     return (
-        <nav className='navbar navbar-expand justify-content-between'>
-        <h2>LuckyYou</h2>
-        <img src={clover} alt='Four leaf clover' height='45'/>
+        <nav className='navbar navbar-expand justify-content-between p-2'>
+        <img  src={luckyYouLogo} alt='Four leaf clover' height='50'/>
         <ul className='navbar-nav justify-content-space-between'>
                 
             {/* always visible */}
@@ -23,8 +23,7 @@ const NavBar = ({setUser, user}) => {
             <NavLink name="Concord" to="/concord"/>
             <NavLink name="Numerology" to="/numerology"/>
             <NavLink name="About" to="/about"/>
-            <NavLink name="Contact" to="/contact"/>
-            {/* TODO: refactor routes into /solarPanel/add and /user/add */}
+            {/* <NavLink name="Contact" to="/contact"/> */}
 
             {/* visible only when logged out */}
             { user === null && <NavLink name="Sign Up" to="/signup" /> }

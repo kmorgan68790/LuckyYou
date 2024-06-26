@@ -4,12 +4,14 @@ import ZodiacItem from './ZodiacItem';
 
 const ZodiacList = ({ zodiacs, user }) => {
     return (
-        <ul>
-            {zodiacs && zodiacs.map(zodiac => (
-                    <ZodiacItem
-                    key={zodiac.zodiacId} zodiac={zodiac} user={user}/>
-                ))}
-        </ul>
+        <div>
+            <ul >
+                {zodiacs && zodiacs.map(zodiac => (
+                        <ZodiacItem
+                        key={zodiac.zodiacId} zodiac={zodiac} user={user}/>
+                    ))}
+            </ul>
+        </div>
     );
 };
 

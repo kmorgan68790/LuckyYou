@@ -53,7 +53,6 @@ public class UsersService {
         if (zodiacId != null) {
             user.setZodiacId(zodiacId);
         } else {
-            // Only add error if zodiac validation is critical, otherwise it should be a warning or log
             result.addErrorMessage("Zodiac sign could not be determined based on the date of birth", ResultType.INVALID);
         }
 

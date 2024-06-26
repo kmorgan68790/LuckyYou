@@ -99,11 +99,12 @@ public class UserNumerologyMappingService {
 
         int daySum = isMasterNumber(day) ? day : sumDigits(day);
         int monthSum = isMasterNumber(month) ? month : sumDigits(month);
-        int yearSum = sumDigits(year);
+        int yearSum = isMasterNumber(year) ? year : sumDigits(year);
 
-        int lifePathNumber = daySum + monthSum + yearSum;
+        int lifePathNumberSum = daySum + monthSum + yearSum;
+//        int lifePathNumber = isMasterNumber(lifePathNumberSum) ? lifePathNumberSum : sumDigits(lifePathNumberSum);
 
-        return reduceToSingleDigit(lifePathNumber);
+        return reduceToSingleDigit(lifePathNumberSum);
     }
 
     // Calculate Birthday Number based on user's day of birth

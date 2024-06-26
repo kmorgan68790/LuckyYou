@@ -11,8 +11,6 @@ import learn.luckyyou.models.Users;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.SignatureException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -104,7 +102,6 @@ public class UsersController {
         if (headers.get("authorization") == null) {
             return null;
         }
-
         Integer userId;
             Jws<Claims> parsedJwt = Jwts.parserBuilder()
                     .setSigningKey(secretSigningKey.getKey())
