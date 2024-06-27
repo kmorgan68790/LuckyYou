@@ -114,11 +114,14 @@ const LuckyMe = ({ user }) => {
                         <div class="luckyMeContainer">
                             <h2>Concord Group {concordGroup.concordGroupNumber}</h2>
                             <p>{concordGroup.concordGroupDescription}</p>
+                            <h3 class="mx-3">Lucky Days: </h3>
                         </div>
                         {Object.entries(groupDaysByType(concordDays)).map(([type, days]) => (
                             <div key={type } class="luckyMeContainer">
-                                <h3>{type} days:</h3>
+                                <div class="mx-3">
+                                <h4>{type} days:</h4>
                                 <p>{days.join(', ')}</p>
+                                </div>
                             </div>
                         ))}
                     </div>

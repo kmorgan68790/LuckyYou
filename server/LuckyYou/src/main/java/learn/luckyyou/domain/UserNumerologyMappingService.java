@@ -48,10 +48,13 @@ public class UserNumerologyMappingService {
     }
 
     public void calculateAndSaveNumerologyMappings(Users user) {
+//        Deletes previous user information to store new calculation
         repository.deleteNumerologyMappingsByUserId(user.getUserId());
 
+//        Finds all descriptions for each numerology
         List<NumerologyDescription> numerologyTypeList = numerologyDescriptionRepository.findAll();
 
+//        Calls each calculation method below on the user and stores into variable
         int lifePathNumber = calculateLifePathNumber(user.getDob());
         int birthdayNumber = calculateBirthdayNumber(user.getDob());
         int expressionNumber = calculateExpressionNumber(user.getFirstName(), user.getMiddleName(), user.getLastName());
@@ -60,7 +63,7 @@ public class UserNumerologyMappingService {
         int luckyNumber = calculateLuckyNumber(user.getDob());
         int luckyYear = calculateLuckyYear(user.getFirstName(), user.getMiddleName(), user.getLastName());
 
-        // Maps numerology types to their calculated values
+//         Maps numerology types to their calculated values
         Map<String, Integer> numerologyCalculations = new HashMap<>();
         numerologyCalculations.put("Life Path", lifePathNumber);
         numerologyCalculations.put("Birthday", birthdayNumber);
@@ -70,12 +73,12 @@ public class UserNumerologyMappingService {
         numerologyCalculations.put("Lucky Number", luckyNumber);
         numerologyCalculations.put("Lucky Year", luckyYear);
 
-        // Loops through each numerology type and saves the corresponding calculation
+//         Loops through each numerology type and saves the corresponding calculation
         for (Map.Entry<String, Integer> entry : numerologyCalculations.entrySet()) {
             String numerologyType = entry.getKey();
             int numerologyValue = entry.getValue();
 
-            // Finds the corresponding numerology description id
+//             Finds the corresponding numerology description id
             NumerologyDescription description = numerologyTypeList.stream()
                     .filter(desc -> desc.getNumerologyType().equals(numerologyType) && desc.getNumerologyNumber()
                             == numerologyValue)
@@ -83,7 +86,7 @@ public class UserNumerologyMappingService {
                     .orElseThrow(() -> new RuntimeException("Numerology description not found for type: "
                             + numerologyType + " and value: " + numerologyValue));
 
-            // Create the mapping object
+//             Creates the mapping object
             UserNumerologyMapping mapping = new UserNumerologyMapping();
             mapping.setUserId(user.getUserId());
             mapping.setNumerologyType(numerologyType);
@@ -108,13 +111,13 @@ public class UserNumerologyMappingService {
         return reduceToSingleDigit(lifePathNumberSum);
     }
 
-    // Calculate Birthday Number based on user's day of birth
+//     Calculates Birthday Number based on user's day of birth
     public int calculateBirthdayNumber(LocalDate dob) {
         int day = dob.getDayOfMonth();
         return day;
     }
 
-    // Calculate Expression Number based on user's full name
+//     Calculates Expression Number based on user's full name
     public int calculateExpressionNumber(String firstName, String middleName, String lastName) {
         int firstNameSum = isMasterNumber(sumLetters(firstName)) ? sumLetters(firstName) : sumDigits(sumLetters(firstName));
         int middleNameSum = isMasterNumber(sumLetters(middleName)) ? sumLetters(middleName) : sumDigits(sumLetters(middleName));
@@ -126,7 +129,7 @@ public class UserNumerologyMappingService {
         return reduceToSingleDigit(fullNameSum);
     }
 
-    // Calculate Personality Number based on consonants in user's full name
+//     Calculates Personality Number based on consonants in user's full name
     public int calculatePersonalityNumber(String firstName, String middleName, String lastName) {
         String firstConsonants = firstName.replaceAll("[aeiouAEIOU]", "");
         String middleConsonants = middleName.replaceAll("[aeiouAEIOU]", "");
@@ -142,7 +145,7 @@ public class UserNumerologyMappingService {
         return reduceToSingleDigit(fullNameSum);
     }
 
-    // Calculate Soul Urge Number based on vowels in user's full name
+//     Calculates Soul Urge Number based on vowels in user's full name
     public int calculateSoulUrgeNumber(String firstName, String middleName, String lastName) {
         String firstConsonants = firstName.replaceAll("[^aeiouAEIOU]", "");
         String middleConsonants = middleName.replaceAll("[^aeiouAEIOU]", "");
@@ -158,7 +161,7 @@ public class UserNumerologyMappingService {
         return reduceToSingleDigit(fullNameSum);
     }
 
-    // Calculate Lucky Number based on user's full date of birth
+//     Calculates Lucky Number based on user's full date of birth
     public int calculateLuckyNumber(LocalDate dob) {
         int day = dob.getDayOfMonth();
         int month = dob.getMonthValue();
@@ -174,7 +177,7 @@ public class UserNumerologyMappingService {
         return reduceToSingleDigit(luckyNumber);
     }
 
-    // Calculate Lucky Year based on user's expression number
+//     Calculates Lucky Year based on user's expression number
     public int calculateLuckyYear(String firstName, String middleName, String lastName) {
         int firstNameSum = isMasterNumber(sumLetters(firstName)) ? sumLetters(firstName) : sumDigits(sumLetters(firstName));
         int middleNameSum = isMasterNumber(sumLetters(middleName)) ? sumLetters(middleName) : sumDigits(sumLetters(middleName));
@@ -187,7 +190,7 @@ public class UserNumerologyMappingService {
     }
 
     // Helper methods
-    // check if a number is a master number
+    // checks if a number is a master number
     public boolean isMasterNumber(int number) {
         return number == 11 || number == 22 || number == 33;
     }
@@ -220,7 +223,7 @@ public class UserNumerologyMappingService {
         return number;
     }
 
-//    map letters to numbers
+//    maps letters to numbers
     private int sumLetters(String text) {
         return text.chars()
                 .map(this::mapCharToNumber)
@@ -229,12 +232,12 @@ public class UserNumerologyMappingService {
 
     private int mapCharToNumber(int ch) {
         if (Character.isLetter(ch)) {
-            // Normalize to a 1-26 range: 'A'->1, 'B'->2, ..., 'Z'->26
+            // Normalizes to a 1-26 range: 'A'->1, 'B'->2, ..., 'Z'->26
             int normalized = Character.toUpperCase(ch) - 'A' + 1;
-            // Map to 1-9 range
+            // Maps to 1-9 range
             return (normalized - 1) % 9 + 1;
         }
-        // For non-letters, you may want to decide how to handle them, here we return 0
+        // For non-letters returns 0
         return 0;
     }
 
