@@ -9,7 +9,8 @@ html, body{
 
 
 body {
-    background-color: #0C9E5A;
+    /* background-color: #0C9E5A; */
+	background-image: linear-gradient(to bottom right, #0C9E5A, #CCFF02);
     display: flex;
     flex-direction: column;
 }
@@ -39,7 +40,11 @@ ul {
 	margin-right: 5rem;
   }
 .concord {
-	margin-left: 5rem;
+	margin-left: 3rem;
+}
+
+.nav-link {
+	cursor: pointer;
 }
 
 

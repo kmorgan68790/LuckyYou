@@ -70,7 +70,7 @@ public class UsersService {
                 user.setPassword(hashedPassword);
                 Users createdUser = repository.add(user);
 
-                // Calculate and save numerology mappings
+//                 Calculates and save numerology mappings
                 userNumerologyMappingService.calculateAndSaveNumerologyMappings(user);
 
                 result.setPayload(createdUser);
@@ -80,7 +80,8 @@ public class UsersService {
     }
 
     public boolean isDateWithinRangeIgnoreYear(LocalDate date, LocalDate startDate, LocalDate endDate) {
-        LocalDate adjustedStartDate = startDate.withYear(2000); // Arbitrary non-leap year
+//         Arbitrary non-leap year
+        LocalDate adjustedStartDate = startDate.withYear(2000);
         LocalDate adjustedEndDate = endDate.withYear(2000);
         LocalDate adjustedDate = date.withYear(2000);
 
@@ -103,8 +104,10 @@ public class UsersService {
 
         if (result.isSuccess()) {
             if (repository.update(user)) {
-                // Calculate and save numerology mappings
+
+//                 Calculates and save numerology mappings
                 userNumerologyMappingService.calculateAndSaveNumerologyMappings(user);
+
                 result.setPayload(user);
             } else {
                 result.addErrorMessage("Account was not found", ResultType.NOT_FOUND);

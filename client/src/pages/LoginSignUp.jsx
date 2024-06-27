@@ -113,7 +113,7 @@ const LoginSignUp = ({setUser}) => {
     }
 
     return (
-        <div>
+        <div style={{ minHeight: '80vh' }}>
             <h3 className="mx-5">{isLogin ? 'Login' : 'Sign Up'}</h3>
             <Errors errors={errors} />
             <form onSubmit={handleSubmit}>
@@ -158,7 +158,7 @@ const LoginSignUp = ({setUser}) => {
                                 onChange={event => setLastName(event.target.value)}  className="mb-3" />
                             </div>
 
-                            <div className='col-12 col-md-4 mb-3'>
+                            <div className='col-12 col-md-2 mb-3'>
                             <label htmlFor='dob' className='form-label'>
                                 Date Of Birth
                             </label>

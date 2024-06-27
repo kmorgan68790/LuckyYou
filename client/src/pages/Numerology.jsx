@@ -3,8 +3,7 @@ import NumerologyList from '../components/NumerologyList';
 
 const Numerology = ({user}) => {
     const [numerologies, setNumerologies] = useState([])
-	// const [numerologyNumbers, setnumerologyNumbers] = useState([])
-
+	
 	useEffect(() => {
 		fetch("http://localhost:8080/api/numerology")
 		.then(response => response.json())
@@ -13,17 +12,9 @@ const Numerology = ({user}) => {
 		})
 	}, [])
 
-	// useEffect(() => {
-	// 	fetch(`http://localhost:8080/api/mapping/user/${user.userId}`)
-	// 	.then(response => response.json())
-	// 	.then(json => {
-	// 		setnumerologyNumbers(json)
-	// 	})
-	// }, [])
-
     return (
 		<div className='me-5 mx-5'>
-		<h1 className='mb-3'>Numerology: "It's all about the digits" </h1>
+		<h1 className='mb-4'>Numerology: "It's all about the digits" </h1>
 		<p>Your Numerology chart is mostly based on your birth date and your full name, so everyone's numbers will be unique to them. 
 			Some numerology numbers will indicate your strengths and weaknesses, while others influence your personality traits or the 
 			opportunities that come into your life. Here are the 5 core numbers with the addition of the lucky numbers and lucky years:</p>
