@@ -74,7 +74,7 @@ public class UsersController {
         }
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/delete/{userId}")
     public ResponseEntity<Void> deleteById(@PathVariable int userId) {
         Users existingUser = service.findById(userId);
         if (existingUser == null) {
@@ -92,7 +92,6 @@ public class UsersController {
                 .claim("zodiacId", user.getZodiacId())
                 .claim("concordGroupId", user.getConcordGroupId())
                 .claim("dob", user.getDob().getDayOfMonth())
-                .claim("test","test")
                 .signWith(secretSigningKey.getKey())
                 .compact();
         HashMap<String, String> output = new HashMap<>();

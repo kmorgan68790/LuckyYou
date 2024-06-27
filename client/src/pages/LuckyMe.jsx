@@ -10,6 +10,7 @@ const LuckyMe = ({ user }) => {
 
     useEffect(() => {
         if (user && user.userId) {
+            setNumerologies([]); // Reset numerologies state
             fetchNumerologies(user.userId);
             fetchZodiac(user.zodiacId);
             fetchConcordGroup(user.concordGroupId);
@@ -123,7 +124,7 @@ const LuckyMe = ({ user }) => {
                     </div>
                 )}
                 <div class="luckyMeContainer"> 
-                    <NumerologyList numerologies={numerologies} />
+                    <NumerologyList key={user.userId} numerologies={numerologies} />
                 </div>
                 
             </div>

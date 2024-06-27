@@ -76,5 +76,11 @@ public class UserNumerologyMappingJdbcTemplateRepository implements UserNumerolo
         return rowsAffected > 0;
     }
 
+    @Override
+    public boolean deleteNumerologyMappingsByUserId(int userId) {
+        String sql = "DELETE FROM user_numerology_mapping WHERE user_id = ?;" ;
+        return jdbcTemplate.update(sql, userId) > 0;
+    };
+
 }
 

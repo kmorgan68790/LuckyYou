@@ -1,6 +1,6 @@
 LuckyYou    
     planning
-        [] project-structure - 1hr
+        [x] project-structure - 1hr
         [x] uses-cases - 1.5 hr
     client
         Styles
@@ -33,7 +33,7 @@ LuckyYou
             User
                 [x] Login/SignUp
                 [x] EditUser
-                [] MyLuckyYouPage - for viewing lucky information
+                [x] MyLuckyYouPage - for viewing lucky information
 
             Zodiac
                 [x] Zodiac
@@ -42,7 +42,7 @@ LuckyYou
                 [x] Numerology
 
             LuckyMe
-            [] LuckyMe
+            [x] LuckyMe
 
         [x] App
         [x] Main    

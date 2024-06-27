@@ -99,7 +99,6 @@ public class UserJdbcTemplateRepository implements UserRepository{
     @Override
     public boolean deleteById(int userId) {
         String sql = "DELETE FROM user_numerology_mapping WHERE user_id = ?;" ;
-//                "DELETE FROM users WHERE user_id = ?;";
         return jdbcTemplate.update(sql, userId) > 0;
     }
 

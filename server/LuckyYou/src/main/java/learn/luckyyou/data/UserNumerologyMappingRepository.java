@@ -13,4 +13,5 @@ public interface UserNumerologyMappingRepository {
     List<UserNumerologyMapping> findByNumerologyDescriptionId(int numerologyDescriptionId);
     UserNumerologyMapping findByUserIdAndNumerologyType(int userId, String numerologyType);
     boolean saveNumerologyMapping(UserNumerologyMapping mapping);
+    boolean deleteNumerologyMappingsByUserId(int userId);
 }

@@ -103,6 +103,8 @@ public class UsersService {
 
         if (result.isSuccess()) {
             if (repository.update(user)) {
+                // Calculate and save numerology mappings
+                userNumerologyMappingService.calculateAndSaveNumerologyMappings(user);
                 result.setPayload(user);
             } else {
                 result.addErrorMessage("Account was not found", ResultType.NOT_FOUND);

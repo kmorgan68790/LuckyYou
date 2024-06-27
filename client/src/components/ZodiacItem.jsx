@@ -21,7 +21,7 @@ const ZodiacItem = ({ zodiac }) => {
     return (
         <div class="d-flex flex-column justify-content-center align-items-center text-justify-center" >
             <h3 className="text-center">{zodiac.zodiacName}</h3>
-            <img src={zodiacImage} alt={`${zodiac.zodiacName} icon`} width='600' height='500'/>
+            <img src={zodiacImage} alt={`${zodiac.zodiacName} icon`} width='600' height='500' className="mb-3"/>
             <p style={{ maxWidth: '150vh' }}>{zodiac.zodiacDescription}</p>
         </div>
     );

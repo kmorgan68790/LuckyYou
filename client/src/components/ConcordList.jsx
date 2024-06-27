@@ -29,8 +29,9 @@ const ConcordList = ({ concords, concordDays, user }) => {
     };
 
     return (
-        <div className='m-5' >
-            <p>Every person is born with a vibration, and that vibration depends on the day of birth. The day of birth determines
+        <div className='mx-5' >
+            <h1 className='mb-5'>The Concords: "Nothing but good vibes" </h1>
+            <p >Every person is born with a vibration, and that vibration depends on the day of birth. The day of birth determines
                 which vibrational group a person belongs to. There are three groups and any dates in the group that a person belongs to is 
                 good for them. The dates for group one are 1,5,7 and any birthdates that reduce to these numbers, for group two the dates are 
                 2, 4, 8 and any dates that reduce to these numbers, and the same rules apply for group three whose dates are 3, 6, 9. These three 

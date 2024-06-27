@@ -30,7 +30,7 @@ const NavBar = ({setUser, user}) => {
                         
             {/* visible only when logged in */}
             {/* { user !== null && <NavLink name="Add" to="/add" /> } */}
-            { user !== null && <NavLink name="Lucky Me" to="/luckyme" /> }
+            { user !== null && <NavLink name="LuckyMe" to="/luckyme" /> }
             { user !== null && <NavLink name="Edit" to={`/edit/${user.userId}`} /> }
             { user !== null && logOutLink }
         </ul>

@@ -173,8 +173,8 @@ const LoginSignUp = ({setUser}) => {
                 </fieldset>    
             </form>
             {showSignupPrompt && isLogin && (
-                <div>
-                    <h4>Would you like to sign up</h4>
+                <div className="mx-3">
+                    <h4 >Would you like to sign up</h4>
                     <button type="button" onClick={switchToSignUp}>Yes</button>
                     <button type="button" onClick={() => setShowSignupPrompt(false)}>No</button>
             </div>

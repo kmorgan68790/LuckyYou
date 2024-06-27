@@ -48,6 +48,8 @@ public class UserNumerologyMappingService {
     }
 
     public void calculateAndSaveNumerologyMappings(Users user) {
+        repository.deleteNumerologyMappingsByUserId(user.getUserId());
+
         List<NumerologyDescription> numerologyTypeList = numerologyDescriptionRepository.findAll();
 
         int lifePathNumber = calculateLifePathNumber(user.getDob());
@@ -97,12 +99,11 @@ public class UserNumerologyMappingService {
         int month = dob.getMonthValue();
         int year = dob.getYear();
 
-        int daySum = isMasterNumber(day) ? day : sumDigits(day);
-        int monthSum = isMasterNumber(month) ? month : sumDigits(month);
-        int yearSum = isMasterNumber(year) ? year : sumDigits(year);
+        int daySum = sumDigitsWithMasterNumber(day);
+        int monthSum = sumDigitsWithMasterNumber(month);
+        int yearSum = sumDigitsWithMasterNumber(year);
 
         int lifePathNumberSum = daySum + monthSum + yearSum;
-//        int lifePathNumber = isMasterNumber(lifePathNumberSum) ? lifePathNumberSum : sumDigits(lifePathNumberSum);
 
         return reduceToSingleDigit(lifePathNumberSum);
     }
@@ -119,7 +120,8 @@ public class UserNumerologyMappingService {
         int middleNameSum = isMasterNumber(sumLetters(middleName)) ? sumLetters(middleName) : sumDigits(sumLetters(middleName));
         int lastNameSum = isMasterNumber(sumLetters(lastName)) ? sumLetters(lastName) : sumDigits(sumLetters(lastName));
 
-        int fullNameSum = firstNameSum + middleNameSum + lastNameSum;
+        int fullNameSum = sumDigitsWithMasterNumber(firstNameSum) + sumDigitsWithMasterNumber(middleNameSum) +
+                sumDigitsWithMasterNumber(lastNameSum) ;
 
         return reduceToSingleDigit(fullNameSum);
     }
@@ -134,7 +136,8 @@ public class UserNumerologyMappingService {
         int middleSum = isMasterNumber(sumLetters(middleConsonants)) ? sumLetters(middleConsonants) : sumDigits(sumLetters(middleConsonants));
         int lastSum = isMasterNumber(sumLetters(lastConsonants)) ? sumLetters(lastConsonants) : sumDigits(sumLetters(lastConsonants));
 
-        int fullNameSum = firstSum + middleSum + lastSum;
+        int fullNameSum = sumDigitsWithMasterNumber(firstSum) + sumDigitsWithMasterNumber(middleSum) +
+                sumDigitsWithMasterNumber(lastSum);
 
         return reduceToSingleDigit(fullNameSum);
     }
@@ -149,7 +152,8 @@ public class UserNumerologyMappingService {
         int middleSum = isMasterNumber(sumLetters(middleConsonants)) ? sumLetters(middleConsonants) : sumDigits(sumLetters(middleConsonants));
         int lastSum = isMasterNumber(sumLetters(lastConsonants)) ? sumLetters(lastConsonants) : sumDigits(sumLetters(lastConsonants));
 
-        int fullNameSum = firstSum + middleSum + lastSum;
+        int fullNameSum = sumDigitsWithMasterNumber(firstSum) + sumDigitsWithMasterNumber(middleSum) +
+                sumDigitsWithMasterNumber(lastSum);
 
         return reduceToSingleDigit(fullNameSum);
     }
@@ -164,7 +168,8 @@ public class UserNumerologyMappingService {
         int monthSum = isMasterNumber(month) ? month : sumDigits(month);
         int yearSum = isMasterNumber(year) ? year : sumDigits(year) ;
 
-        int luckyNumber = daySum + monthSum + yearSum;
+        int luckyNumber = sumDigitsWithMasterNumber(daySum)  + sumDigitsWithMasterNumber(monthSum)  +
+                sumDigitsWithMasterNumber(yearSum);
 
         return reduceToSingleDigit(luckyNumber);
     }
@@ -175,16 +180,26 @@ public class UserNumerologyMappingService {
         int middleNameSum = isMasterNumber(sumLetters(middleName)) ? sumLetters(middleName) : sumDigits(sumLetters(middleName));
         int lastNameSum = isMasterNumber(sumLetters(lastName)) ? sumLetters(lastName) : sumDigits(sumLetters(lastName));
 
-        int fullNameSum = firstNameSum + middleNameSum + lastNameSum;
+        int fullNameSum = sumDigitsWithMasterNumber(firstNameSum) + sumDigitsWithMasterNumber(middleNameSum) +
+                sumDigitsWithMasterNumber(lastNameSum);
 
         return reduceToSingleDigit(fullNameSum);
     }
 
     // Helper methods
-
     // check if a number is a master number
     public boolean isMasterNumber(int number) {
         return number == 11 || number == 22 || number == 33;
+    }
+
+    private int sumDigitsWithMasterNumber(int number) {
+        if (isMasterNumber(number)) {
+            return number;
+        }
+        while (number > 9 && !isMasterNumber(number)) {
+            number = sumDigits(number);
+        }
+        return number;
     }
 
     // sum digits of a number
