@@ -1,12 +1,11 @@
 import React from 'react';
 
 const NumerologyItem = ({ numerology }) => {
-
     return (
         <li>
-            {/* <h3>{numerology.numerologyType}</h3> */}
-            <p>{numerology.numerologyNumber}</p>
-            <p>{numerology.numerologyDescription}</p>
+            <h3>{numerology.numerologyType}</h3>
+            <p>Numerology Number: {numerology.numerologyNumber}</p>
+            <p>Description: {numerology.numerologyDescription}</p>
         </li>
     );
 };

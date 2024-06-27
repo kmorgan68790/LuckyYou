@@ -59,12 +59,9 @@ public class UserJdbcTemplateRepository implements UserRepository{
         final String sql = "INSERT INTO users (user_name, user_password, email, first_name, middle_name, last_name, dob, " +
                 "zodiac_id, concord_group_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-//        jdbcTemplate.update(new PreparedStatementCreator() {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
 
-//            @Override
-//            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, new String[] {"user_id"});
                 ps.setString(1, user.getUserName());
                 ps.setString(2, user.getPassword());
@@ -88,9 +85,6 @@ public class UserJdbcTemplateRepository implements UserRepository{
         if (generatedId != null) {
             user.setUserId(generatedId.intValue());
         }
-
-//        // Set the generated key on the user object
-//        user.setUserId(keyHolder.getKey().intValue());
         return user;
     }
 
@@ -105,7 +99,6 @@ public class UserJdbcTemplateRepository implements UserRepository{
     @Override
     public boolean deleteById(int userId) {
         String sql = "DELETE FROM user_numerology_mapping WHERE user_id = ?;" ;
-//                "DELETE FROM users WHERE user_id = ?;";
         return jdbcTemplate.update(sql, userId) > 0;
     }
 

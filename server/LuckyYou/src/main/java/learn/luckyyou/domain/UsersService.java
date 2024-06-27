@@ -53,7 +53,6 @@ public class UsersService {
         if (zodiacId != null) {
             user.setZodiacId(zodiacId);
         } else {
-            // Only add error if zodiac validation is critical, otherwise it should be a warning or log
             result.addErrorMessage("Zodiac sign could not be determined based on the date of birth", ResultType.INVALID);
         }
 
@@ -104,6 +103,8 @@ public class UsersService {
 
         if (result.isSuccess()) {
             if (repository.update(user)) {
+                // Calculate and save numerology mappings
+                userNumerologyMappingService.calculateAndSaveNumerologyMappings(user);
                 result.setPayload(user);
             } else {
                 result.addErrorMessage("Account was not found", ResultType.NOT_FOUND);

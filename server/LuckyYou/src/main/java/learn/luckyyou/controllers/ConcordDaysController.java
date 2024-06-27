@@ -16,19 +16,21 @@ public class ConcordDaysController {
     public ConcordDaysController(ConcordDaysService service) {
         this.service = service;
     }
+
     @GetMapping("/id/{concordDaysId}")
     public ConcordDays findById(@PathVariable int concordDaysId) {
         return service.findById(concordDaysId);
+    }
+
+    @GetMapping("/birthday/{concordBirthdayNumber}/group/{concordGroupId}")
+    public List<ConcordDays> findConcordDaysByBirthdayAndGroupId(@PathVariable int concordBirthdayNumber,
+                                                                 @PathVariable int concordGroupId) {
+        return service.findConcordDaysByBirthdayAndGroupId(concordBirthdayNumber, concordGroupId);
     }
 
     @GetMapping("/group/{concordGroupId}")
     public List<ConcordDays> findByConcordGroupId(@PathVariable int concordGroupId) {
         return service.findByConcordGroupId(concordGroupId);
     }
-
-//    @GetMapping("/group-day/{concordGroupId}")
-//    public List<ConcordDays> findByDayTypeAndGroupId(String dayType, int concordGroupId) {
-//        return service.findByDayTypeAndGroupId(dayType,concordGroupId);
-//    }
 
 }

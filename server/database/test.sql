@@ -69,6 +69,7 @@ CREATE TABLE concord_birthday (
 CREATE TABLE concord_days (
 	concord_days_id SERIAL primary key,
 	day_type VARCHAR (50),
+	concord_birthday_number INTEGER,
 	concord_day_number INTEGER,
 	concord_group_id INTEGER,
 	constraint fk_concord_days_concord_group

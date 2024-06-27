@@ -31,12 +31,4 @@ public class UserNumerologyMappingController {
         return service.findByNumerologyDescriptionId(numerologyDescriptionId);
     }
 
-//    GetMapping
-//    public saveNumerologyMapping(UserNumerologyMapping mapping) {
-//        return service.fin(numerologyDescriptionId)
-//    }
-
-//    UserNumerologyMapping findByUserIdAndNumerologyType(int userId, String numerologyType);
-//    List<UserNumerologyMapping> findByNumerologyType(String numerologyType);
-
 }

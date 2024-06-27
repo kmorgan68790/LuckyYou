@@ -56,31 +56,4 @@ public class ConcordBirthdayJdbcTemplateRepository implements ConcordBirthdayRep
         final String sql = "SELECT * FROM concord_birthday WHERE concord_birthday_number = ?;";
         return jdbcTemplate.queryForObject(sql, new ConcordBirthdayRowMapper(), birthdayNumber);
     }
-//    @Override
-//    public ConcordBirthday add(ConcordBirthday concordBirthday) {
-//        KeyHolder keyHolder = new GeneratedKeyHolder();
-//        String sql = "INSERT INTO concord_birthday (concord_birthday_number, concord_group_id) " +
-//                "VALUES (?, ?);";
-//
-//        jdbcTemplate.update(new PreparedStatementCreator() {
-//            @Override
-//            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-//                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//                ps.setInt(1, concordBirthday.getConcordBirthdayNumber());
-//                ps.setInt(2, concordBirthday.getConcordGroupId());
-//                return ps;
-//            }
-//        }, keyHolder);
-//
-//        // Set the generated key on the user object
-//        concordBirthday.setConcordBirthdayNumberId(keyHolder.getKey().intValue());
-//        return concordBirthday;
-
-//    @Override
-//    public boolean update(ConcordBirthday concordBirthday) {
-//        String sql = "UPDATE concord_birthday SET concord_birthday_number = ?, concord_group_id = ? " +
-//                "WHERE concord_birthday_number_id = ?;";
-//        return jdbcTemplate.update(sql, concordBirthday.getConcordBirthdayNumber(), concordBirthday.getConcordGroupId(),
-//                concordBirthday.getConcordBirthdayNumberId()) > 0;
-//    }
 }

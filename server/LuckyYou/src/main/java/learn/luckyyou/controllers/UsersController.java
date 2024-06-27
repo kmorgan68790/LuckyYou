@@ -11,8 +11,6 @@ import learn.luckyyou.models.Users;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.SignatureException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,45 +47,17 @@ public class UsersController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<?> update(@RequestBody Users user, @PathVariable int userId
-//                                    @RequestHeader HashMap<String, String> headers
-    ) {
-//        if (userId != user.getUserId()) {
-//            return new ResponseEntity<>(HttpStatus.CONFLICT);
-//        }
-
-//        Integer userId = getUserIdFromHeaders(headers);
-
-//        if (userId == null) {
-//            return new ResponseEntity<>(List.of("Authentication failed"), HttpStatus.FORBIDDEN);
-//        }
-
+    public ResponseEntity<?> update(@RequestBody Users user, @PathVariable int userId) {
         Users existingUser = service.findById(userId);
         if (existingUser == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-//
-//        if (existingUser.getUserId() != userId) {
-//            return new ResponseEntity<>(List.of("You cannot edit a panel you don't own"), HttpStatus.FORBIDDEN);
-//        }
-//
-//        solarPanel.setUserId(userId);
-//        Result<SolarPanel> result = service.update(solarPanel);
-//        if (!result.isSuccess()) {
-//            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST); // 400
-//        }
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204
-
         Result<Users> result = service.update(user);
-//        if (result.isSuccess()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
+
         if (!result.isSuccess()) {
             return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST); // 400
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
-//        return ErrorResponse.build(result);
     }
 
     @PostMapping("/login")
@@ -104,7 +74,7 @@ public class UsersController {
         }
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/delete/{userId}")
     public ResponseEntity<Void> deleteById(@PathVariable int userId) {
         Users existingUser = service.findById(userId);
         if (existingUser == null) {
@@ -113,16 +83,15 @@ public class UsersController {
 
        service.deleteById(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
-//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     private HashMap<String, String> getJwtFromUser(Users user) {
         String jwt = Jwts.builder()
-                .claim("user_name", user.getUserName())
-                .claim("user_id", user.getUserId())
-                .claim("zodiac_id", user.getZodiacId())
-                .claim("concord_group_id", user.getConcordGroupId())
+                .claim("userName", user.getUserName())
+                .claim("userId", user.getUserId())
+                .claim("zodiacId", user.getZodiacId())
+                .claim("concordGroupId", user.getConcordGroupId())
+                .claim("dob", user.getDob().getDayOfMonth())
                 .signWith(secretSigningKey.getKey())
                 .compact();
         HashMap<String, String> output = new HashMap<>();
@@ -134,7 +103,6 @@ public class UsersController {
         if (headers.get("authorization") == null) {
             return null;
         }
-
         Integer userId;
             Jws<Claims> parsedJwt = Jwts.parserBuilder()
                     .setSigningKey(secretSigningKey.getKey())

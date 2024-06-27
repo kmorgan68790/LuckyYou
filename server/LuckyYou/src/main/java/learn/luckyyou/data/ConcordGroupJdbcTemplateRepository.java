@@ -32,42 +32,6 @@ public class ConcordGroupJdbcTemplateRepository implements ConcordGroupRepositor
         }
     }
 
-//    @Override
-//    public ConcordGroup add(ConcordGroup concordGroup) {
-//        String sql = "INSERT INTO concord_group (concord_group_number, concord_group_description) VALUES (?, ?);";
-//
-//            KeyHolder keyHolder = new GeneratedKeyHolder();
-//            int rowsAffected = jdbcTemplate.update(connection -> {
-//                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//                ps.setInt(1, concordGroup.getConcordGroupId());
-//                ps.setInt(2, concordGroup.getConcordGroupNumber());
-//                ps.setString(3, concordGroup.getConcordGroupDescription());
-//                return ps;
-//
-//        }, keyHolder);
-//
-//        if (rowsAffected <= 0) {
-//            return null;
-//        }
-//
-//        concordGroup.setConcordGroupId(keyHolder.getKey().intValue());
-//        return concordGroup;
-//    }
-//
-//    @Override
-//    public Boolean update(ConcordGroup concordGroup) {
-//        String sql = "UPDATE concord_group SET concord_group_number = ?, concord_group_description = ? " +
-//                "WHERE concord_group_id = ?;";
-//        return jdbcTemplate.update(sql, concordGroup.getConcordGroupNumber(), concordGroup.getConcordGroupDescription(),
-//                concordGroup.getConcordGroupId()) > 0;
-//    }
-//
-//    @Override
-//    public Boolean deleteById(int concordGroupId) {
-//        String sql = "DELETE FROM concord_group WHERE concord_group_id = ?;";
-//        return jdbcTemplate.update(sql, concordGroupId) > 0;
-//    }
-
     @Override
     public ConcordGroup findById(int concordGroupId) {
         String sql = "SELECT * FROM concord_group WHERE concord_group_id = ?;";

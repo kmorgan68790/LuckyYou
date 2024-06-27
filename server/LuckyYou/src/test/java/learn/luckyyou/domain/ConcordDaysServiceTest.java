@@ -66,15 +66,15 @@ class ConcordDaysServiceTest {
 
         assertEquals(expected,actual);
     }
-
+//
     private ConcordDays makeConcordDaysOne () {
-        ConcordDays concordDayOne = new ConcordDays(1,"mental",1,1);
+        ConcordDays concordDayOne = new ConcordDays(1,"mental",5,1,1);
 
         return concordDayOne;
     }
 
     private ConcordDays makeConcordDaysTwo () {
-        ConcordDays concordDayTwo = new ConcordDays(2,"mental",25,1);
+        ConcordDays concordDayTwo = new ConcordDays(2,"mental",5,25,1);
 
         return concordDayTwo;
     }

@@ -1,10 +1,4 @@
 package learn.luckyyou.controllers;
-
-import learn.luckyyou.domain.Result;
-import learn.luckyyou.domain.ResultType;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
 import java.time.LocalDateTime;
 
 public class ErrorResponse {

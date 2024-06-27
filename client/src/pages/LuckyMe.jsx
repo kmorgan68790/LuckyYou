@@ -1,101 +1,134 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Errors from "../components/Errors";
+import NumerologyList from "../components/NumerologyList";
+import ZodiacItem from "../components/ZodiacItem";
 
 const LuckyMe = ({ user }) => {
-    const navigate = useNavigate();
-    const [userData, setUserData] = useState(null);
-    const [userNumerologyMapping, setUserNumerologyMapping] = useState([]);
-    const [errors, setErrors] = useState([]);
+    const [numerologies, setNumerologies] = useState([]);
+    const [zodiac, setZodiac] = useState([]);
+    const [concordGroup, setConcordGroup] = useState(null);
+    const [concordDays, setConcordDays] = useState([]);
 
     useEffect(() => {
-        if (!user) {
-            setErrors(["User is not logged in."]);
-            return;
+        if (user && user.userId) {
+            setNumerologies([]); // Reset numerologies state
+            fetchNumerologies(user.userId);
+            fetchZodiac(user.zodiacId);
+            fetchConcordGroup(user.concordGroupId);
         }
-
-        const { zodiacId, concordGroupId, userId, jwt, userMapping } = user;
-
-        if (!zodiacId || !concordGroupId || !userId || !jwt) {
-            setErrors(["User data is incomplete."]);
-            return;
-        }
-
-            const fetchZodiacInfo = fetch(`http://localhost:8080/api/zodiac/id/${zodiacId}`, {
-                headers: {
-                    Authorization: `Bearer ${jwt}`
-                }
-            }).then(response => response.json());
-
-            const fetchConcordInfo = fetch(`http://localhost:8080/api/concord-group/id/${user.concordGroupId}`, {
-                headers: {
-                    Authorization: `Bearer ${user.jwt}`
-                }
-            }).then(response => response.json());
-
-            const fetchNumerologyInfo = fetch(`http://localhost:8080/api/mapping/user/${user.userId}`, {
-                headers: {
-                    Authorization: `Bearer ${user.jwt}`
-                }
-            }).then(response => response.json());
-
-             // Fetch User Numerology Mapping Info
-            const fetchUserNumerologyMapping = fetch(`http://localhost:8080/api/mapping/user/${userId}`, {
-            headers: {
-                Authorization: `Bearer ${jwt}`
-            }
-            }).then(response => response.json());
-
-            Promise.all([fetchZodiacInfo, fetchConcordInfo, fetchNumerologyInfo, fetchUserNumerologyMapping])
-                .then(([zodiacInfo, concordInfo, numerologyInfo, userNumerologyMappingInfo]) => {
-                    setUserData({
-                        zodiac: zodiacInfo,
-                        concord: concordInfo,
-                        mapping: numerologyInfo,
-                        userNumerologyMapping: userNumerologyMappingInfo
-                    });
-                    setUserNumerologyMapping(userMapping);
-                })
-                .catch(err => setErrors(["Failed to fetch user data"]));
-        
     }, [user]);
 
-    if (!user) {
-        return <div>Please log in to view your personalized information.</div>;
-    }
+    const fetchNumerologies = (userId) => {
+        fetch(`http://localhost:8080/api/mapping/user/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${user.jwt}`
+            }
+        })
+        .then(response => response.json())
+        .then(json => {
+            // Fetch numerology details for each numerology_description_id
+            const promises = json.map(mapping => {
+                return fetch(`http://localhost:8080/api/numerology/id/${mapping.numerologyDescriptionId}`)
+                        .then(response => response.json());
+            });
 
-    return (
-        <div>
-            <h3>Lucky Me</h3>
-            <Errors errors={errors} />
-            {userData && (
-                <div>
-                    <h4>Zodiac Information</h4>
-                    <p>Sign: {userData.zodiac.zodiacName}</p>
-                    <p>Description: {userData.zodiac.zodiacDescription}</p>
+            Promise.all(promises)
+            .then(numerologyDetails => {
+                const formattedNumerologies = json.map((mapping, index) => ({
+                    numerologyType: mapping.numerologyType,
+                    numerologyNumber: numerologyDetails[index].numerologyNumber,
+                    numerologyDescription: numerologyDetails[index].numerologyDescription
+                }));
+                setNumerologies(formattedNumerologies);
+            })
+            .catch(err => console.error("Failed to fetch numerology details", err));
+        })
+        .catch(err => console.error("Failed to fetch numerology data", err));
+    };
 
-                    <h4>Concord Information</h4>
-                    <p>Concord Group: {userData.concord.concordGroupNumber}</p>
-                    <p>Description: {userData.concord.description}</p>
+    const fetchZodiac = (zodiacId) => {
+        fetch(`http://localhost:8080/api/zodiac/id/${zodiacId}`, {
+            headers: {
+                Authorization: `Bearer ${user.jwt}`
+            }
+        })
+        .then(response => response.json())
+        .then(json => setZodiac(json))
+        .catch(err => console.error("Failed to fetch zodiac data", err));
+    };
 
-                    <h4>Numerology Information</h4>
-                    <p>Life Path Number: {userData.mapping.numerologyType}</p>
-                    <p>Birthday Number: {userData.mapping.birthdayNumber}</p>
-                    <p>Expression Number: {userData.mapping.expressionNumber}</p>
-                    <p>Personality Number: {userData.mapping.personalityNumber}</p>
-                    <p>Soul Urge Number: {userData.mapping.soulUrgeNumber}</p>
+        const fetchConcordGroup = (concordGroupId) => {
+            fetch(`http://localhost:8080/api/concord-group/id/${concordGroupId}`, {
+                headers: {
+                    Authorization: `Bearer ${user.jwt}`
+                }
+            })
+            .then(response => response.json())
+            .then(json => {
+                setConcordGroup(json);
+                const birthdayNumber = user.dob;
+                fetchConcordDays(user.dob, concordGroupId);
+            })
+            .catch(err => console.error("Failed to fetch concord group data", err));
+        };
 
-                     <h4>User Numerology Mapping Information</h4>
-                    {userData.userNumerologyMapping && userData.userNumerologyMapping.map(mapping => (
-                        <div key={mapping.user_numerology_mapping_id}>
-                            <p>Numerology Type: {mapping.numerology_type}</p>
-                            {/* Display other relevant fields from user numerology mapping */}
-                        </div>
-                    ))}
+        const fetchConcordDays = (birthdayNumber, concordGroupId) => {
+            console.log(birthdayNumber)
+            console.log(concordGroupId)
+            fetch(`http://localhost:8080/api/concord-days/birthday/${birthdayNumber}/group/${concordGroupId}`, {
+                headers: {
+                    Authorization: `Bearer ${user.jwt}`
+                }
+            })
+            .then(response => response.json())
+            .then(json => {
+                console.log(json)
+                const filteredDays = json.filter(day => day.concordBirthdayNumber === birthdayNumber);
+                setConcordDays(filteredDays);
+            })
+            .catch(err => console.error("Failed to fetch concord days data", err));
+        };
+
+        const groupDaysByType = (days) => {
+            return days.reduce((acc, day) => {
+                if (!acc[day.dayType]) {
+                    acc[day.dayType] = [];
+                }
+                acc[day.dayType].push(day.concordDayNumber);
+                return acc;
+            }, {});
+        };
+
+        return (
+            <div >
+                <div class="luckyMeContainer">
+                    <h1 >LuckyMe</h1>
+                    <p>Welcome, to your personal LuckyMe page. Here you will find your lucky numbers, zodiac sign, and lucky days. Good Luck!</p>
+                </div>
+                 {zodiac && (
+                <div className="luckyMeContainer" >
+                    <ZodiacItem zodiac={zodiac} />
                 </div>
             )}
-        </div>
-    );
-};
+                {concordGroup && (
+                    <div> 
+                        <div class="luckyMeContainer">
+                            <h2>Concord Group {concordGroup.concordGroupNumber}</h2>
+                            <p>{concordGroup.concordGroupDescription}</p>
+                        </div>
+                        {Object.entries(groupDaysByType(concordDays)).map(([type, days]) => (
+                            <div key={type } class="luckyMeContainer">
+                                <h3>{type} days:</h3>
+                                <p>{days.join(', ')}</p>
+                            </div>
+                        ))}
+                    </div>
+                )}
+                <div class="luckyMeContainer"> 
+                    <NumerologyList key={user.userId} numerologies={numerologies} />
+                </div>
+                
+            </div>
+        );
+    };
 
-export default LuckyMe;
+    export default LuckyMe;

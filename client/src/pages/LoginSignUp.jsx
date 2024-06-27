@@ -4,21 +4,6 @@ import Errors from "../components/Errors";
 import { jwtDecode } from "jwt-decode";
 
 const LoginSignUp = ({setUser}) => {
-    // const INITIAL_USER= {
-    //     userId: 0,
-    //     userName: "",
-    //     password: "",
-    //     email: "",
-    //     firstName: "",
-    //     middleName: "",
-    //     lastName: "",
-    //     dob: 0,
-    //     zodiacId: 0,
-    //     concordGroupId: 0,
-    //   };
-
-    // const setUser = props.setUser
-    // const[user, setUser] = useState(INITIAL_USER);
     const [errors, setErrors] = useState([]);
     const [isLogin, setIsLogin] = useState(true);
     const [showSignupPrompt, setShowSignupPrompt] = useState(false);
@@ -30,8 +15,6 @@ const LoginSignUp = ({setUser}) => {
     const[middleName, setMiddleName] = useState("")
     const[lastName, setLastName] = useState("")
     const[dob, setDob] = useState("")
-    const[zodiacId, setZodiacId] = useState("")
-    const[concordId, setConcordId] = useState("")
     
     // hide/show password
     const [showPassword, setShowPassword] = useState(false);
@@ -59,16 +42,13 @@ const LoginSignUp = ({setUser}) => {
         .then(response => {
             if (response.ok) {
                 response.json().then(json => {
-                    // setUser(json); 
-                    // localStorage.setItem("user", JSON.stringify(json));
+
                     const userObject = jwtDecode(json.jwt)
                     userObject.jwt = json.jwt
                     setUser(userObject)
-                    localStorage.setItem("users", JSON.stringify(userObject))
-                    // navigate("/");
+                    localStorage.setItem("user", JSON.stringify(userObject))
+                    navigate("/luckyme");
                 });
-                // console.log("Success!");
-                // navigate("/")
             } else if (response.status >= 400 || response.status <= 499) {
                 response.json()
                 .then(json => setErrors(json))
@@ -96,17 +76,10 @@ const LoginSignUp = ({setUser}) => {
                     const decodedToken = jwtDecode(json.jwt);
                     const userObject = {
                         jwt: json.jwt,
-                        userName: decodedToken.user_name,
-                        userId: decodedToken.user_id,
-                        zodiacId: decodedToken.zodiac_id,
-                        concordGroupId: decodedToken.concord_group_id
+                        ...decodedToken
                     };
-                    // userObject.jwt = json.jwt
-                    // userObject.zodiacId = json.zodiacId; 
-                    // userObject.concordGroupId = json.concordGroupId;
-                    // userObject.userId = json.userId;
                     setUser(userObject)
-                    localStorage.setItem("users", JSON.stringify(userObject))
+                    localStorage.setItem("user", JSON.stringify(userObject))
                     navigate("/luckyme");
                 });
             } else if (response.status === 404 || response.status === 403) {
@@ -124,7 +97,6 @@ const LoginSignUp = ({setUser}) => {
 
     function handleSubmit(event) {
         event.preventDefault();
-        // logIn();
         if (isLogin) {
           logIn();
         } else {   
@@ -142,10 +114,10 @@ const LoginSignUp = ({setUser}) => {
 
     return (
         <div>
-            <h3>{isLogin ? 'Login' : 'Sign Up'}</h3>
+            <h3 className="mx-5">{isLogin ? 'Login' : 'Sign Up'}</h3>
             <Errors errors={errors} />
             <form onSubmit={handleSubmit}>
-                <fieldset>
+                <fieldset className="mx-5">
                     <div>
                         <label htmlFor="userName-input">Username</label>
                         <input id="userName-input" name="userName" type="text" value={userName}
@@ -201,8 +173,8 @@ const LoginSignUp = ({setUser}) => {
                 </fieldset>    
             </form>
             {showSignupPrompt && isLogin && (
-                <div>
-                    <h4>Would you like to sign up</h4>
+                <div className="mx-3">
+                    <h4 >Would you like to sign up</h4>
                     <button type="button" onClick={switchToSignUp}>Yes</button>
                     <button type="button" onClick={() => setShowSignupPrompt(false)}>No</button>
             </div>

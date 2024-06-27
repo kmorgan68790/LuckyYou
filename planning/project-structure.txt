@@ -1,51 +1,50 @@
 LuckyYou    
     planning
-        [] project-structure - 1hr
+        [x] project-structure - 1hr
         [x] uses-cases - 1.5 hr
     client
         Styles
-            [] CSS ?
+            [x] CSS ?
         Assets
-            [] img/logo
+            [x] img/logo
         components
-            Common
+            components
                 [x] Errors
-                [] header
-                [] footer
-                [] NavBar
-                [] Navlink
+                [x] footer
+                [x] NavBar
+                [x] Navlink
             ConcordGroup
-                [] ConcordGroupList
-                [] ConcordGroupItem
+                [x] ConcordGroupList
+                [x] ConcordGroupItem
 
             Numerology
                 [x] NumerologyItem
-                [] NumerologyList
+                [x] NumerologyList
 
             Zodiac
-                [] ZodiacList
+                [x] ZodiacList
                 [x] ZodiacItem
  
         pages
             Home
-                [] Home
-                [] About
-                [] Contact ?
+                [x] Home
+                [x] About
+                [x] Contact 
             User
-                [] Login/SignUp
-                [] EditUser
-                [] MyLuckyYouPage - for viewing lucky information
+                [x] Login/SignUp
+                [x] EditUser
+                [x] MyLuckyYouPage - for viewing lucky information
 
             Zodiac
-                [] Zodiac
+                [x] Zodiac
 
             Numerology
-                [] Numerology
+                [x] Numerology
 
             LuckyMe
-            [] LuckyMe
+            [x] LuckyMe
 
-        [] App
+        [x] App
         [x] Main    
 
     server (7-days total)
